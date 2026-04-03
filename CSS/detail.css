@@ -1,0 +1,759 @@
+/* 学术风格详情页样式 */
+
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+    min-height: 100vh;
+    color: #334155;
+    line-height: 1.6;
+}
+
+/* 学术风格容器 */
+.detail-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* 语言切换按钮 */
+.lang-switch-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.lang-switch-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid rgba(30, 64, 175, 0.2);
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e40af;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.1);
+}
+
+.lang-switch-btn:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+}
+
+.lang-current {
+    font-weight: 700;
+}
+
+.lang-divider {
+    color: #94a3b8;
+}
+
+.lang-other {
+    color: #64748b;
+    font-weight: 400;
+}
+
+.lang-switch-btn:hover .lang-divider,
+.lang-switch-btn:hover .lang-other {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 学术风格顶部导航 */
+.academic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(30, 64, 175, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.academic-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #f59e0b 0%, #d97706 50%, #f59e0b 100%);
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(-3px);
+}
+
+.back-icon {
+    font-size: 1.2rem;
+}
+
+.header-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.doc-number {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+}
+
+.doc-type {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 2px;
+}
+
+/* 主内容区域 - 学术风左右布局 */
+.detail-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* 学术面板通用样式 */
+.academic-panel,
+.interactive-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* 信息卡片通用样式 */
+.info-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(30, 64, 175, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(30, 64, 175, 0.1);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    box-shadow: 0 4px 20px rgba(30, 64, 175, 0.12);
+    transform: translateY(-2px);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 24px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 2px solid rgba(30, 64, 175, 0.1);
+}
+
+.header-icon {
+    font-size: 1.3rem;
+}
+
+.card-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e40af;
+    margin: 0;
+}
+
+.card-content {
+    padding: 24px;
+}
+
+/* 地点信息卡片 */
+.heritage-title {
+    font-size: 1.8rem;
+    color: #1e40af;
+    margin-bottom: 20px;
+    font-weight: 700;
+    border-left: 4px solid #3b82f6;
+    padding-left: 15px;
+}
+
+.location-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.meta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(30, 64, 175, 0.08);
+}
+
+.meta-item:last-child {
+    border-bottom: none;
+}
+
+.meta-label {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.meta-value {
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 500;
+}
+
+.meta-value.highlight {
+    color: #d97706;
+    font-weight: 600;
+    background: rgba(217, 119, 6, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* 标签卡片 */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.academic-tag {
+    padding: 8px 16px;
+    background: rgba(30, 64, 175, 0.08);
+    color: #475569;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(30, 64, 175, 0.15);
+    transition: all 0.3s ease;
+}
+
+.academic-tag:hover {
+    background: rgba(30, 64, 175, 0.15);
+    transform: translateY(-2px);
+}
+
+.academic-tag.primary {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    border-color: transparent;
+}
+
+.academic-tag.secondary {
+    background: rgba(217, 119, 6, 0.15);
+    color: #92400e;
+    border-color: rgba(217, 119, 6, 0.3);
+}
+
+/* 文化介绍卡片 */
+.culture-section {
+    margin-bottom: 24px;
+}
+
+.culture-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: #1e40af;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-subtitle::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    background: linear-gradient(180deg, #3b82f6 0%, #1e40af 100%);
+    border-radius: 2px;
+}
+
+.culture-text {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.heritage-list {
+    list-style: none;
+    padding: 0;
+}
+
+.heritage-list li {
+    padding: 10px 0;
+    padding-left: 24px;
+    position: relative;
+    font-size: 0.9rem;
+    color: #475569;
+    border-bottom: 1px solid rgba(30, 64, 175, 0.06);
+}
+
+.heritage-list li:last-child {
+    border-bottom: none;
+}
+
+.heritage-list li::before {
+    content: '•';
+    position: absolute;
+    left: 8px;
+    color: #3b82f6;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* 点滴故事卡片 */
+.story-item {
+    padding: 20px;
+    background: rgba(30, 64, 175, 0.03);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border-left: 3px solid #3b82f6;
+}
+
+.story-item:last-child {
+    margin-bottom: 0;
+}
+
+.story-quote {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.quote-mark {
+    font-size: 3rem;
+    color: rgba(30, 64, 175, 0.2);
+    line-height: 1;
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    font-family: Georgia, serif;
+}
+
+.story-quote p {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.8;
+    font-style: italic;
+    padding-left: 20px;
+}
+
+.story-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.author-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e40af;
+}
+
+.author-title {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* 听听你的声音卡片 */
+.voice-intro {
+    margin-bottom: 20px;
+}
+
+.voice-intro p {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+.voice-button {
+    width: 100%;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+}
+
+.voice-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* 学术风模态框 */
+.voice-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.voice-modal.active {
+    display: flex;
+}
+
+.modal-content.academic-modal {
+    background: white;
+    border-radius: 16px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(30, 64, 175, 0.25);
+    border: 1px solid rgba(30, 64, 175, 0.15);
+}
+
+.modal-accent-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1e40af 0%, #3b82f6 50%, #d97706 100%);
+    border-radius: 16px 16px 0 0;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 30px 20px;
+    border-bottom: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.modal-title-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.modal-icon {
+    font-size: 1.8rem;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    color: #1e40af;
+    font-weight: 700;
+    margin: 0;
+}
+
+.close-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(30, 64, 175, 0.1);
+    border: 1px solid rgba(30, 64, 175, 0.2);
+    color: #1e40af;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button:hover {
+    background: rgba(30, 64, 175, 0.2);
+    transform: rotate(90deg);
+}
+
+/* 表单样式 */
+.voice-form {
+    padding: 0 30px 30px;
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section:last-of-type {
+    margin-bottom: 20px;
+}
+
+.section-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(30, 64, 175, 0.1);
+}
+
+.section-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.section-header-bar h3 {
+    font-size: 1.1rem;
+    color: #1e40af;
+    font-weight: 600;
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #475569;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgba(30, 64, 175, 0.2);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #334155;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* 表单按钮 */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.cancel-button {
+    padding: 12px 24px;
+    background: rgba(30, 64, 175, 0.1);
+    color: #475569;
+    border: 1px solid rgba(30, 64, 175, 0.2);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-button:hover {
+    background: rgba(30, 64, 175, 0.2);
+}
+
+.submit-button {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .detail-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .academic-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .header-title {
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .detail-container {
+        padding: 15px;
+    }
+    
+    .academic-header {
+        padding: 15px 20px;
+    }
+    
+    .doc-type {
+        font-size: 1rem;
+    }
+    
+    .heritage-title {
+        font-size: 1.5rem;
+    }
+    
+    .card-content {
+        padding: 18px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-header {
+        padding: 20px 20px 15px;
+    }
+    
+    .voice-form {
+        padding: 0 20px 20px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .cancel-button,
+    .submit-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .back-text {
+        display: none;
+    }
+    
+    .heritage-title {
+        font-size: 1.3rem;
+    }
+    
+    .meta-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .story-quote p {
+        font-size: 0.9rem;
+    }
+}

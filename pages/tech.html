@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语料库与翻译评估系统</title>
+    <link rel="stylesheet" href="../css/tech.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 第一部分 - 语料库 -->
+        <section class="section corpus-section" id="corpusSection">
+            <div class="corpus-layout">
+                <!-- 左侧区域 - 三栏布局 -->
+                <div class="left-panel">
+                    <!-- 搜索区域 -->
+                    <div class="search-area">
+                        <div class="search-container">
+                            <input type="text" class="search-input" id="searchInput" placeholder="尝试搜索农遗相关术语...">
+                            <button class="search-btn" id="searchBtn">🔍</button>
+                        </div>
+                        <div class="search-suggestions" id="searchSuggestions"></div>
+                    </div>
+                    
+                    <!-- 常用术语区域（拉大高度） -->
+                    <div class="common-terms-area expanded">
+                        <div class="terms-collection" id="termsCollection">
+                            <div class="empty-state">
+                                <p>暂无收藏的术语</p>
+                                <p class="hint">搜索并选择术语进行收藏</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 6宫格应用场景 -->
+                    <div class="application-grid">
+                        <div class="grid-item" data-dimension="accuracy">
+                            <div class="grid-icon">🎯</div>
+                            <span>品种细化</span>
+                        </div>
+                        <div class="grid-item" data-dimension="fluency">
+                            <div class="grid-icon">📑</div>
+                            <span>术语汇总</span>
+                        </div>
+                        <div class="grid-item" data-dimension="cultural">
+                            <div class="grid-icon">📖</div>
+                            <span>诗词荟萃</span>
+                        </div>
+                        <div class="grid-item" data-dimension="technical">
+                            <div class="grid-icon">📚</div>
+                            <span>研究文献</span>
+                        </div>
+                        <div class="grid-item" data-dimension="consistency">
+                            <div class="grid-icon">✈️</div>
+                            <span>产业链条</span>
+                        </div>
+                        <div class="grid-item" data-dimension="completeness">
+                            <div class="grid-icon">✅</div>
+                            <span>调研术语</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右侧区域 - 上下布局 -->
+                <div class="right-panel">
+                    <!-- 上方 - AI对话聊天框 -->
+                    <div class="chat-container">
+                        <div class="chat-header">
+                            <h3>🐟 数字官</h3>
+                            <div class="chat-actions">
+                                <button class="clear-chat-btn" id="clearChat">清空对话</button>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message system">
+                                <div class="message-content">
+                                    您好！我是广东农遗小助手，可以帮助您进行相关知识相关的查询和翻译
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <textarea class="chat-input" id="chatInput" placeholder="输入您的问题..."></textarea>
+                            <button class="send-btn" id="sendBtn">发送</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 下方 - 学术卡片显示区域 -->
+                    <div class="academic-cards-panel" id="selectedContentBox">
+                        <div class="cards-container" id="cardsContainer">
+                            <div class="cards-loading">
+                                <div class="loading-spinner"></div>
+                                <span>请选择左侧维度标签</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 术语详情模态框 -->
+            <div class="term-detail-modal" id="termDetailModal">
+                <div class="term-detail-content">
+                    <div class="term-detail-header">
+                        <h2 class="term-detail-title" id="termDetailName"></h2>
+                        <button class="close-btn" id="closeModal">&times;</button>
+                    </div>
+                    <div class="term-detail-category" id="termDetailCategory"></div>
+                    <div class="term-detail-description" id="termDetailDescription"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二部分 - 翻译评估（完整恢复） -->
+        <section class="section evaluation-section" id="evaluationSection">
+            <div class="evaluation-layout">
+                <!-- 左侧翻译区域 -->
+                <div class="translation-panel">
+                    <!-- 翻译方向选择器 -->
+                    <div class="direction-selector">
+                        <div class="direction-tabs">
+                            <div class="direction-tab active" data-direction="zh-en">
+                                <span class="direction-text">学术模式</span>
+                            </div>
+                            <div class="direction-tab" data-direction="en-zh">
+                                <span class="direction-text">商贸模式</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 翻译输入区域 -->
+                    <div class="translation-input-area">
+                        <div class="input-header">
+                            <h3 class="input-title">请输入要翻译的文本</h3>
+                            <div class="input-actions">
+                                <button class="clear-btn" id="clearText">清空</button>
+                                <button class="sample-btn" id="loadSample">示例</button>
+                            </div>
+                        </div>
+                        <textarea class="translation-input" id="sourceText" placeholder="在此输入需要翻译的文本内容..."></textarea>
+                        <div class="input-footer">
+                            <span class="char-count" id="charCount">0 字符</span>
+                            <button class="translate-btn" id="translateBtn">开始翻译</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 翻译结果区域 -->
+                    <div class="translation-result-area">
+                        <div class="result-header">
+                            <h3 class="result-title">翻译结果</h3>
+                            <div class="result-actions">
+                                <button class="copy-btn" id="copyResult">📋 复制</button>
+                                <button class="edit-btn" id="editResult">✏️ 编辑</button>
+                            </div>
+                        </div>
+                        <div class="translation-result" id="translationResult">
+                            <div class="result-placeholder">翻译结果将在这里显示...</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右侧评估区域 -->
+                <div class="evaluation-panel">
+                    <!-- 文件上传和操作按钮区域 -->
+                    <div class="upload-area">
+                        <div class="upload-row">
+                            <div class="upload-zone" id="uploadZone">
+                                <div class="upload-content" id="uploadContent">
+                                    <div class="upload-icon">📁</div>
+                                    <div class="upload-text">
+                                        <p class="upload-main">拖拽文件到此处或点击上传</p>
+                                        <p class="upload-sub">支持 .txt, .docx, .pdf 格式</p>
+                                    </div>
+                                </div>
+                                <input type="file" class="file-input" id="fileInput" accept=".txt,.docx,.pdf" multiple>
+                            </div>
+                            <div class="upload-actions">
+                                <button class="action-btn term-recognize-btn" id="termRecognizeBtn">🔍 术语识别</button>
+                                <button class="action-btn translate-assess-btn" id="translateAssessBtn">📊 翻译评估</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 评估结果区域 -->
+                    <div class="assessment-area">
+                        <div class="assessment-header">
+                            <h3 class="assessment-title">翻译质量评估</h3>
+                            <div class="assessment-score" id="assessmentScore">
+                                <span class="score-number">--</span>
+                                <span class="score-label">综合评分</span>
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-dimensions">
+                            <div class="dimension-item">
+                                <div class="dimension-header">
+                                    <span class="dimension-name">准确性</span>
+                                    <span class="dimension-score" id="accuracyScore">--</span>
+                                </div>
+                                <div class="dimension-bar">
+                                    <div class="dimension-fill" id="accuracyFill"></div>
+                                </div>
+                            </div>
+                            <div class="dimension-item">
+                                <div class="dimension-header">
+                                    <span class="dimension-name">流畅性</span>
+                                    <span class="dimension-score" id="fluencyScore">--</span>
+                                </div>
+                                <div class="dimension-bar">
+                                    <div class="dimension-fill" id="fluencyFill"></div>
+                                </div>
+                            </div>
+                            <div class="dimension-item">
+                                <div class="dimension-header">
+                                    <span class="dimension-name">文化适应性</span>
+                                    <span class="dimension-score" id="culturalScore">--</span>
+                                </div>
+                                <div class="dimension-bar">
+                                    <div class="dimension-fill" id="culturalFill"></div>
+                                </div>
+                            </div>
+                            <div class="dimension-item">
+                                <div class="dimension-header">
+                                    <span class="dimension-name">技术专业性</span>
+                                    <span class="dimension-score" id="technicalScore">--</span>
+                                </div>
+                                <div class="dimension-bar">
+                                    <div class="dimension-fill" id="technicalFill"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-report-btn">
+                            <button class="view-report-btn" id="viewReportBtn">📋 查看详细评估报告</button>
+                        </div>
+                        
+                        <div class="assessment-actions">
+                            <button class="export-btn" id="exportReport">📊 导出报告</button>
+                            <button class="save-btn" id="saveResult">💾 保存结果</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 评估报告模态框 -->
+    <div class="report-modal" id="reportModal">
+        <div class="report-modal-content">
+            <div class="report-modal-header">
+                <h2 class="report-modal-title">📋 详细评估报告</h2>
+                <button class="close-modal-btn" id="closeReportModal">&times;</button>
+            </div>
+            <div class="report-modal-body">
+                <div class="report-section">
+                    <h3 class="section-title">评估摘要</h3>
+                    <p class="report-text" id="modalReportSummary">完成翻译后，系统将生成详细的评估报告...</p>
+                </div>
+                <div class="report-section">
+                    <h3 class="section-title">改进建议</h3>
+                    <ul class="suggestions-list" id="modalSuggestionsList">
+                        <li>请先进行翻译以获取评估建议</li>
+                    </ul>
+                </div>
+                <div class="report-section">
+                    <h3 class="section-title">🍃 术语分析与翻译逻辑</h3>
+                    <div class="term-analysis" id="termAnalysis">
+                        <p class="placeholder-text">暂无术语分析数据</p>
+                    </div>
+                </div>
+            </div>
+            <div class="report-modal-footer">
+                <button class="modal-export-btn" id="modalExportBtn">📊 导出完整报告</button>
+                <button class="modal-close-btn" id="modalCloseBtn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 滚动指示器 -->
+    <div class="scroll-indicator">
+        <div class="scroll-dot active" data-section="corpus"></div>
+        <div class="scroll-dot" data-section="evaluation"></div>
+    </div>
+
+    <!-- 先加载API模块，再加载UI模块 -->
+    <script src="../js/tech2.js"></script>
+    <script src="../js/tech.js"></script>
+</body>
+</html>

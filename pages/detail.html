@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文化遗产详情 - 学术档案</title>
+    <link rel="stylesheet" href="../css/detail.css">
+</head>
+<body>
+    <div class="detail-container">
+        <!-- 学术风格顶部导航栏 -->
+        <header class="academic-header">
+            <a href="../index.html" class="back-button">
+                <span class="back-icon">←</span>
+                <span class="back-text">返回主页</span>
+            </a>
+            <div class="header-title">
+                <span class="doc-number">NO.2024-ICH-001</span>
+                <span class="doc-type">文化遗产学术档案</span>
+            </div>
+        </header>
+        
+        <!-- 语言切换按钮 -->
+        <div class="lang-switch-container">
+            <button class="lang-switch-btn" id="langSwitchBtn">
+                <span class="lang-current">中</span>
+                <span class="lang-divider">/</span>
+                <span class="lang-other">EN</span>
+            </button>
+        </div>
+        
+        <!-- 主要内容区域 - 学术风左右布局 -->
+        <div class="detail-content">
+            <!-- 左侧区域 - 学术信息 -->
+            <div class="left-section academic-panel">
+                <!-- 地点信息卡片 -->
+                <div class="info-card location-card">
+                    <div class="card-header">
+                        <span class="header-icon">📍</span>
+                        <h3 data-zh="地点信息" data-en="Location Info">地点信息</h3>
+                    </div>
+                    <div class="card-content">
+                        <h2 id="heritageTitle" class="heritage-title" data-zh="增城古荔枝园" data-en="Zengcheng Ancient Lychee Garden">增城古荔枝园</h2>
+                        <div class="location-meta">
+                            <div class="meta-item">
+                                <span class="meta-label" data-zh="地理位置" data-en="Location">地理位置</span>
+                                <span class="meta-value" data-zh="广东省广州市增城区" data-en="Zengcheng District, Guangzhou, Guangdong">广东省广州市增城区</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label" data-zh="坐标" data-en="Coordinates">坐标</span>
+                                <span class="meta-value">23°16'N  113°50'E</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label" data-zh="保护级别" data-en="Protection Level">保护级别</span>
+                                <span class="meta-value highlight" data-zh="省级非物质文化遗产" data-en="Provincial Intangible Cultural Heritage">省级非物质文化遗产</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 文化介绍 -->
+                <div class="info-card culture-card">
+                    <div class="card-header">
+                        <span class="header-icon">📚</span>
+                        <h3 data-zh="文化介绍" data-en="Cultural Introduction">文化介绍</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="culture-section">
+                            <h4 class="section-subtitle" data-zh="历史渊源" data-en="Historical Origins">历史渊源</h4>
+                            <p class="culture-text" data-zh="增城古荔枝园拥有数百年的荔枝种植历史，是广东荔枝文化的重要发源地。这里的古荔枝树枝繁叶茂，见证了岭南农业文明的发展历程。每一棵古树都承载着深厚的历史文化底蕴。" data-en="Zengcheng Ancient Lychee Garden has a history of lychee cultivation spanning hundreds of years, serving as an important birthplace of Guangdong's lychee culture. The ancient lychee trees here are lush and vibrant, witnessing the development of Lingnan agricultural civilization. Each ancient tree carries profound historical and cultural heritage.">
+                                增城古荔枝园拥有数百年的荔枝种植历史，是广东荔枝文化的重要发源地。这里的古荔枝树枝繁叶茂，见证了岭南农业文明的发展历程。每一棵古树都承载着深厚的历史文化底蕴。
+                            </p>
+                        </div>
+                        <div class="culture-section">
+                            <h4 class="section-subtitle" data-zh="文化价值" data-en="Cultural Value">文化价值</h4>
+                            <p class="culture-text" data-zh="荔枝不仅是一种水果，更是岭南文化的象征。从"一骑红尘妃子笑"的典故到现代荔枝节，荔枝文化已经深深融入当地人的生活方式和精神世界。" data-en="Lychee is not just a fruit, but also a symbol of Lingnan culture. From the historical allusion 'A horse gallops in red dust, the concubine smiles' to modern lychee festivals, lychee culture has deeply integrated into the local people's lifestyle and spiritual world.">
+                                荔枝不仅是一种水果，更是岭南文化的象征。从"一骑红尘妃子笑"的典故到现代荔枝节，荔枝文化已经深深融入当地人的生活方式和精神世界。
+                            </p>
+                        </div>
+                        <div class="culture-section">
+                            <h4 class="section-subtitle" data-zh="非遗项目" data-en="Intangible Cultural Heritage">非遗项目</h4>
+                            <ul class="heritage-list">
+                                <li data-zh="《何仙姑与挂绿的传说》（省级非遗）" data-en="Legend of He Xiangu and Gualv (Provincial ICH)">《何仙姑与挂绿的传说》（省级非遗）</li>
+                                <li data-zh="传统荔枝嫁接技艺（市级非遗）" data-en="Traditional Lychee Grafting Techniques (Municipal ICH)">传统荔枝嫁接技艺（市级非遗）</li>
+                                <li data-zh="荔枝木烤鹅制作技艺（区级非遗）" data-en="Lychee Wood Roast Goose Technique (District ICH)">荔枝木烤鹅制作技艺（区级非遗）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧区域 - 互动内容 -->
+            <div class="right-section interactive-panel">
+                <!-- 点滴故事 -->
+                <div class="info-card stories-card">
+                    <div class="card-header">
+                        <span class="header-icon">💬</span>
+                        <h3 data-zh="点滴故事" data-en="Stories">点滴故事</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="story-item">
+                            <div class="story-quote">
+                                <span class="quote-mark">"</span>
+                                <p data-zh="这些荔枝树是我们祖先留下的宝贵财富，每一棵树都有它的故事。春天开花时，整个村庄都弥漫着花香，这是我们最美好的记忆。" data-en="These lychee trees are precious treasures left by our ancestors. Each tree has its own story. When they bloom in spring, the whole village is filled with fragrance - this is our most beautiful memory.">
+                                    这些荔枝树是我们祖先留下的宝贵财富，每一棵树都有它的故事。春天开花时，整个村庄都弥漫着花香，这是我们最美好的记忆。
+                                </p>
+                            </div>
+                            <div class="story-author">
+                                <span class="author-avatar">张</span>
+                                <div class="author-info">
+                                    <span class="author-name" data-zh="张大爷" data-en="Grandpa Zhang">张大爷</span>
+                                    <span class="author-title" data-zh="当地老农 · 种植经验50年" data-en="Local Farmer · 50 Years Experience">当地老农 · 种植经验50年</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="story-item">
+                            <div class="story-quote">
+                                <span class="quote-mark">"</span>
+                                <p data-zh="我们世代守护着这些古树，就像守护着我们的根。荔枝不仅是一种水果，更是我们文化的象征。" data-en="We have guarded these ancient trees for generations, just like guarding our roots. Lychee is not just a fruit, but a symbol of our culture.">
+                                    我们世代守护着这些古树，就像守护着我们的根。荔枝不仅是一种水果，更是我们文化的象征。
+                                </p>
+                            </div>
+                            <div class="story-author">
+                                <span class="author-avatar">李</span>
+                                <div class="author-info">
+                                    <span class="author-name" data-zh="李阿姨" data-en="Aunt Li">李阿姨</span>
+                                    <span class="author-title" data-zh="荔枝种植户 · 第三代传承人" data-en="Lychee Grower · 3rd Generation Inheritor">荔枝种植户 · 第三代传承人</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 听听你的声音 -->
+                <div class="info-card voice-card">
+                    <div class="card-header">
+                        <span class="header-icon">🎤</span>
+                        <h3 data-zh="听听你的声音" data-en="Your Voice">听听你的声音</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="voice-intro">
+                            <p data-zh="分享你对这个文化遗产的感受，以及你会如何用自己的语言向世界介绍它。" data-en="Share your feelings about this cultural heritage and how you would introduce it to the world in your own words.">分享你对这个文化遗产的感受，以及你会如何用自己的语言向世界介绍它。</p>
+                        </div>
+                        <button class="voice-button" id="voiceButton">
+                            <span class="btn-icon">✍️</span>
+                            <span class="btn-text" data-zh="我也来发声" data-en="Share My Voice">我也来发声</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 学术风模态框 -->
+    <div class="voice-modal" id="voiceModal">
+        <div class="modal-content academic-modal">
+            <!-- 顶部装饰线 -->
+            <div class="modal-accent-line"></div>
+            
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <span class="modal-icon">🎤</span>
+                    <h2 data-zh="分享你的声音" data-en="Share Your Voice">分享你的声音</h2>
+                </div>
+                <button class="close-button" id="closeModal">×</button>
+            </div>
+            
+            <form class="voice-form" id="voiceForm">
+                <!-- 感受和建议部分 -->
+                <div class="form-section">
+                    <div class="section-header-bar">
+                        <span class="section-number">01</span>
+                        <h3 data-zh="你的感受和建议" data-en="Your Feelings & Suggestions">你的感受和建议</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="userFeeling" data-zh="你对这个文化遗产的感受：" data-en="Your feelings about this cultural heritage:">你对这个文化遗产的感受：</label>
+                        <textarea id="userFeeling" name="feeling" placeholder="请分享你看到这个文化遗产时的感受..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="userStory" data-zh="你会如何用自己的语言介绍这个文化：" data-en="How would you introduce this culture in your own words:">你会如何用自己的语言介绍这个文化：</label>
+                        <textarea id="userStory" name="story" placeholder="想象你要向外国朋友介绍这个文化遗产，你会怎么说..." required></textarea>
+                    </div>
+                </div>
+                
+                <!-- 信息采集部分 -->
+                <div class="form-section">
+                    <div class="section-header-bar">
+                        <span class="section-number">02</span>
+                        <h3 data-zh="基本信息" data-en="Basic Information">基本信息</h3>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="userName" data-zh="姓名" data-en="Name">姓名</label>
+                            <input type="text" id="userName" name="name" placeholder="请输入你的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userAge" data-zh="年龄" data-en="Age">年龄</label>
+                            <input type="number" id="userAge" name="age" placeholder="请输入年龄" min="1" max="120" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userCountry" data-zh="国家/地区" data-en="Country/Region">国家/地区</label>
+                        <input type="text" id="userCountry" name="country" placeholder="请输入你的国家或地区" required>
+                    </div>
+                </div>
+                
+                <!-- 提交按钮 -->
+                <div class="form-actions">
+                    <button type="button" class="cancel-button" id="cancelButton" data-zh="取消" data-en="Cancel">取消</button>
+                    <button type="submit" class="submit-button">
+                        <span class="btn-icon">✓</span>
+                        <span class="btn-text" data-zh="提交分享" data-en="Submit">提交分享</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../js/detail.js"></script>
+</body>
+</html>

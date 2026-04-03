@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广东农遗交易所 | Guangdong Agri-Heritage Exchange</title>
+    <link rel="stylesheet" href="../css/industry.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 全屏滚动容器 -->
+    <div class="fullscreen-container" id="fullscreenContainer">
+        
+        <!-- 第一部分：首页大厅 - 五大农遗展示 -->
+        <section class="fullscreen-section section-hero" id="section1">
+            <div class="section-bg hero-bg"></div>
+            
+            <div class="section-content">
+                <div class="hero-header">
+                    <h1 class="main-title">
+                        <span class="title-cn">广东农遗交易所</span>
+                        <span class="title-en">Guangdong Agri-Heritage Exchange</span>
+                    </h1>
+                    <p class="tagline">"From Farm to Fork, You Add Values"</p>
+                </div>
+                
+                <!-- 五大农遗卡片 -->
+                <div class="heritage-cards">
+                    <div class="h-card" data-heritage="zengcheng" onclick="openCardModal('zengcheng')">
+                        <div class="h-card-bg"></div>
+                        <div class="h-card-glow red"></div>
+                        <div class="h-card-inner">
+                            <span class="h-badge">SSR</span>
+                            <h3 class="h-name">增城荔枝</h3>
+                            <p class="h-name-en">Zengcheng Lychee</p>
+                            <div class="h-tags">
+                                <span class="h-tag">极速物流</span>
+                                <span class="h-tag">限时生存</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="h-card" data-heritage="chaozhou" onclick="openCardModal('chaozhou')">
+                        <div class="h-card-bg"></div>
+                        <div class="h-card-glow gold"></div>
+                        <div class="h-card-inner">
+                            <span class="h-badge">UR</span>
+                            <h3 class="h-name">潮州单丛茶</h3>
+                            <p class="h-name-en">Chaozhou Dancong Tea</p>
+                            <div class="h-tags">
+                                <span class="h-tag">工序附魔</span>
+                                <span class="h-tag">时间增值</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="h-card" data-heritage="huazhou" onclick="openCardModal('huazhou')">
+                        <div class="h-card-bg"></div>
+                        <div class="h-card-glow purple"></div>
+                        <div class="h-card-inner">
+                            <span class="h-badge">SR</span>
+                            <h3 class="h-name">化州橘红</h3>
+                            <p class="h-name-en">Huazhou Huajuhong</p>
+                            <div class="h-tags">
+                                <span class="h-tag">治愈炼金</span>
+                                <span class="h-tag">岭南特供</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="h-card" data-heritage="xinhui" onclick="openCardModal('xinhui')">
+                        <div class="h-card-bg"></div>
+                        <div class="h-card-glow amber"></div>
+                        <div class="h-card-inner">
+                            <span class="h-badge">SSR</span>
+                            <h3 class="h-name">新会陈皮</h3>
+                            <p class="h-name-en">Xinhui Chenpi</p>
+                            <div class="h-tags">
+                                <span class="h-tag">时间增值</span>
+                                <span class="h-tag">越老越强</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="h-card" data-heritage="dongguan" onclick="openCardModal('dongguan')">
+                        <div class="h-card-bg"></div>
+                        <div class="h-card-glow dark"></div>
+                        <div class="h-card-inner">
+                            <span class="h-badge">RARE</span>
+                            <h3 class="h-name">东莞莞香</h3>
+                            <p class="h-name-en">Dongguan Incense</p>
+                            <div class="h-tags">
+                                <span class="h-tag">创伤转化</span>
+                                <span class="h-tag">灵魂香氛</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 卡片详情模态框 -->
+                <div class="card-modal" id="cardModal">
+                    <div class="modal-overlay" onclick="closeCardModal()"></div>
+                    <div class="modal-content">
+                        <button class="modal-close" onclick="closeCardModal()">×</button>
+                        <div class="modal-body" id="modalBody">
+                            <!-- 动态内容将在这里插入 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="scroll-hint">
+                    <span class="scroll-text">向下滚动探索</span>
+                    <span class="scroll-arrow">↓</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 第二部分：农遗大厅 - 产品卡片墙 -->
+        <section class="fullscreen-section section-hall" id="section2">
+            <div class="section-bg hall-bg">
+                <div class="hall-grid"></div>
+                <div class="hall-glow"></div>
+            </div>
+            
+            <div class="section-content section-hall-content">
+                <!-- 筛选标签 -->
+                <div class="hall-filters">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="zengcheng">增城荔枝</button>
+                    <button class="filter-btn" data-filter="chaozhou">潮州单丛茶</button>
+                    <button class="filter-btn" data-filter="huazhou">化州橘红</button>
+                    <button class="filter-btn" data-filter="xinhui">新会陈皮</button>
+                    <button class="filter-btn" data-filter="dongguan">东莞莞香</button>
+                </div>
+                
+                <!-- 产品卡片墙 -->
+                <div class="product-wall" id="productWall">
+                    <!-- 增城荔枝产品 -->
+                    <div class="product-card game-card" data-category="zengcheng" data-product-id="lychee-1">
+                        <div class="card-rarity ssr">SSR</div>
+                        <div class="product-info">
+                            <div class="farmer-info">
+                                <span class="farmer-avatar">👨‍🌾</span>
+                                <div class="farmer-detail">
+                                    <span class="farmer-name">陈大叔</span>
+                                    <span class="farmer-location">📍 增城·仙村</span>
+                                </div>
+                            </div>
+                            <h4 class="product-name">桂味荔枝</h4>
+                            <div class="product-tags">
+                                <span class="p-tag">肉厚核小</span>
+                                <span class="p-tag">清甜爽口</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">¥68/500g</span>
+                                <button class="select-btn" onclick="addToSlot('lychee-1', '桂味荔枝', 'zengcheng')">选择</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card game-card" data-category="zengcheng" data-product-id="lychee-2">
+                        <div class="card-rarity ur">UR</div>
+                        <div class="product-info">
+                            <div class="farmer-info">
+                                <span class="farmer-avatar">👩‍🌾</span>
+                                <div class="farmer-detail">
+                                    <span class="farmer-name">李阿姨</span>
+                                    <span class="farmer-location">📍 增城·石滩</span>
+                                </div>
+                            </div>
+                            <h4 class="product-name">糯米糍</h4>
+                            <div class="product-tags">
+                                <span class="p-tag">软糯香甜</span>
+                                <span class="p-tag">入口即化</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">¥88/500g</span>
+                                <button class="select-btn" onclick="addToSlot('lychee-2', '糯米糍', 'zengcheng')">选择</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 潮州单丛茶产品 -->
+                    <div class="product-card game-card" data-category="chaozhou" data-product-id="tea-1">
+                        <div class="card-rarity ur">UR</div>
+                        <div class="product-info">
+                            <div class="farmer-info">
+                                <span class="farmer-avatar">🧑‍🌾</span>
+                                <div class="farmer-detail">
+                                    <span class="farmer-name">林师傅</span>
+                                    <span class="farmer-location">📍 潮州·凤凰山</span>
+                                </div>
+                            </div>
+                            <h4 class="product-name">鸭屎香</h4>
+                            <div class="product-tags">
+                                <span class="p-tag">香气浓郁</span>
+                                <span class="p-tag">回甘持久</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">¥128/100g</span>
+                                <button class="select-btn" onclick="addToSlot('tea-1', '鸭屎香', 'chaozhou')">选择</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card game-card" data-category="chaozhou" data-product-id="tea-2">
+                        <div class="card-rarity ssr">SSR</div>
+                        <div class="product-info">
+                            <div class="farmer-info">
+                                <span class="farmer-avatar">👨‍🌾</span>
+                                <div class="farmer-detail">
+                                    <span class="farmer-name">王茶农</span>
+                                    <span class="farmer-location">📍 潮州·乌岽山</span>
+                                </div>
+                            </div>
+                            <h4 class="product-name">蜜兰香</h4>
+                            <div class="product-tags">
+                                <span class="p-tag">蜜韵兰香</span>
+                                <span class="p-tag">醇厚甘甜</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">¥98/100g</span>
+                                <button class="select-btn" onclick="addToSlot('tea-2', '蜜兰香', 'chaozhou')">选择</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 化州橘红产品 -->
+                    <div class="product-card game-card" data-category="huazhou" data-product-id="herb-1">
+                        <div class="card-rarity sr">SR</div>
+                        <div class="product-info">
+                            <div class="farmer-info">
+                                <span class="farmer-avatar">👴</span>
+                                <div class="farmer-detail">
+                                    <span class="farmer-name">张老医师</span>
+                                    <span class="farmer-location">📍 化州·平定</span>
+                                </div>
+                            </div>
+                            <h4 class="product-name">正毛橘红</h4>
+                            <div class="product-tags">
+                                <span class="p-tag">毛厚香浓</span>
+                                <span class="p-tag">化痰止咳</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">¥168/50g</span>
+                                <button class="select-btn" onclick="addToSlot('herb-1', '正毛橘红', 'huazhou')">选择</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 新会陈皮产品 -->
+                    <div class="product-card game-card" data-category="xinhui" data-product-id="chenpi-1">
+                        <div class="card-rarity ssr">SSR</div>
+                        <div class="product-info">
+                            <div class="farmer-info">
+                                <span class="farmer-avatar">👵</span>
+                                <div class="farmer-detail">
+                                    <span class="farmer-name">陈皮婆婆</span>
+                                    <span class="farmer-location">📍 新会·天马村</span>
+                                </div>
+                            </div>
+                            <h4 class="product-name">五年陈皮</h4>
+                            <div class="product-tags">
+                                <span class="p-tag">陈香醇厚</span>
+                                <span class="p-tag">理气健脾</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">¥268/100g</span>
+                                <button class="select-btn" onclick="addToSlot('chenpi-1', '五年陈皮', 'xinhui')">选择</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card game-card" data-category="xinhui" data-product-id="chenpi-2">
+                        <div class="card-rarity ur">UR</div>
+                        <div class="product-info">
+                            <div class="farmer-info">
+                                <span class="farmer-avatar">👨‍🌾</span>
+                                <div class="farmer-detail">
+                                    <span class="farmer-name">黄掌柜</span>
+                                    <span class="farmer-location">📍 新会·茶坑</span>
+                                </div>
+                            </div>
+                            <h4 class="product-name">十年陈皮</h4>
+                            <div class="product-tags">
+                                <span class="p-tag">药香浓郁</span>
+                                <span class="p-tag">珍贵稀有</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">¥688/100g</span>
+                                <button class="select-btn" onclick="addToSlot('chenpi-2', '十年陈皮', 'xinhui')">选择</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 东莞莞香产品 -->
+                    <div class="product-card game-card" data-category="dongguan" data-product-id="incense-1">
+                        <div class="card-rarity rare">RARE</div>
+                        <div class="product-info">
+                            <div class="farmer-info">
+                                <span class="farmer-avatar">🧙‍♂️</span>
+                                <div class="farmer-detail">
+                                    <span class="farmer-name">香道大师</span>
+                                    <span class="farmer-location">📍 东莞·大岭山</span>
+                                </div>
+                            </div>
+                            <h4 class="product-name">莞香线香</h4>
+                            <div class="product-tags">
+                                <span class="p-tag">清雅幽香</span>
+                                <span class="p-tag">静心宁神</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">¥198/盒</span>
+                                <button class="select-btn" onclick="addToSlot('incense-1', '莞香线香', 'dongguan')">选择</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 第三部分：卡片养成系统（整合原第二部分和第三部分） -->
+        <section class="fullscreen-section section-train" id="section3">
+            <div class="section-bg train-bg">
+                <div class="train-grid"></div>
+                <div class="train-particles"></div>
+            </div>
+            
+            <div class="section-content">
+                <div class="section-header">
+                    <h2 class="section-title light">
+                        <span class="title-cn">农遗养成</span>
+                        <span class="title-en">Heritage Cultivation</span>
+                    </h2>
+                    <p class="section-desc light">通过工序附魔、天气护航、时间结晶，养成你的专属农遗卡片</p>
+                </div>
+                
+                <!-- 主内容区：左侧槽位 + 右侧虚实映射 -->
+                <div class="train-main-content">
+                    <!-- 左侧：养成槽位 -->
+                    <div class="train-slots-panel">
+                        <h3 class="area-title">我的养成槽位 <span class="slot-indicator">(<span id="slotCount">0/4</span>)</span></h3>
+                        <div class="train-slots" id="trainSlots">
+                            <!-- 动态生成槽位 -->
+                        </div>
+                        
+                        <!-- 养成功能按钮组 -->
+                        <div class="train-actions">
+                            <button class="action-main-btn weather" onclick="checkWeather()">
+                                <span class="btn-icon">🌤️</span>
+                                <span class="btn-text">天气护航</span>
+                            </button>
+                            <button class="action-main-btn checkin" onclick="dailyCheckIn()">
+                                <span class="btn-icon">⏳</span>
+                                <span class="btn-text">时间结晶</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧：虚实映射 -->
+                    <div class="mapping-panel">
+                        <h3 class="area-title">虚实映射 <span class="map-status" id="mapStatus">未选择</span></h3>
+                        <div class="mapping-showcase" id="mappingShowcase">
+                            <div class="map-placeholder">
+                                <div class="placeholder-icon">🔄</div>
+                                <p>点击左侧槽位卡片</p>
+                                <p class="placeholder-sub">查看数字藏品与实体产品的映射关系</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 第四部分：开箱体验 -->
+        <section class="fullscreen-section section-unbox" id="section4">
+            <div class="section-bg dark-gradient">
+                <div class="glow-effects"></div>
+            </div>
+            
+            <div class="section-content">
+                <div class="section-header">
+                    <h2 class="section-title light">
+                        <span class="title-cn">实体化召唤</span>
+                        <span class="title-en">Summon to Reality</span>
+                    </h2>
+                    <p class="section-desc light">将养成的数字卡片转化为实体产品，记录你与农遗的故事</p>
+                </div>
+                
+                <!-- 已完成养成的产品展示 -->
+                <div class="completed-slots-section">
+                    <h3 class="section-subtitle">已完成养成的农遗</h3>
+                    <div class="completed-slots" id="completedSlots">
+                        <div class="empty-completed">
+                            <p>暂无完成养成的产品</p>
+                            <p class="sub-text">在第三部分养成你的产品，满级后即可实体化召唤</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 开箱展示区域 -->
+                <div class="unbox-showcase">
+                    <div class="package-preview" onclick="openProductCardModal()">
+                        <div class="package-box">
+                            <div class="box-lid"></div>
+                            <div class="box-body">
+                                <div class="box-glow"></div>
+                                <span class="box-icon">📦</span>
+                            </div>
+                        </div>
+                        <div class="unbox-light"></div>
+                        <div class="click-hint">点击查看产品名片</div>
+                    </div>
+                    
+                    <div class="unbox-contents">
+                        <div class="content-item">
+                            <div class="ci-icon">🍵</div>
+                            <h4>实体产品</h4>
+                            <p>原产地直发</p>
+                        </div>
+                        <div class="content-item">
+                            <div class="ci-icon">🎴</div>
+                            <h4>数字证书</h4>
+                            <p>区块链存证</p>
+                        </div>
+                        <div class="content-item">
+                            <div class="ci-icon">📖</div>
+                            <h4>故事记录</h4>
+                            <p>你的专属回忆</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 分享区域 -->
+                <div class="share-section">
+                    <h3 class="section-subtitle light">分享你的农遗故事</h3>
+                    <div class="share-platforms">
+                        <button class="sp-btn tiktok" onclick="shareToSocial('tiktok')">
+                            <span class="sp-icon">📱</span>
+                            <span>TikTok</span>
+                        </button>
+                        <button class="sp-btn instagram" onclick="shareToSocial('instagram')">
+                            <span class="sp-icon">📷</span>
+                            <span>Instagram</span>
+                        </button>
+                        <button class="sp-btn twitter" onclick="shareToSocial('twitter')">
+                            <span class="sp-icon">🐦</span>
+                            <span>Twitter</span>
+                        </button>
+                        <button class="sp-btn wechat" onclick="shareToSocial('wechat')">
+                            <span class="sp-icon">💬</span>
+                            <span>微信</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+    
+    <!-- 页面导航指示器 -->
+    <div class="page-navigator" id="pageNavigator">
+        <div class="nav-dot active" data-section="1"></div>
+        <div class="nav-dot" data-section="2"></div>
+        <div class="nav-dot" data-section="3"></div>
+        <div class="nav-dot" data-section="4"></div>
+    </div>
+
+    <script src="../js/industry.js"></script>
+</body>
+</html>

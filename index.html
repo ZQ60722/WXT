@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>岭南农遗服务生态</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 第一部分 - 展示区域 -->
+        <section class="section section-1" id="section1">
+            <div class="glass-card">
+                <h1 class="main-title">🌿 Lingnan Intangible Cultural Heritage</h1>
+                <h2 class="subtitle">Digital Preservation and Cross-Cultural Communication of Traditional Knowledge Systems</h2>
+                <p class="description">
+                    Exploring the intricate tapestry of agricultural heritage, traditional craftsmanship, and folk wisdom across Guangdong Province.</br>
+                    A Corpus-Based Approach to Documenting and Translating Intangible Cultural Heritage
+                </p>
+                <!-- 双按钮区域 -->
+                <div class="button-group">
+                    <a href="pages/tech.html" class="cta-button primary">Explore Corpus</a>
+                    <a href="pages/industry.html" class="cta-button secondary">Industry Service</a>
+                </div>
+            </div>
+            
+            <!-- 向下滚动指示器 -->
+            <div class="scroll-indicator-bottom">
+                <div class="scroll-arrows">
+                    <div class="arrow">《</div>
+                    <div class="arrow">《</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二部分 - 交互地图 -->
+        <section class="section section-2" id="section2">
+            <div class="section-header">
+                <h2 class="section-title">🧭Heritage Map</h2>
+                
+            </div>
+            
+            <!-- 学术风格布局：标题区 + 主内容区 -->
+            <div class="academic-layout compact">
+                <!-- 顶部标题栏 -->
+                <div class="academic-header-bar">
+                    <div class="header-left">
+                        <span class="section-number">CN</span>
+                        <div class="header-divider"></div>
+                        <span class="section-subtitle">Guangdong Province——Cradle of Lingnan Intangible Cultural Heritage</span>
+                    </div>
+                    <div class="header-right">
+                        <span class="coordinate">23°16'N  113°50'E</span>
+                    </div>
+                </div>
+                
+                <!-- 主内容区 -->
+                <div class="academic-main-content compact">
+                    <!-- 左侧信息面板 -->
+                    <div class="academic-left-panel compact">
+                        <!-- 地点信息卡片 -->
+                        <div class="location-info-card" id="locationInfoCard">
+                            <div class="location-header">
+                                <span class="location-icon">📍</span>
+                                <h3 class="location-name" id="locationName">增城(Zengcheng)</h3>
+                                <!-- 语言切换按钮 -->
+                                <button class="lang-switch-btn" id="langSwitchBtn" onclick="toggleLanguage()" title="切换语言">
+                                    <span class="lang-current">中</span>
+                                    <span class="lang-divider">/</span>
+                                    <span class="lang-other">EN</span>
+                                </button>
+                            </div>
+                            
+                            <!-- 介绍 -->
+                            <div class="info-section">
+                                <h4 class="section-label" data-zh="介绍" data-en="Introduction">介绍</h4>
+                                <div class="intro-text" id="introText">
+                                    <p data-zh="岭南文化瑰宝" data-en="Treasure of Lingnan Culture">岭南文化瑰宝</p>
+                                </div>
+                            </div>
+
+                            <!-- 非遗与文化 -->
+                            <div class="info-section">
+                                <h4 class="section-label" data-zh="非遗与文化" data-en="Heritage & Culture">非遗与文化</h4>
+                                <div class="heritage-list" id="heritageList">
+                                    <div class="heritage-item">
+                                        <span class="heritage-dot"></span>
+                                        <span class="heritage-text" data-zh="荔枝传说文化（省级非遗）" data-en="Lychee Legend Culture (Provincial ICH)">荔枝传说文化（省级非遗）</span>
+                                    </div>
+                                    <div class="heritage-item">
+                                        <span class="heritage-dot"></span>
+                                        <span class="heritage-text" data-zh="传统荔枝种植技艺" data-en="Traditional Lychee Cultivation Techniques">传统荔枝种植技艺</span>
+                                    </div>
+                                    <div class="heritage-item">
+                                        <span class="heritage-dot"></span>
+                                        <span class="heritage-text" data-zh="北园绿荔枝（区级非遗）" data-en="Beiyuanlv Lychee (District ICH)">北园绿荔枝（区级非遗）</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 核心点位 -->
+                            <div class="info-section">
+                                <h4 class="section-label" data-zh="核心点位" data-en="Key Sites">核心点位</h4>
+                                <div class="core-sites" id="coreSites">
+                                    <span class="site-tag" data-zh="西园桂绿母树园" data-en="Xiyuan Guilv Garden">西园桂绿母树园</span>
+                                    <span class="site-tag" data-zh="陈桥头村北园绿基地" data-en="Chenqiaotou Beiyuanlv Base">陈桥头村北园绿基地</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 数据统计卡片 -->
+                        <div class="academic-stats compact">
+                            <div class="stat-item">
+                                <span class="stat-number">7691</span>
+                                <span class="stat-label">非遗项目</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">226+</span>
+                                <span class="stat-label">保护单位</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">1000+</span>
+                                <span class="stat-label">年历史</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧地图区域 -->
+                    <div class="academic-map-area compact">
+                        <div class="map-frame compact">
+                            <!-- 地图容器 -->
+                            <div class="map-wrapper compact">
+                                <div id="zengchengMap" style="width: 100%; height: 100%; border-radius: 12px; background: rgba(255, 255, 255, 0.1);"></div>
+                                
+                                <!-- 地图标记点 -->
+                                <div class="map-markers" id="mapMarkers"></div>
+                                
+
+                            </div>
+                            
+                            <!-- 地图装饰边框 -->
+                            <div class="map-corner top-left"></div>
+                            <div class="map-corner top-right"></div>
+                            <div class="map-corner bottom-left"></div>
+                            <div class="map-corner bottom-right"></div>
+                            
+                            <!-- 探索知识图谱按钮 -->
+                            <a href="pages/knowledge-graph.html" class="knowledge-graph-btn" title="探索知识图谱">
+                                <span class="btn-icon">🔍</span>
+                                <span class="btn-text">探索知识图谱</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧边缘图片墙 -->
+                    <div class="side-image-wall">
+                        <div class="side-image-item" style="--delay: 0s;">
+                            <img src="img/凤凰单丛茶.jpg" alt="凤凰单丛茶">
+                            <div class="side-image-caption">凤凰单丛茶</div>
+                        </div>
+                        <div class="side-image-item" style="--delay: 0.2s;">
+                            <img src="img/桑基鱼塘.jpg" alt="桑基鱼塘">
+                            <div class="side-image-caption">桑基鱼塘</div>
+                        </div>
+                        <div class="side-image-item" style="--delay: 0.4s;">
+                            <img src="img/荔枝丰收.jpg" alt="荔枝丰收">
+                            <div class="side-image-caption">沉醉甜蜜</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第三部分 - 共创社区 -->
+        <section class="section section-3" id="section3">
+            <div class="global-wall">
+                <div class="global-header">
+                    <div class="header-with-button">
+                        <div class="title-section">
+                            <h2 class="global-title">🤝 Co-Creation Community</h2>
+                            <p class="global-subtitle">Voices from China and around the world sharing their impressions of Zengcheng Lychee Culture</p>
+                        </div>
+                        <a href="pages/detail.html" class="voice-btn">
+                            <span class="voice-icon">🎤</span>
+                            <span class="voice-text">我也来发声</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 分类标签 -->
+                <div class="community-tabs">
+                    <button class="tab-btn active" data-tab="chinese">❤️ 中国视角</button>
+                    <button class="tab-btn" data-tab="international">🌍 国际视角</button>
+                </div>
+                
+                <div class="story-wall" id="storyWall">
+                    <!-- 用户故事卡片将通过JavaScript动态生成 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 第四部分 - 项目介绍 -->
+        <section class="section section-4" id="section4">
+            <div class="section-header">
+                <h2 class="section-title">✉️ About The Project</h2>
+            </div>
+        </section>
+    </div>
+
+    <!-- 滚动指示器 -->
+    <div class="scroll-indicator">
+        <div class="scroll-dot active" data-section="1"></div>
+        <div class="scroll-dot" data-section="2"></div>
+        <div class="scroll-dot" data-section="3"></div>
+        <div class="scroll-dot" data-section="4"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
