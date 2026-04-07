@@ -1605,77 +1605,7 @@ body {
     z-index: 0;
 }
 
-/* 第四部分 - 项目介绍 - 农业遗产档案风格 */
-.section-4 {
-    background: 
-        linear-gradient(160deg, #ecfdf5 0%, #d1fae5 30%, #a7f3d0 60%, #6ee7b7 100%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23059669' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    position: relative;
-    overflow: hidden;
-}
 
-/* 农遗档案顶部装饰 */
-.section-4::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #065f46 0%, #059669 25%, #10b981 50%, #059669 75%, #065f46 100%);
-}
-
-/* 农遗特色纹理 */
-.section-4::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        radial-gradient(circle at 20% 80%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(6, 95, 70, 0.05) 0%, transparent 40%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* 第五部分 - 总结 - 古籍典藏风格 */
-.section-5 {
-    background: 
-        linear-gradient(135deg, #fffbeb 0%, #fef3c7 40%, #fde68a 70%, #fcd34d 100%),
-        url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b45309' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-    position: relative;
-    overflow: hidden;
-}
-
-/* 古籍装饰边框 */
-.section-5::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #78350f 0%, #92400e 25%, #b45309 50%, #92400e 75%, #78350f 100%);
-}
-
-/* 古籍纹理效果 */
-.section-5::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        linear-gradient(rgba(120, 53, 15, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(120, 53, 15, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-    z-index: 0;
-}
 
 .section-title {
     font-size: 3rem;
@@ -1831,5 +1761,387 @@ body {
     
     .voice-icon {
         font-size: 1.1rem;
+    }
+}
+
+/* ========== 第四部分：关于我们 ========== */
+.section-4 {
+    background: linear-gradient(180deg, #f8fafc 0%, #e0f2fe 30%, #dbeafe 60%, #bfdbfe 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-4::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+}
+
+.about-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(14, 165, 233, 0.04) 0%, transparent 50%);
+}
+
+.about-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+
+.about-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.about-content {
+    position: relative;
+    z-index: 10;
+    width: 95%;
+    max-width: 1400px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.about-title {
+    margin-bottom: 10px;
+}
+
+.about-title .title-cn {
+    display: block;
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #0ea5e9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 8px;
+    margin-bottom: 8px;
+}
+
+.about-title .title-en {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #64748b;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.about-subtitle {
+    font-size: 1rem;
+    color: #64748b;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+/* 主内容区 */
+.about-main {
+    display: flex;
+    gap: 25px;
+    flex: 1;
+    align-items: stretch;
+    margin-bottom: 20px;
+}
+
+/* 面板样式 */
+.about-panel {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-header {
+    padding: 18px 22px;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.panel-icon {
+    font-size: 1.6rem;
+}
+
+.panel-title {
+    color: #1e40af;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.panel-subtitle {
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-left: auto;
+}
+
+.panel-content {
+    padding: 18px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* 项目介绍内容 */
+.intro-block {
+    background: rgba(248, 250, 252, 0.8);
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+}
+
+.intro-block:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(59, 130, 246, 0.25);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.block-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1e3a8a;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.block-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, #3b82f6, #0ea5e9);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+.block-text {
+    color: #475569;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.value-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.value-tag {
+    padding: 5px 12px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 20px;
+    color: #2563eb;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* 团队介绍内容 */
+.team-intro {
+    background: rgba(248, 250, 252, 0.8);
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.team-desc {
+    color: #475569;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.team-roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    flex: 1;
+}
+
+.role-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+}
+
+.role-card:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(59, 130, 246, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.role-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.role-info h5 {
+    color: #1e3a8a;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.role-info p {
+    color: #64748b;
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+/* 底部信息 */
+.about-footer {
+    padding-top: 15px;
+    border-top: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.footer-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.info-label {
+    color: #64748b;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-value {
+    color: #334155;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.info-divider {
+    width: 1px;
+    height: 25px;
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.copyright {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* 关于我们响应式 */
+@media (max-width: 1200px) {
+    .about-main {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .about-panel {
+        min-height: auto;
+    }
+    
+    .team-roles {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-title .title-cn {
+        font-size: 2rem;
+    }
+    
+    .about-title .title-en {
+        font-size: 0.9rem;
+    }
+    
+    .about-content {
+        padding: 15px 20px;
+        height: 95vh;
+    }
+    
+    .team-roles {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-info {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .info-divider {
+        width: 50px;
+        height: 1px;
+    }
+    
+    .panel-subtitle {
+        display: none;
     }
 }
