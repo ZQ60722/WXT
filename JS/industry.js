@@ -854,7 +854,7 @@ function selectSlotForMapping(index) {
                         </div>
                     </div>
                     <div class="product-info">
-                        <div class="product-img" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">${slot.emoji}</div>
+                        <div class="product-img" style="background: linear-gradient(135deg, #B4322F, #C77E2A);">${slot.emoji}</div>
                         <div class="product-detail">
                             <h5>${slot.name}</h5>
                             <p class="product-price">${slot.price}</p>

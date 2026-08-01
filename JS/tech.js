@@ -581,7 +581,7 @@ function enableEdit() {
     if (resultDiv.querySelector('.result-placeholder')) return;
 
     resultDiv.contentEditable = true;
-    resultDiv.style.border = '2px solid #3b82f6';
+    resultDiv.style.border = '2px solid #B4322F';
     resultDiv.focus();
 
     resultDiv.addEventListener('blur', function() {

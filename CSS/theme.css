@@ -1,0 +1,163 @@
+/* ============================================================
+   岭南农遗 · 共享主题层  (theme.css)
+   设计语言：岭南乡土 · 暖色自然
+   签名：五色农遗带（五大遗产色）+ 朱印
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+:root {
+  /* ---- 基底 ---- */
+  --paper:      #F7F2E7;   /* 米纸 */
+  --paper-2:    #EFE6D2;   /* 纸深 */
+  --paper-3:    #E3D4B6;   /* 更深 */
+  --ink:        #43332A;   /* 墨褐 */
+  --ink-soft:   #77685A;   /* 墨柔 */
+  --ink-faint:  #A39680;   /* 墨淡 */
+  --line:       rgba(67, 51, 42, 0.14);
+  --line-strong:rgba(67, 51, 42, 0.30);
+
+  /* ---- 主色 ---- */
+  --lychee:      #B4322F;  /* 荔枝红 · 主行动色 */
+  --lychee-deep: #8E2421;
+  --tangerine:   #C77E2A;  /* 橘金 · 高亮 */
+  --tea:         #4E6B52;  /* 茶青 · 平衡 */
+  --tea-deep:    #3A5440;
+
+  /* ---- 五大农遗色 ---- */
+  --c-lychee: #C24B3F;  /* 增城荔枝 */
+  --c-tea:    #5F7A55;  /* 潮州单丛茶 */
+  --c-citrus: #D9792B;  /* 化州橘红 */
+  --c-chenpi:#A6782A;   /* 新会陈皮 */
+  --c-agar:  #4A3A2A;   /* 东莞莞香 */
+
+  /* ---- 字体 ---- */
+  --font-display: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --font-body:    'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  --font-latin:   'Cormorant Garamond', 'Times New Roman', serif;
+
+  /* ---- 阴影 ---- */
+  --shadow-card: 0 12px 32px rgba(67, 51, 42, 0.12);
+  --shadow-pop:  0 24px 56px rgba(67, 51, 42, 0.22);
+}
+
+/* ================= 基底 ================= */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(180, 50, 47, 0.85);
+  color: #FFF7EC;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--paper-2); }
+::-webkit-scrollbar-thumb { background: #C9B995; border-radius: 6px; border: 2px solid var(--paper-2); }
+::-webkit-scrollbar-thumb:hover { background: var(--lychee); }
+
+:focus-visible {
+  outline: 2px solid var(--lychee);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================= 字体层级 ================= */
+/* 展示字体（宋体 · 东方手稿感） */
+.main-title, .section-title, .global-title,
+.about-title .title-cn, .about-title .title-en,
+.title-cn, .title-en,
+.panel-title, .location-name, .h-name, .h-name-en,
+.header-title, .heritage-title, .card-title,
+.voice-text, .block-title, .subtitle,
+.chat-header, .chat-title, .result-title, .modal-title {
+  font-family: var(--font-display);
+}
+
+/* 拉丁/数字装饰字体 */
+.section-number, .coordinate, .stat-number, .card-id, .doc-number,
+.section-subtitle, .header-right, .meta-value, .page-number,
+.stat-number, .tagline, .h-badge {
+  font-family: var(--font-latin);
+  font-style: normal;
+}
+
+/* ================= 签名：五色农遗带 ================= */
+.five-band {
+  display: block;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg,
+    var(--c-lychee) 0 20%, var(--c-tea) 20% 40%,
+    var(--c-citrus) 40% 60%, var(--c-chenpi) 60% 80%,
+    var(--c-agar) 80% 100%);
+  background-size: 100% 100%;
+}
+.five-band.thin { height: 4px; }
+.five-band.center { margin: 16px auto 0; max-width: 240px; }
+.header-band { width: 200px; margin-top: 12px; }
+
+/* ================= 签名：朱印 ================= */
+.seal {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 66px;
+  padding: 8px 6px;
+  background: linear-gradient(135deg, #C24B3F 0%, #8E2421 100%);
+  color: #FFF3E6;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  letter-spacing: 3px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 243, 230, 0.5),
+    0 12px 28px rgba(180, 50, 47, 0.35);
+  transform: rotate(-5deg);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* ================= 深色主题页（交易所） ================= */
+body.dark-theme {
+  background-color: #1C1510;
+  color: #E7DEC9;
+}
+body.dark-theme::-webkit-scrollbar-track { background: #1C1510; }
+body.dark-theme::-webkit-scrollbar-thumb { background: #43332A; border-color: #1C1510; }
+body.dark-theme::-webkit-scrollbar-thumb:hover { background: #B4322F; }
+
+/* ================= 签名：顶部五色品牌条 ================= */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  z-index: 9999;
+  background: linear-gradient(90deg,
+    var(--c-lychee) 0 20%, var(--c-tea) 20% 40%,
+    var(--c-citrus) 40% 60%, var(--c-chenpi) 60% 80%,
+    var(--c-agar) 80% 100%);
+  pointer-events: none;
+}
+
+/* ================= 动效降级 ================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

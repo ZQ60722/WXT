@@ -296,7 +296,7 @@ function showPersonDetails(person) {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(15, 23, 42, 0.85);
+        background: rgba(28, 21, 16, 0.85);
         backdrop-filter: blur(12px);
         display: flex;
         align-items: center;
@@ -306,9 +306,9 @@ function showPersonDetails(person) {
     `;
     
     const headerInfo = isChinese 
-        ? `<p style="margin: 0; font-size: 0.95rem; color: #64748b; font-weight: 500;">${person.role} · ${person.location}</p>`
-        : `<p style="margin: 0; font-size: 0.95rem; color: #64748b; font-weight: 500;">${person.role}</p>
-           <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #94a3b8;">${person.country}</p>`;
+        ? `<p style="margin: 0; font-size: 0.95rem; color: #77685A; font-weight: 500;">${person.role} · ${person.location}</p>`
+        : `<p style="margin: 0; font-size: 0.95rem; color: #77685A; font-weight: 500;">${person.role}</p>
+           <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #A39680;">${person.country}</p>`;
     
     modal.innerHTML = `
         <div class="academic-modal-content" style="
@@ -321,8 +321,8 @@ function showPersonDetails(person) {
             overflow-y: auto;
             position: relative;
             animation: slideUp 0.3s ease;
-            border: 1px solid rgba(30, 64, 175, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(30, 64, 175, 0.25);
+            border: 1px solid rgba(67, 51, 42, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(67, 51, 42, 0.25);
         ">
             <!-- 学术风格装饰线 -->
             <div style="
@@ -331,7 +331,7 @@ function showPersonDetails(person) {
                 left: 0;
                 right: 0;
                 height: 4px;
-                background: linear-gradient(90deg, #1e40af 0%, #3b82f6 50%, #d97706 100%);
+                background: linear-gradient(90deg, #43332A 0%, #B4322F 50%, #d97706 100%);
                 border-radius: 16px 16px 0 0;
             "></div>
             
@@ -339,16 +339,16 @@ function showPersonDetails(person) {
                 position: absolute;
                 top: 20px;
                 right: 20px;
-                background: rgba(30, 64, 175, 0.1);
-                border: 1px solid rgba(30, 64, 175, 0.2);
+                background: rgba(67, 51, 42, 0.1);
+                border: 1px solid rgba(67, 51, 42, 0.2);
                 border-radius: 8px;
                 width: 36px;
                 height: 36px;
-                color: #1e40af;
+                color: #43332A;
                 font-size: 20px;
                 cursor: pointer;
                 transition: all 0.3s ease;
-            " onmouseover="this.style.background='rgba(30, 64, 175, 0.2)'" onmouseout="this.style.background='rgba(30, 64, 175, 0.1)'">×</button>
+            " onmouseover="this.style.background='rgba(67, 51, 42, 0.2)'" onmouseout="this.style.background='rgba(67, 51, 42, 0.1)'">×</button>
             
             <!-- 头部信息 -->
             <div style="text-align: center; margin-bottom: 30px; padding-top: 10px;">
@@ -356,7 +356,7 @@ function showPersonDetails(person) {
                     width: 70px;
                     height: 70px;
                     border-radius: 50%;
-                    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+                    background: linear-gradient(135deg, #43332A 0%, #B4322F 100%);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -364,20 +364,20 @@ function showPersonDetails(person) {
                     font-weight: bold;
                     font-size: 1.8rem;
                     margin: 0 auto 15px;
-                    border: 3px solid rgba(30, 64, 175, 0.1);
+                    border: 3px solid rgba(67, 51, 42, 0.1);
                 ">${person.avatar}</div>
-                <h2 style="margin: 0 0 8px 0; font-size: 1.6rem; color: #1e40af; font-weight: 700;">${person.name}</h2>
+                <h2 style="margin: 0 0 8px 0; font-size: 1.6rem; color: #43332A; font-weight: 700;">${person.name}</h2>
                 ${headerInfo}
             </div>
             
             <!-- 分享/故事内容 -->
             <div style="margin-bottom: 25px;">
-                <h3 style="color: #1e40af; margin-bottom: 12px; font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                    <span style="display: inline-block; width: 4px; height: 18px; background: #1e40af; border-radius: 2px;"></span>
+                <h3 style="color: #43332A; margin-bottom: 12px; font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                    <span style="display: inline-block; width: 4px; height: 18px; background: #43332A; border-radius: 2px;"></span>
                     ${isChinese ? '📝 分享' : '📝 Story'}
                 </h3>
-                <div style="background: rgba(30, 64, 175, 0.03); border-left: 3px solid #1e40af; padding: 15px 18px; border-radius: 0 8px 8px 0;">
-                    <p style="line-height: 1.7; margin: 0; color: #374151; font-size: 0.95rem;">${person.content}</p>
+                <div style="background: rgba(67, 51, 42, 0.03); border-left: 3px solid #43332A; padding: 15px 18px; border-radius: 0 8px 8px 0;">
+                    <p style="line-height: 1.7; margin: 0; color: #4A3B2E; font-size: 0.95rem;">${person.content}</p>
                 </div>
             </div>
             
@@ -393,8 +393,8 @@ function showPersonDetails(person) {
             </div>
             
             <!-- 底部日期 -->
-            <div style="text-align: right; padding-top: 15px; border-top: 1px solid rgba(30, 64, 175, 0.1);">
-                <span style="color: #94a3b8; font-size: 0.85rem; font-family: 'Courier New', monospace;">${isChinese ? '分享日期' : 'Date'}：${person.date}</span>
+            <div style="text-align: right; padding-top: 15px; border-top: 1px solid rgba(67, 51, 42, 0.1);">
+                <span style="color: #A39680; font-size: 0.85rem; font-family: 'Courier New', monospace;">${isChinese ? '分享日期' : 'Date'}：${person.date}</span>
             </div>
         </div>
     `;
@@ -473,7 +473,7 @@ async function loadZengchengData() {
     } catch (error) {
         console.error('加载广东省地图失败:', error);
         document.getElementById('zengchengMap').innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #64748b;">
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #77685A;">
                 <div style="text-align: center;">
                     <div style="font-size: 2rem; margin-bottom: 10px;">⚠️</div>
                     <div>地图加载失败</div>
@@ -491,7 +491,7 @@ function setGuangdongMapOption() {
             left: 'center',
             top: 10,
             textStyle: {
-                color: '#1e40af',
+                color: '#43332A',
                 fontSize: 16,
                 fontWeight: 'bold'
             }
@@ -499,16 +499,16 @@ function setGuangdongMapOption() {
         tooltip: {
             trigger: 'item',
             backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            borderColor: '#3b82f6',
+            borderColor: '#B4322F',
             borderWidth: 1,
             textStyle: {
-                color: '#374151'
+                color: '#4A3B2E'
             },
             formatter: function(params) {
                 if (params.componentType === 'geo') {
                     return `<div style="padding: 8px;">
-                        <div style="font-weight: bold; color: #1e40af; margin-bottom: 5px;">${params.name}</div>
-                        <div style="color: #64748b;">广东省</div>
+                        <div style="font-weight: bold; color: #43332A; margin-bottom: 5px;">${params.name}</div>
+                        <div style="color: #77685A;">广东省</div>
                     </div>`;
                 }
                 return params.name;
@@ -522,28 +522,28 @@ function setGuangdongMapOption() {
             label: {
                 show: true,
                 fontSize: 10,
-                color: '#374151',
+                color: '#4A3B2E',
                 fontWeight: 'normal'
             },
             itemStyle: {
-                areaColor: '#e0f2fe',  // 淡蓝色主题
-                borderColor: '#3b82f6',
+                areaColor: '#F6EFE0',  // 淡蓝色主题
+                borderColor: '#B4322F',
                 borderWidth: 1,
-                shadowColor: 'rgba(59, 130, 246, 0.1)',
+                shadowColor: 'rgba(180, 50, 47, 0.1)',
                 shadowBlur: 5
             },
             emphasis: {
                 label: {
                     show: true,
                     fontSize: 12,
-                    color: '#1e40af',
+                    color: '#43332A',
                     fontWeight: 'bold'
                 },
                 itemStyle: {
-                    areaColor: '#bae6fd',
-                    borderColor: '#1e40af',
+                    areaColor: '#E4D7B8',
+                    borderColor: '#43332A',
                     borderWidth: 2,
-                    shadowColor: 'rgba(59, 130, 246, 0.2)',
+                    shadowColor: 'rgba(180, 50, 47, 0.2)',
                     shadowBlur: 10
                 }
             }

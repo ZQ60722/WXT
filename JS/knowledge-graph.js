@@ -328,33 +328,33 @@ const categoryColors = {
         gradient: 'centerGradient'
     },
     zengcheng: {
-        main: '#ff2d55',
-        light: '#ff6b8a',
-        dark: '#c41e3a',
+        main: '#C24B3F',
+        light: '#E8B4AE',
+        dark: '#8E2421',
         gradient: 'zengchengGradient'
     },
     huazhou: {
-        main: '#ff9500',
-        light: '#ffb347',
-        dark: '#cc7a00',
+        main: '#D9792B',
+        light: '#E8B876',
+        dark: '#9A5F1C',
         gradient: 'huazhouGradient'
     },
     chaozhou: {
-        main: '#34c759',
-        light: '#6ee7b7',
-        dark: '#248a3d',
+        main: '#5F7A55',
+        light: '#A8C2A0',
+        dark: '#3A5440',
         gradient: 'chaozhouGradient'
     },
     dongguan: {
-        main: '#af52de',
-        light: '#c4b5fd',
-        dark: '#8b5cf6',
+        main: '#6B5340',
+        light: '#D9C2A6',
+        dark: '#3A2A1C',
         gradient: 'dongguanGradient'
     },
     xinhui: {
-        main: '#ffcc00',
-        light: '#ffe066',
-        dark: '#d4a574',
+        main: '#D9A03C',
+        light: '#F2D8A8',
+        dark: '#A6782A',
         gradient: 'xinhuiGradient'
     }
 };

@@ -9,9 +9,9 @@
 
 body {
     font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+    background: linear-gradient(135deg, #FAF6EC 0%, #F3EDDD 50%, #E7DEC9 100%);
     min-height: 100vh;
-    color: #334155;
+    color: #43332A;
     line-height: 1.6;
 }
 
@@ -37,22 +37,22 @@ body {
     gap: 8px;
     padding: 10px 20px;
     background: white;
-    border: 2px solid rgba(30, 64, 175, 0.2);
+    border: 2px solid rgba(67, 51, 42, 0.2);
     border-radius: 25px;
     font-size: 0.95rem;
     font-weight: 600;
-    color: #1e40af;
+    color: #43332A;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.1);
+    box-shadow: 0 2px 8px rgba(67, 51, 42, 0.1);
 }
 
 .lang-switch-btn:hover {
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #43332A 0%, #B4322F 100%);
     color: white;
     border-color: transparent;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+    box-shadow: 0 4px 15px rgba(67, 51, 42, 0.3);
 }
 
 .lang-current {
@@ -60,11 +60,11 @@ body {
 }
 
 .lang-divider {
-    color: #94a3b8;
+    color: #A39680;
 }
 
 .lang-other {
-    color: #64748b;
+    color: #77685A;
     font-weight: 400;
 }
 
@@ -79,10 +79,10 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #43332A 0%, #B4322F 100%);
     border-radius: 12px;
     margin-bottom: 30px;
-    box-shadow: 0 4px 20px rgba(30, 64, 175, 0.2);
+    box-shadow: 0 4px 20px rgba(67, 51, 42, 0.2);
     position: relative;
     overflow: hidden;
 }
@@ -161,14 +161,14 @@ body {
 .info-card {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(30, 64, 175, 0.08);
+    box-shadow: 0 2px 12px rgba(67, 51, 42, 0.08);
     overflow: hidden;
-    border: 1px solid rgba(30, 64, 175, 0.1);
+    border: 1px solid rgba(67, 51, 42, 0.1);
     transition: all 0.3s ease;
 }
 
 .info-card:hover {
-    box-shadow: 0 4px 20px rgba(30, 64, 175, 0.12);
+    box-shadow: 0 4px 20px rgba(67, 51, 42, 0.12);
     transform: translateY(-2px);
 }
 
@@ -177,8 +177,8 @@ body {
     align-items: center;
     gap: 10px;
     padding: 18px 24px;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    border-bottom: 2px solid rgba(30, 64, 175, 0.1);
+    background: linear-gradient(135deg, #FAF6EC 0%, #F3EDDD 100%);
+    border-bottom: 2px solid rgba(67, 51, 42, 0.1);
 }
 
 .header-icon {
@@ -188,7 +188,7 @@ body {
 .card-header h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #1e40af;
+    color: #43332A;
     margin: 0;
 }
 
@@ -199,10 +199,10 @@ body {
 /* 地点信息卡片 */
 .heritage-title {
     font-size: 1.8rem;
-    color: #1e40af;
+    color: #43332A;
     margin-bottom: 20px;
     font-weight: 700;
-    border-left: 4px solid #3b82f6;
+    border-left: 4px solid #B4322F;
     padding-left: 15px;
 }
 
@@ -217,7 +217,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid rgba(30, 64, 175, 0.08);
+    border-bottom: 1px solid rgba(67, 51, 42, 0.08);
 }
 
 .meta-item:last-child {
@@ -226,13 +226,13 @@ body {
 
 .meta-label {
     font-size: 0.9rem;
-    color: #64748b;
+    color: #77685A;
     font-weight: 500;
 }
 
 .meta-value {
     font-size: 0.95rem;
-    color: #334155;
+    color: #43332A;
     font-weight: 500;
 }
 
@@ -253,22 +253,22 @@ body {
 
 .academic-tag {
     padding: 8px 16px;
-    background: rgba(30, 64, 175, 0.08);
-    color: #475569;
+    background: rgba(67, 51, 42, 0.08);
+    color: #5A4C3D;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
-    border: 1px solid rgba(30, 64, 175, 0.15);
+    border: 1px solid rgba(67, 51, 42, 0.15);
     transition: all 0.3s ease;
 }
 
 .academic-tag:hover {
-    background: rgba(30, 64, 175, 0.15);
+    background: rgba(67, 51, 42, 0.15);
     transform: translateY(-2px);
 }
 
 .academic-tag.primary {
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #43332A 0%, #B4322F 100%);
     color: white;
     border-color: transparent;
 }
@@ -290,7 +290,7 @@ body {
 
 .section-subtitle {
     font-size: 1rem;
-    color: #1e40af;
+    color: #43332A;
     font-weight: 600;
     margin-bottom: 12px;
     display: flex;
@@ -303,13 +303,13 @@ body {
     display: inline-block;
     width: 4px;
     height: 18px;
-    background: linear-gradient(180deg, #3b82f6 0%, #1e40af 100%);
+    background: linear-gradient(180deg, #B4322F 0%, #43332A 100%);
     border-radius: 2px;
 }
 
 .culture-text {
     font-size: 0.95rem;
-    color: #475569;
+    color: #5A4C3D;
     line-height: 1.8;
     text-align: justify;
 }
@@ -324,8 +324,8 @@ body {
     padding-left: 24px;
     position: relative;
     font-size: 0.9rem;
-    color: #475569;
-    border-bottom: 1px solid rgba(30, 64, 175, 0.06);
+    color: #5A4C3D;
+    border-bottom: 1px solid rgba(67, 51, 42, 0.06);
 }
 
 .heritage-list li:last-child {
@@ -336,7 +336,7 @@ body {
     content: '•';
     position: absolute;
     left: 8px;
-    color: #3b82f6;
+    color: #B4322F;
     font-weight: bold;
     font-size: 1.2rem;
 }
@@ -344,10 +344,10 @@ body {
 /* 点滴故事卡片 */
 .story-item {
     padding: 20px;
-    background: rgba(30, 64, 175, 0.03);
+    background: rgba(67, 51, 42, 0.03);
     border-radius: 10px;
     margin-bottom: 16px;
-    border-left: 3px solid #3b82f6;
+    border-left: 3px solid #B4322F;
 }
 
 .story-item:last-child {
@@ -361,7 +361,7 @@ body {
 
 .quote-mark {
     font-size: 3rem;
-    color: rgba(30, 64, 175, 0.2);
+    color: rgba(67, 51, 42, 0.2);
     line-height: 1;
     position: absolute;
     top: -10px;
@@ -371,7 +371,7 @@ body {
 
 .story-quote p {
     font-size: 0.95rem;
-    color: #475569;
+    color: #5A4C3D;
     line-height: 1.8;
     font-style: italic;
     padding-left: 20px;
@@ -387,7 +387,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #43332A 0%, #B4322F 100%);
     color: white;
     display: flex;
     align-items: center;
@@ -405,12 +405,12 @@ body {
 .author-name {
     font-size: 0.95rem;
     font-weight: 600;
-    color: #1e40af;
+    color: #43332A;
 }
 
 .author-title {
     font-size: 0.8rem;
-    color: #94a3b8;
+    color: #A39680;
 }
 
 /* 听听你的声音卡片 */
@@ -420,14 +420,14 @@ body {
 
 .voice-intro p {
     font-size: 0.95rem;
-    color: #64748b;
+    color: #77685A;
     line-height: 1.7;
 }
 
 .voice-button {
     width: 100%;
     padding: 16px 24px;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #43332A 0%, #B4322F 100%);
     color: white;
     border: none;
     border-radius: 10px;
@@ -439,13 +439,13 @@ body {
     justify-content: center;
     gap: 10px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+    box-shadow: 0 4px 15px rgba(67, 51, 42, 0.3);
 }
 
 .voice-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
-    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    box-shadow: 0 8px 25px rgba(67, 51, 42, 0.4);
+    background: linear-gradient(135deg, #43332A 0%, #B4322F 100%);
 }
 
 .btn-icon {
@@ -460,7 +460,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(15, 23, 42, 0.85);
+    background: rgba(28, 21, 16, 0.85);
     backdrop-filter: blur(12px);
     z-index: 1000;
     align-items: center;
@@ -480,8 +480,8 @@ body {
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
-    box-shadow: 0 25px 50px -12px rgba(30, 64, 175, 0.25);
-    border: 1px solid rgba(30, 64, 175, 0.15);
+    box-shadow: 0 25px 50px -12px rgba(67, 51, 42, 0.25);
+    border: 1px solid rgba(67, 51, 42, 0.15);
 }
 
 .modal-accent-line {
@@ -490,7 +490,7 @@ body {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #1e40af 0%, #3b82f6 50%, #d97706 100%);
+    background: linear-gradient(90deg, #43332A 0%, #B4322F 50%, #d97706 100%);
     border-radius: 16px 16px 0 0;
 }
 
@@ -499,7 +499,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 30px 30px 20px;
-    border-bottom: 1px solid rgba(30, 64, 175, 0.1);
+    border-bottom: 1px solid rgba(67, 51, 42, 0.1);
 }
 
 .modal-title-section {
@@ -514,7 +514,7 @@ body {
 
 .modal-header h2 {
     font-size: 1.5rem;
-    color: #1e40af;
+    color: #43332A;
     font-weight: 700;
     margin: 0;
 }
@@ -523,9 +523,9 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    background: rgba(30, 64, 175, 0.1);
-    border: 1px solid rgba(30, 64, 175, 0.2);
-    color: #1e40af;
+    background: rgba(67, 51, 42, 0.1);
+    border: 1px solid rgba(67, 51, 42, 0.2);
+    color: #43332A;
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -535,7 +535,7 @@ body {
 }
 
 .close-button:hover {
-    background: rgba(30, 64, 175, 0.2);
+    background: rgba(67, 51, 42, 0.2);
     transform: rotate(90deg);
 }
 
@@ -558,14 +558,14 @@ body {
     gap: 12px;
     margin-bottom: 20px;
     padding-bottom: 12px;
-    border-bottom: 2px solid rgba(30, 64, 175, 0.1);
+    border-bottom: 2px solid rgba(67, 51, 42, 0.1);
 }
 
 .section-number {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #43332A 0%, #B4322F 100%);
     color: white;
     display: flex;
     align-items: center;
@@ -576,7 +576,7 @@ body {
 
 .section-header-bar h3 {
     font-size: 1.1rem;
-    color: #1e40af;
+    color: #43332A;
     font-weight: 600;
     margin: 0;
 }
@@ -588,7 +588,7 @@ body {
 .form-group label {
     display: block;
     font-size: 0.9rem;
-    color: #475569;
+    color: #5A4C3D;
     font-weight: 500;
     margin-bottom: 8px;
 }
@@ -597,11 +597,11 @@ body {
 .form-group textarea {
     width: 100%;
     padding: 12px 16px;
-    border: 1px solid rgba(30, 64, 175, 0.2);
+    border: 1px solid rgba(67, 51, 42, 0.2);
     border-radius: 8px;
     font-size: 0.95rem;
-    color: #334155;
-    background: #f8fafc;
+    color: #43332A;
+    background: #FAF6EC;
     transition: all 0.3s ease;
     font-family: inherit;
 }
@@ -609,9 +609,9 @@ body {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: #B4322F;
     background: white;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 3px rgba(180, 50, 47, 0.1);
 }
 
 .form-group textarea {
@@ -631,14 +631,14 @@ body {
     justify-content: flex-end;
     gap: 15px;
     padding-top: 20px;
-    border-top: 1px solid rgba(30, 64, 175, 0.1);
+    border-top: 1px solid rgba(67, 51, 42, 0.1);
 }
 
 .cancel-button {
     padding: 12px 24px;
-    background: rgba(30, 64, 175, 0.1);
-    color: #475569;
-    border: 1px solid rgba(30, 64, 175, 0.2);
+    background: rgba(67, 51, 42, 0.1);
+    color: #5A4C3D;
+    border: 1px solid rgba(67, 51, 42, 0.2);
     border-radius: 8px;
     font-size: 0.95rem;
     font-weight: 500;
@@ -647,12 +647,12 @@ body {
 }
 
 .cancel-button:hover {
-    background: rgba(30, 64, 175, 0.2);
+    background: rgba(67, 51, 42, 0.2);
 }
 
 .submit-button {
     padding: 12px 28px;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #43332A 0%, #B4322F 100%);
     color: white;
     border: none;
     border-radius: 8px;
@@ -663,12 +663,12 @@ body {
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+    box-shadow: 0 4px 15px rgba(67, 51, 42, 0.3);
 }
 
 .submit-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+    box-shadow: 0 6px 20px rgba(67, 51, 42, 0.4);
 }
 
 /* 响应式设计 */
@@ -756,4 +756,51 @@ body {
     .story-quote p {
         font-size: 0.9rem;
     }
+}
+
+/* ============================================================
+   详情页主题精修 (热改层)
+   ============================================================ */
+
+/* 顶部导航栏底部：五色农遗带 */
+.academic-header::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+        #C24B3F 0 20%, #5F7A55 20% 40%, #D9792B 40% 60%,
+        #A6782A 60% 80%, #4A3A2A 80% 100%);
+}
+
+/* 卡片暖白化 */
+.academic-panel .info-card,
+.stories-card, .voice-card, .location-card, .culture-card {
+    background: rgba(255, 251, 242, 0.92);
+}
+
+/* 主标题强化 */
+.heritage-title {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* 主要按钮：荔枝红渐变 */
+.voice-button,
+.submit-button {
+    background: linear-gradient(135deg, #C24B3F 0%, #8E2421 100%);
+    box-shadow: 0 10px 26px rgba(180, 50, 47, 0.3);
+}
+.voice-button:hover,
+.submit-button:hover {
+    background: linear-gradient(135deg, #D9534F 0%, #A52B28 100%);
+}
+
+/* 语言切换与文字强调 */
+.lang-switch-btn {
+    border-color: rgba(180, 50, 47, 0.35);
+}
+.meta-value.highlight {
+    color: #B4322F;
+    font-weight: 600;
 }

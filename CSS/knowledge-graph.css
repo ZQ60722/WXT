@@ -42,16 +42,16 @@
     /* 节点配色 - 和谐渐变 */
     --varieties-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
     --heritage-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    --industry-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    --industry-gradient: linear-gradient(135deg, #B4322F 0%, #B4322F 100%);
     --technology-gradient: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    --center-gradient: linear-gradient(135deg, #C41E3A 0%, #8B1538 100%);
-    
+    --center-gradient: linear-gradient(135deg, #D99A3E 0%, #8E5A1E 100%);
+
     /* 五大非遗配色 */
-    --zengcheng-gradient: linear-gradient(135deg, #ff2d55 0%, #c41e3a 100%);
-    --huazhou-gradient: linear-gradient(135deg, #ff9500 0%, #cc7a00 100%);
-    --chaozhou-gradient: linear-gradient(135deg, #34c759 0%, #248a3d 100%);
-    --dongguan-gradient: linear-gradient(135deg, #af52de 0%, #5b21b6 100%);
-    --xinhui-gradient: linear-gradient(135deg, #ffcc00 0%, #b48246 100%);
+    --zengcheng-gradient: linear-gradient(135deg, #C24B3F 0%, #8E2421 100%);
+    --huazhou-gradient: linear-gradient(135deg, #D9792B 0%, #9A5F1C 100%);
+    --chaozhou-gradient: linear-gradient(135deg, #7DA57E 0%, #3A5440 100%);
+    --dongguan-gradient: linear-gradient(135deg, #A5836A 0%, #3A2A1C 100%);
+    --xinhui-gradient: linear-gradient(135deg, #D9A03C 0%, #A6782A 100%);
 }
 
 body {
