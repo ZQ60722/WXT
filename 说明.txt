@@ -1,4 +1,0 @@
-index是主页，直接点就可以使用。pages里面是各个页面（tech-技术页面，语料库和ai评估，industry是产业链来的，knowledge-graph是知识图谱，detail是国际视角的讲自己故事）
-js是每个页面的逻辑（tech页面太多我就写了两个）
-css是装饰来的
-backend是后端
