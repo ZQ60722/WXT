@@ -640,6 +640,20 @@ function addMapMarkers() {
                 { zh: '广济桥功夫茶体验点', en: 'Guangji Bridge Kung Fu Tea Experience' },
                 { zh: '凤凰茶博物馆', en: 'Fenghuang Tea Museum' }
             ]
+        },
+        {
+            name: '梅州(Meizhou)',
+            position: [115.4, 23.8],
+            images: [],
+            intro: { zh: '岭南灵芝文化代表', en: 'Representative of Lingnan Ganoderma Culture' },
+            heritage: [
+                { zh: '赤灵芝/血灵芝', en: 'Gandoderma lucidum/sinense' },
+                { zh: '灵芝农业文化', en: 'Lingzhi Agricultural Culture' }
+            ],
+            coreSites: [
+                { zh: '万福楼灵芝基地', en: 'Wanfukou Lingzhi Base' },
+                { zh: '旧寨村有机灵芝栽培基地', en: 'Jiuzhai Village has an organic Lingzhi cultivation base' }
+            ]
         }
     ];
 

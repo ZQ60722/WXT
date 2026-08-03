@@ -767,3 +767,299 @@ body {
         height: 200px;
     }
 }
+
+/* ============================================================
+   知识图谱 · 深色星图风热改层
+   深墨绿星图底 + 暖金网格/光晕 + 珠宝感节点 + 分层连线
+   ============================================================ */
+
+/* ---------- 深色星图背景 ---------- */
+body {
+    background: radial-gradient(ellipse 80% 60% at 50% 20%, #15221F 0%, #0F1A18 55%, #0A100F 100%) !important;
+    background-attachment: fixed;
+}
+.academic-container { background: transparent; }
+
+.academic-header {
+    background: rgba(12, 20, 18, 0.85) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(217, 178, 120, 0.18);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+.header-title { color: #F5EDDC !important; }
+.header-subtitle { color: rgba(242, 200, 119, 0.85) !important; font-style: italic; }
+
+/* 图谱画布：深色 + 细腻网格 + 光晕 */
+.graph-section {
+    background: rgba(15, 24, 22, 0.85);
+    border: 1px solid rgba(217, 178, 120, 0.14);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+.graph-canvas {
+    background:
+        radial-gradient(ellipse 55% 45% at 50% 42%, rgba(217, 178, 120, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 60% at 50% 50%, rgba(60, 90, 80, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, #0C1614 0%, #0A100F 100%) !important;
+}
+.graph-canvas::before {
+    border: 2px solid rgba(242, 200, 119, 0.14) !important;
+}
+.graph-canvas::after {
+    border: 1px solid rgba(242, 200, 119, 0.10) !important;
+}
+
+/* 细腻网格：暖金极淡 */
+.academic-grid {
+    background-image:
+        linear-gradient(rgba(242, 200, 119, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(242, 200, 119, 0.05) 1px, transparent 1px) !important;
+}
+
+/* 缩放提示：深色 */
+.zoom-hint {
+    background: rgba(12, 20, 18, 0.8);
+    color: #C9B995;
+    border: 1px solid rgba(217, 178, 120, 0.15);
+}
+.zoom-hint kbd {
+    background: rgba(242, 200, 119, 0.15);
+    color: #F2C877;
+    border: 1px solid rgba(242, 200, 119, 0.25);
+}
+
+/* ---------- 图例：深色玻璃 ---------- */
+.graph-legend {
+    background: rgba(12, 20, 18, 0.85) !important;
+    border-top: 1px solid rgba(217, 178, 120, 0.15) !important;
+    color: #E7DEC9;
+}
+.legend-item { color: #D9CBBB; }
+.legend-dot {
+    box-shadow: 0 0 12px currentColor, 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* ---------- 详情面板：深色玻璃 ---------- */
+.detail-panel {
+    background: rgba(12, 20, 18, 0.88) !important;
+    border: 1px solid rgba(217, 178, 120, 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+.detail-placeholder { color: #A39680; }
+.detail-placeholder .placeholder-icon { color: #F2C877; }
+.detail-content {
+    background: linear-gradient(160deg, #101B19, #0C1412) !important;
+    border: 1px solid rgba(217, 178, 120, 0.16);
+}
+.detail-header {
+    background: linear-gradient(135deg, #1A2B26, #0E1A17) !important;
+    border-bottom: 1px solid rgba(242, 200, 119, 0.25);
+}
+.detail-header h3 { color: #F5EDDC; }
+.detail-header p { color: #C9B995; }
+.detail-body { color: #D9CBBB; }
+.detail-section { border-bottom-color: rgba(242, 200, 119, 0.12) !important; }
+.section-title {
+    color: #F2C877;
+    border-bottom-color: rgba(242, 200, 119, 0.35) !important;
+}
+.section-content { color: #D9CBBB; }
+
+/* ---------- 珠宝感节点（深底适配） ---------- */
+/* 节点描边高光 */
+.node-outer-ring { stroke: rgba(242, 200, 119, 0.35); }
+
+/* 连线：分层质感（JS 已设 category 色，这里加光晕与粗细层次） */
+.link-line {
+    stroke-width: 2.5px;
+    filter: drop-shadow(0 0 5px rgba(242, 200, 119, 0.35));
+}
+/* 中心→一级 用暖金（仅最内层） */
+.link-line[data-tier="1"] {
+    stroke: url(#centerGradient);
+    stroke-width: 3px;
+    filter: drop-shadow(0 0 8px rgba(242, 200, 119, 0.5));
+}
+.level2-link {
+    stroke-width: 1.5px;
+    opacity: 0.5;
+    filter: drop-shadow(0 0 3px rgba(242, 200, 119, 0.2));
+}
+.flow-line {
+    stroke-width: 1.5px;
+    opacity: 0.55;
+}
+
+/* 节点 hover 柔光 */
+.graph-canvas .node-outer-ring:hover,
+.graph-canvas circle:hover {
+    filter: drop-shadow(0 0 10px rgba(242, 200, 119, 0.5));
+}
+
+/* 标签：深底白字清晰 */
+.node-label-main { fill: #F7F1E3 !important; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+.node-label-sub { fill: rgba(217, 203, 187, 0.75) !important; }
+
+/* ---------- 滚动条适配深色 ---------- */
+::-webkit-scrollbar-track { background: #0A100F; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3A5440, #6B5340); border-color: #0A100F; }
+
+/* ============================================================
+   知识图谱 · 梅州灵芝 + 灵魂动效热改层
+   ============================================================ */
+
+/* ---------- 图例：梅州灵芝 ---------- */
+.legend-dot.meizhou {
+    background: linear-gradient(135deg, #E3C89A 0%, #B08A4A 60%, #6B4A20 100%);
+    box-shadow: 0 0 12px rgba(176, 138, 74, 0.5), 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* ---------- 节点呼吸动效 ---------- */
+/* 一级节点：缓慢呼吸 */
+.level1-node {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: nodeBreath 5s ease-in-out infinite;
+}
+.level1-node:nth-of-type(odd) { animation-duration: 6s; animation-delay: -2s; }
+@keyframes nodeBreath {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+}
+/* 二级节点：星星闪烁 */
+.level2-node {
+    animation: starTwinkle 3s ease-in-out infinite;
+}
+.level2-node:nth-of-type(even) { animation-delay: 1.2s; }
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.75; }
+    50% { opacity: 1; }
+}
+
+/* ---------- 连线能量流（发光流动） ---------- */
+/* 中心→一级：暖金能量流 */
+.link-line[data-tier="1"] {
+    stroke: url(#centerGradient);
+    stroke-width: 3px;
+    filter: drop-shadow(0 0 8px rgba(242, 200, 119, 0.5));
+    animation: energyFlow 3s linear infinite;
+}
+/* 一级→二级：柔光细线 */
+.level2-link {
+    stroke-width: 1.5px;
+    opacity: 0.5;
+    animation: energyFlowSoft 4s linear infinite;
+}
+/* 二级→三级：流动虚线 */
+.flow-line {
+    stroke-width: 1.5px;
+    opacity: 0.55;
+    animation: flowAnimation 1.2s linear infinite;
+}
+@keyframes energyFlow {
+    0% { stroke-dashoffset: 0; stroke-dasharray: 14 10; }
+    100% { stroke-dashoffset: -48; stroke-dasharray: 14 10; }
+}
+@keyframes energyFlowSoft {
+    0% { stroke-dashoffset: 0; stroke-dasharray: 2 6; opacity: 0.3; }
+    50% { opacity: 0.6; }
+    100% { stroke-dashoffset: -32; stroke-dasharray: 2 6; opacity: 0.3; }
+}
+
+/* ---------- 星辰粒子背景 ---------- */
+.starfield {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+.starfield::before,
+.starfield::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(242, 200, 119, 0.8);
+    box-shadow:
+        120px 80px rgba(242, 200, 119, 0.6), 300px 160px rgba(242, 200, 119, 0.4),
+        480px 90px rgba(242, 200, 119, 0.5), 700px 220px rgba(242, 200, 119, 0.3),
+        250px 320px rgba(242, 200, 119, 0.5), 550px 380px rgba(242, 200, 119, 0.35),
+        820px 340px rgba(242, 200, 119, 0.4), 950px 120px rgba(242, 200, 119, 0.3),
+        180px 450px rgba(242, 200, 119, 0.4), 640px 500px rgba(242, 200, 119, 0.3),
+        900px 480px rgba(242, 200, 119, 0.5), 1080px 260px rgba(242, 200, 119, 0.35),
+        130px 200px rgba(242, 200, 119, 0.35), 1180px 420px rgba(242, 200, 119, 0.4),
+        1350px 150px rgba(242, 200, 119, 0.3), 1500px 350px rgba(242, 200, 119, 0.4);
+    animation: starFloat 18s linear infinite;
+}
+.starfield::after {
+    width: 2px;
+    height: 2px;
+    background: rgba(217, 203, 187, 0.7);
+    box-shadow:
+        200px 140px rgba(217, 203, 187, 0.5), 420px 280px rgba(217, 203, 187, 0.35),
+        650px 160px rgba(217, 203, 187, 0.4), 860px 400px rgba(217, 203, 187, 0.3),
+        360px 520px rgba(217, 203, 187, 0.4), 720px 600px rgba(217, 203, 187, 0.3),
+        1000px 550px rgba(217, 203, 187, 0.35), 1280px 520px rgba(217, 203, 187, 0.4),
+        150px 380px rgba(217, 203, 187, 0.3), 1420px 600px rgba(217, 203, 187, 0.35),
+        1560px 280px rgba(217, 203, 187, 0.3), 600px 100px rgba(217, 203, 187, 0.35);
+    animation-duration: 26s;
+    animation-direction: reverse;
+}
+@keyframes starFloat {
+    0% { transform: translateY(0) translateX(0); opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-40px) translateX(20px); opacity: 0.6; }
+}
+
+/* ---------- 中心节点：心跳增强 ---------- */
+.center-node {
+    animation: centerPulse 2.6s ease-in-out infinite;
+}
+
+/* ============================================================
+   知识图谱 · 节点流畅度优化热改层
+   ============================================================ */
+
+/* 节点入场：柔和弹出 + 轻微上浮（替代硬切） */
+.level1-node {
+    animation: nodeBreath 6s ease-in-out infinite;
+}
+.level2-node {
+    animation: nodePopIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards, starTwinkle 3s ease-in-out 0.6s infinite;
+}
+.level3-node {
+    animation: nodePopIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes nodePopIn {
+    from { opacity: 0; transform: scale(0.4); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 节点呼吸：更柔和，幅度更小，模拟自然呼吸 */
+@keyframes nodeBreath {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.028); }
+}
+
+/* SVG 整体过渡：展开/收起时柔和淡入 */
+#knowledgeGraph {
+    transition: opacity 0.28s ease;
+}
+
+/* 连线绘制：更流畅的描线动画 */
+.link-line {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: lineDraw 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* 星辰粒子：更慢更飘逸 */
+.starfield::before {
+    animation: starFloat 24s ease-in-out infinite;
+}
+.starfield::after {
+    animation: starFloat 34s ease-in-out infinite reverse;
+}

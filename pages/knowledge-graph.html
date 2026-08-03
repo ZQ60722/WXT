@@ -28,6 +28,8 @@
                 <div class="graph-canvas" id="graphCanvas">
                     <!-- 学术风格背景网格 -->
                     <div class="academic-grid"></div>
+                    <!-- 星辰粒子背景 -->
+                    <div class="starfield" aria-hidden="true"></div>
                     <!-- 缩放提示 -->
                     <div class="zoom-hint">
                         <kbd>滚轮</kbd> 缩放 <kbd>拖拽</kbd> 移动
@@ -44,55 +46,63 @@
                             
                             <!-- 增城荔枝渐变 -->
                             <radialGradient id="zengchengGradient" cx="30%" cy="30%" r="70%">
-                                <stop offset="0%" style="stop-color:#ff6b8a;stop-opacity:1" />
-                                <stop offset="30%" style="stop-color:#ff2d55;stop-opacity:1" />
-                                <stop offset="60%" style="stop-color:#c41e3a;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#8b1538;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#E86A5A;stop-opacity:1" />
+                                <stop offset="30%" style="stop-color:#C24B3F;stop-opacity:1" />
+                                <stop offset="60%" style="stop-color:#A52B28;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8E2421;stop-opacity:1" />
                             </radialGradient>
                             
                             <!-- 化州化橘红渐变 -->
                             <radialGradient id="huazhouGradient" cx="30%" cy="30%" r="70%">
-                                <stop offset="0%" style="stop-color:#ffb347;stop-opacity:1" />
-                                <stop offset="30%" style="stop-color:#ff9500;stop-opacity:1" />
-                                <stop offset="60%" style="stop-color:#cc7a00;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#995c00;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#F0A44E;stop-opacity:1" />
+                                <stop offset="30%" style="stop-color:#D9792B;stop-opacity:1" />
+                                <stop offset="60%" style="stop-color:#B85F1C;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#9A5F1C;stop-opacity:1" />
                             </radialGradient>
                             
                             <!-- 潮州单丛茶渐变 - 茶青 -->
                             <radialGradient id="chaozhouGradient" cx="30%" cy="30%" r="70%">
                                 <stop offset="0%" style="stop-color:#A8C2A0;stop-opacity:1" />
                                 <stop offset="30%" style="stop-color:#7DA57E;stop-opacity:1" />
-                                <stop offset="60%" style="stop-color:#4E6B52;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#2F4A38;stop-opacity:1" />
+                                <stop offset="60%" style="stop-color:#5F7A55;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#3A5440;stop-opacity:1" />
                             </radialGradient>
 
                             <!-- 东莞莞香渐变 - 沉香褐 -->
                             <radialGradient id="dongguanGradient" cx="30%" cy="30%" r="70%">
                                 <stop offset="0%" style="stop-color:#D9C2A6;stop-opacity:1" />
-                                <stop offset="30%" style="stop-color:#A5836A;stop-opacity:1" />
+                                <stop offset="30%" style="stop-color:#B3926F;stop-opacity:1" />
                                 <stop offset="60%" style="stop-color:#6B5340;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#3A2A1C;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#4A3A2A;stop-opacity:1" />
                             </radialGradient>
                             
                             <!-- 新会陈皮渐变 -->
                             <radialGradient id="xinhuiGradient" cx="30%" cy="30%" r="70%">
-                                <stop offset="0%" style="stop-color:#ffe066;stop-opacity:1" />
-                                <stop offset="30%" style="stop-color:#ffcc00;stop-opacity:1" />
-                                <stop offset="60%" style="stop-color:#d4a574;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#b48246;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#F2C877;stop-opacity:1" />
+                                <stop offset="30%" style="stop-color:#D9A03C;stop-opacity:1" />
+                                <stop offset="60%" style="stop-color:#C08A2E;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#A6782A;stop-opacity:1" />
+                            </radialGradient>
+
+                            <!-- 梅州灵芝渐变 -->
+                            <radialGradient id="meizhouGradient" cx="30%" cy="30%" r="70%">
+                                <stop offset="0%" style="stop-color:#E3C89A;stop-opacity:1" />
+                                <stop offset="30%" style="stop-color:#B08A4A;stop-opacity:1" />
+                                <stop offset="60%" style="stop-color:#8A6733;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#6B4A20;stop-opacity:1" />
                             </radialGradient>
                             
                             <!-- 二级节点渐变 -->
                             <radialGradient id="zengchengGradientL2" cx="30%" cy="30%" r="70%">
-                                <stop offset="0%" style="stop-color:#ff8c5a;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#ff6b8a;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#ff2d55;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#F08A7E;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#E86A5A;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#C24B3F;stop-opacity:1" />
                             </radialGradient>
                             
                             <radialGradient id="huazhouGradientL2" cx="30%" cy="30%" r="70%">
-                                <stop offset="0%" style="stop-color:#ffd699;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#ffb347;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#ff9500;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#F5C58A;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#F0A44E;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#D9792B;stop-opacity:1" />
                             </radialGradient>
                             
                             <radialGradient id="chaozhouGradientL2" cx="30%" cy="30%" r="70%">
@@ -108,22 +118,22 @@
                             </radialGradient>
                             
                             <radialGradient id="xinhuiGradientL2" cx="30%" cy="30%" r="70%">
-                                <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#ffe066;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#ffcc00;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#FBE7B8;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#F2C877;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#D9A03C;stop-opacity:1" />
                             </radialGradient>
                             
                             <!-- 三级节点渐变 - 更亮的版本 -->
                             <radialGradient id="zengchengGradientL3" cx="30%" cy="30%" r="70%">
-                                <stop offset="0%" style="stop-color:#ffb3c1;stop-opacity:1" />
-                                <stop offset="40%" style="stop-color:#ff8c5a;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#ff6b8a;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#F2AEA6;stop-opacity:1" />
+                                <stop offset="40%" style="stop-color:#F08A7E;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#E86A5A;stop-opacity:1" />
                             </radialGradient>
                             
                             <radialGradient id="huazhouGradientL3" cx="30%" cy="30%" r="70%">
-                                <stop offset="0%" style="stop-color:#ffe4b3;stop-opacity:1" />
-                                <stop offset="40%" style="stop-color:#ffd699;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#ffb347;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#F8D6A0;stop-opacity:1" />
+                                <stop offset="40%" style="stop-color:#F5C58A;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#F0A44E;stop-opacity:1" />
                             </radialGradient>
                             
                             <radialGradient id="chaozhouGradientL3" cx="30%" cy="30%" r="70%">
@@ -139,11 +149,24 @@
                             </radialGradient>
                             
                             <radialGradient id="xinhuiGradientL3" cx="30%" cy="30%" r="70%">
-                                <stop offset="0%" style="stop-color:#fef9c3;stop-opacity:1" />
-                                <stop offset="40%" style="stop-color:#fef3c7;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#ffe066;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:#FDF3D4;stop-opacity:1" />
+                                <stop offset="40%" style="stop-color:#FBE7B8;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#F2C877;stop-opacity:1" />
                             </radialGradient>
-                            
+
+                            <!-- 梅州灵芝 L2/L3 渐变 -->
+                            <radialGradient id="meizhouGradientL2" cx="30%" cy="30%" r="70%">
+                                <stop offset="0%" style="stop-color:#F0DCB0;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#E3C89A;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#B08A4A;stop-opacity:1" />
+                            </radialGradient>
+
+                            <radialGradient id="meizhouGradientL3" cx="30%" cy="30%" r="70%">
+                                <stop offset="0%" style="stop-color:#F7E9CC;stop-opacity:1" />
+                                <stop offset="40%" style="stop-color:#F0DCB0;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#E3C89A;stop-opacity:1" />
+                            </radialGradient>
+
                             <!-- 高级阴影滤镜 -->
                             <filter id="premiumShadow" x="-50%" y="-50%" width="200%" height="200%">
                                 <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
@@ -170,7 +193,7 @@
                             <!-- 选中状态发光 -->
                             <filter id="selectedGlow" x="-100%" y="-100%" width="300%" height="300%">
                                 <feGaussianBlur stdDeviation="8" result="blur"/>
-                                <feFlood flood-color="#D4A574" flood-opacity="0.8"/>
+                                <feFlood flood-color="#F2C877" flood-opacity="0.9"/>
                                 <feComposite in2="blur" operator="in"/>
                                 <feMerge>
                                     <feMergeNode/>
@@ -210,6 +233,10 @@
                     <div class="legend-item">
                         <div class="legend-dot xinhui"></div>
                         <span>新会陈皮 Chenpi</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot meizhou"></div>
+                        <span>梅州灵芝 Lingzhi</span>
                     </div>
                 </div>
             </section>

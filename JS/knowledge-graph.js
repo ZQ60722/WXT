@@ -45,7 +45,7 @@ const knowledgeGraphData = {
             icon: '🍊',
             description: '南方人参，化痰圣药，岭南中医药文化瑰宝',
             descriptionEn: 'Ginseng of the South, Sacred Medicine for Phlegm Removal, Treasure of Lingnan Traditional Chinese Medicine Culture',
-            angle: 72,
+            angle: 60,
             expanded: false
         },
         {
@@ -57,7 +57,7 @@ const knowledgeGraphData = {
             icon: '🍵',
             description: '工夫茶艺发源地，凤凰单丛香飘四海',
             descriptionEn: 'Birthplace of Kung Fu Tea Art, Phoenix Dancong Tea Fragrance Spreads Worldwide',
-            angle: 144,
+            angle: 120,
             expanded: false
         },
         {
@@ -69,7 +69,7 @@ const knowledgeGraphData = {
             icon: '🌿',
             description: '广东香都，千年制香技艺，海上丝绸之路香料',
             descriptionEn: 'Incense Capital of Guangdong, Millennium-old Incense-making Craft, Spice of Maritime Silk Road',
-            angle: 216,
+            angle: 180,
             expanded: false
         },
         {
@@ -81,7 +81,19 @@ const knowledgeGraphData = {
             icon: '🍂',
             description: '广东三宝之首，百年陈皮胜黄金',
             descriptionEn: 'First of Guangdong Three Treasures, Century-old Chenpi Surpasses Gold',
-            angle: 288,
+            angle: 240,
+            expanded: false
+        },
+        {
+            id: 'meizhou',
+            name: '梅州灵芝',
+            nameEn: 'Meizhou Lingzhi',
+            type: 'level1',
+            category: 'meizhou',
+            icon: '🍄',
+            description: '岭南灵芝文化代表，仙草栽培与药食同源',
+            descriptionEn: 'Representative of Lingnan Lingzhi Culture, Immortal Herb Cultivation and Medicine-Food Homology',
+            angle: 300,
             expanded: false
         }
     ],
@@ -111,6 +123,11 @@ const knowledgeGraphData = {
             { id: 'xh-culture', name: '文化介绍', nameEn: 'Cultural Introduction', type: 'level2', category: 'xinhui', description: '陈皮文化，越陈越香，药食同源', descriptionEn: 'Chenpi Culture, Better with Age, Medicine and Food Same Source' },
             { id: 'xh-industry', name: '产业线条', nameEn: 'Industry Chain', type: 'level2', category: 'xinhui', description: '柑种植、陈皮制作、仓储陈化、品牌营销', descriptionEn: 'Mandarin Planting, Chenpi Making, Storage Aging, Brand Marketing' },
             { id: 'xh-varieties', name: '品种信息', nameEn: 'Variety Information', type: 'level2', category: 'xinhui', description: '茶枝柑品种，新会核心产区', descriptionEn: 'Chazhi Mandarin Variety, Xinhui Core Production Area' }
+        ],
+        meizhou: [
+            { id: 'mz-varieties', name: '品种信息', nameEn: 'Variety Information', type: 'level2', category: 'meizhou', description: '赤灵芝经典弹射孢子，血灵芝抗氧化突出直接采收', descriptionEn: 'Chi Lingzhi classic spore-releasing, Xue Lingzhi antioxidant-rich direct harvest' },
+            { id: 'mz-process', name: '生产工艺', nameEn: 'Production Process', type: 'level2', category: 'meizhou', description: '菌种驯化到洁净采收的标准化流程', descriptionEn: 'Standardized process from strain domestication to clean harvest' },
+            { id: 'mz-culture', name: '文化农遗', nameEn: 'Agri-Culture', type: 'level2', category: 'meizhou', description: '仙草文化与岭南栽培传统，药食同源', descriptionEn: 'Immortal herb culture and Lingnan cultivation tradition, medicine-food homology' }
         ]
     },
     
@@ -204,7 +221,23 @@ const knowledgeGraphData = {
             { id: 'xh-erhong', name: '二红柑', nameEn: 'Second Red Mandarin', type: 'level3', category: 'xinhui', description: '半成熟二红柑皮，药用价值高', descriptionEn: 'Semi-mature second red mandarin peel, high medicinal value' },
             { id: 'xh-qingpi', name: '青皮', nameEn: 'Green Peel', type: 'level3', category: 'xinhui', description: '未成熟青柑皮，药用功效最强', descriptionEn: 'Immature green mandarin peel, strongest medicinal effect' }
         ]
-    }
+    },
+    'mz-varieties': [
+        { id: 'mz-chilingzhi', name: '赤灵芝', nameEn: 'Chi Lingzhi', type: 'level3', category: 'meizhou', description: '经典品种，成熟后弹射孢子粉，栽培历史最久', descriptionEn: 'Classic variety, releases spore powder when mature, longest cultivation history' },
+        { id: 'mz-xuelingzhi', name: '血灵芝', nameEn: 'Xue Lingzhi', type: 'level3', category: 'meizhou', description: '不产孢子粉，成熟后直接采收，抗氧化性能突出', descriptionEn: 'No spore powder, direct harvest when mature, outstanding antioxidant properties' }
+    ],
+    'mz-process': [
+        { id: 'mz-strain', name: '菌种驯化', nameEn: 'Strain Domestication', type: 'level3', category: 'meizhou', description: '优选菌种，人工驯化培育，确保品系纯正', descriptionEn: 'Select superior strains, artificial domestication, ensure pure lineage' },
+        { id: 'mz-medium', name: '培养基制作', nameEn: 'Medium Making', type: 'level3', category: 'meizhou', description: '科学配比培养基，为灵芝生长提供营养', descriptionEn: 'Scientifically formulated culture medium for lingzhi growth' },
+        { id: 'mz-sterilize', name: '高温灭菌', nameEn: 'High-temp Sterilization', type: 'level3', category: 'meizhou', description: '高温灭菌处理，杜绝杂菌污染', descriptionEn: 'High-temperature sterilization to eliminate contamination' },
+        { id: 'mz-incubate', name: '恒温恒湿培育', nameEn: 'Constant Temp-Humidity Cultivation', type: 'level3', category: 'meizhou', description: '恒温恒湿设施栽培，室内立体种植', descriptionEn: 'Indoor vertical cultivation with constant temperature and humidity' },
+        { id: 'mz-harvest', name: '洁净采收', nameEn: 'Clean Harvest', type: 'level3', category: 'meizhou', description: '洁净防护环境采收，孢子粉收集或子实体采收', descriptionEn: 'Harvest in clean protected environment, spore collection or fruiting body harvest' }
+    ],
+    'mz-culture': [
+        { id: 'mz-xiangcao', name: '仙草典故', nameEn: 'Immortal Herb Legend', type: 'level3', category: 'meizhou', description: '《神农本草经》记载，灵芝位列上品，古称"仙草"', descriptionEn: 'Recorded in Shennong Bencao Jing as top grade, known as "immortal herb"' },
+        { id: 'mz-lingnan', name: '岭南栽培传统', nameEn: 'Lingnan Cultivation Tradition', type: 'level3', category: 'meizhou', description: '岭南湿热气候适宜灵芝生长，栽培传统悠久', descriptionEn: 'Lingnan warm-humid climate suits lingzhi, long cultivation tradition' },
+        { id: 'mz-shishitongyuan', name: '药食同源', nameEn: 'Medicine-Food Homology', type: 'level3', category: 'meizhou', description: '药食同源文化理念，灵芝入膳入药双重价值', descriptionEn: 'Medicine-food homology concept, dual value in cuisine and medicine' }
+    ]
 };
 
 // 节点详细信息数据
@@ -316,51 +349,96 @@ const nodeDetails = {
                 content: '新会陈皮入膳可调百味，入药可和百药。具有理气健脾、燥湿化痰的功效，是岭南地区重要的药食同源食材。无论是煲汤、煮粥还是泡茶，新会陈皮都能增添独特的风味。'
             }
         ]
+    },
+    'meizhou': {
+        title: '梅州灵芝',
+        subtitle: 'Meizhou Lingzhi',
+        sections: [
+            {
+                title: '品种特色 / Variety Features',
+                content: '梅州万福楼灵芝基地以赤灵芝、血灵芝两大品种为核心。赤灵芝为经典品种，成熟后弹射孢子粉，栽培历史最久；血灵芝不产孢子粉，成熟后直接采收，抗氧化性能突出。'
+            },
+            {
+                title: '标准化生产 / Standardized Production',
+                content: '从菌种驯化、培养基制作、高温灭菌，到恒温恒湿培育、洁净防护，再到孢子粉收集或子实体采收，形成完整标准化流程。坚持"零化肥农药、密闭洁净管理、室内立体设施栽培"三大绿色标准。'
+            },
+            {
+                title: '农遗文化 / Agri-Heritage Culture',
+                content: '灵芝古称"仙草"，《神农本草经》将其列为上品。岭南湿热气候适宜灵芝生长，栽培传统悠久。秉承"药食同源"的文化理念，推动传统药草文化与乡村特色产业协同发展。'
+            },
+            {
+                title: '免责声明 / Disclaimer',
+                content: '相关内容为种植实践总结，不作医疗论断。'
+            }
+        ]
     }
 };
 
 // 颜色配置 - 五个地方农遗各自配色
 const categoryColors = {
     center: {
-        main: '#ff6b35',
-        light: '#ff8c5a',
-        dark: '#e85a2b',
+        main: '#D99A3E',
+        light: '#F2D8A8',
+        dark: '#8E5A1E',
         gradient: 'centerGradient'
     },
     zengcheng: {
         main: '#C24B3F',
-        light: '#E8B4AE',
+        light: '#F08A7E',
         dark: '#8E2421',
         gradient: 'zengchengGradient'
     },
     huazhou: {
         main: '#D9792B',
-        light: '#E8B876',
+        light: '#F5C58A',
         dark: '#9A5F1C',
         gradient: 'huazhouGradient'
     },
     chaozhou: {
-        main: '#5F7A55',
-        light: '#A8C2A0',
+        main: '#7DA57E',
+        light: '#C5E3BC',
         dark: '#3A5440',
         gradient: 'chaozhouGradient'
     },
     dongguan: {
-        main: '#6B5340',
-        light: '#D9C2A6',
+        main: '#A5836A',
+        light: '#E8D9C5',
         dark: '#3A2A1C',
         gradient: 'dongguanGradient'
     },
     xinhui: {
         main: '#D9A03C',
-        light: '#F2D8A8',
+        light: '#FBE7B8',
         dark: '#A6782A',
         gradient: 'xinhuiGradient'
+    },
+    meizhou: {
+        main: '#B08A4A',
+        light: '#E3C89A',
+        dark: '#6B4A20',
+        gradient: 'meizhouGradient'
     }
 };
 
 // 当前展开的一级节点
 let expandedNodes = new Set();
+
+// 确定性散列随机（基于字符串 seed，保证每次刷新节点位置稳定不跳变）
+function seedRandom(str) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+    }
+    return ((h >>> 0) % 1000) / 1000; // 0..1
+}
+
+// 节点位置散射：围绕理想坐标加稳定随机偏移，让布局自然错落
+function scatter(x, y, seed, range) {
+    const a = seedRandom('a' + seed) * Math.PI * 2;
+    const r = seedRandom('r' + seed) * range;
+    return { x: x + Math.cos(a) * r, y: y + Math.sin(a) * r };
+}
 
 // 初始化图谱
 function initGraph() {
@@ -412,7 +490,7 @@ function drawCenterNode(x, y) {
     glowCircle.setAttribute('cy', y);
     glowCircle.setAttribute('r', 55);
     glowCircle.setAttribute('fill', 'none');
-    glowCircle.setAttribute('stroke', '#ff6b35');
+    glowCircle.setAttribute('stroke', '#D99A3E');
     glowCircle.setAttribute('stroke-width', '3');
     glowCircle.setAttribute('opacity', '0.4');
     glowCircle.setAttribute('filter', 'url(#glow)');
@@ -425,7 +503,7 @@ function drawCenterNode(x, y) {
     pulseCircle.setAttribute('cy', y);
     pulseCircle.setAttribute('r', 50);
     pulseCircle.setAttribute('fill', 'none');
-    pulseCircle.setAttribute('stroke', '#ff6b35');
+    pulseCircle.setAttribute('stroke', '#D99A3E');
     pulseCircle.setAttribute('stroke-width', '2');
     pulseCircle.setAttribute('opacity', '0.2');
     pulseCircle.setAttribute('class', 'pulse-ring');
@@ -437,7 +515,7 @@ function drawCenterNode(x, y) {
     circle.setAttribute('cy', y);
     circle.setAttribute('r', 45);
     circle.setAttribute('fill', 'url(#centerGradient)');
-    circle.setAttribute('stroke', '#ff6b35');
+    circle.setAttribute('stroke', '#D99A3E');
     circle.setAttribute('stroke-width', '3');
     circle.setAttribute('filter', 'url(#premiumShadow)');
     circle.setAttribute('class', 'node center-node');
@@ -491,8 +569,12 @@ function drawLevel1Node(node, centerX, centerY, index) {
     
     const angle = (node.angle * Math.PI) / 180;
     const radius = 220; // 从180增加到220，拉大中心到一级节点的距离
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * Math.sin(angle);
+    const baseX = centerX + radius * Math.cos(angle);
+    const baseY = centerY + radius * Math.sin(angle);
+    // 稳定散射：每个节点围绕理想位置偏移，布局更自然
+    const sp = scatter(baseX, baseY, node.id, 26);
+    const x = sp.x;
+    const y = sp.y;
     
     // 绘制连接线
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -504,6 +586,7 @@ function drawLevel1Node(node, centerX, centerY, index) {
     line.setAttribute('stroke-width', '2.5');
     line.setAttribute('opacity', '0.7');
     line.setAttribute('class', 'link-line');
+    line.setAttribute('data-tier', '1'); // 中心→一级：暖金粗线
     linksGroup.appendChild(line);
     
     // 创建外圈
@@ -605,9 +688,12 @@ function drawLevel2Nodes(level1Node, centerX, centerY) {
         const angleStep = 100 / (level2Nodes.length - 1 || 1); // 从70增加到100
         const angle = ((baseAngle + index * angleStep) * Math.PI) / 180;
         
-        const x = level1X + level2Radius * Math.cos(angle);
-        const y = level1Y + level2Radius * Math.sin(angle);
-        
+        const baseX2 = level1X + level2Radius * Math.cos(angle);
+        const baseY2 = level1Y + level2Radius * Math.sin(angle);
+        const sp2 = scatter(baseX2, baseY2, node.id, 15);
+        const x = sp2.x;
+        const y = sp2.y;
+
         // 绘制连接线
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', level1X);
@@ -713,9 +799,12 @@ function drawLevel3Nodes(level2Node, parentX, parentY, category) {
     
     level3Nodes.forEach((node, index) => {
         const angle = ((startAngle + index * angleStep) * Math.PI) / 180;
-        const x = parentX + level3Radius * Math.cos(angle);
-        const y = parentY + level3Radius * Math.sin(angle);
-        
+        const baseX3 = parentX + level3Radius * Math.cos(angle);
+        const baseY3 = parentY + level3Radius * Math.sin(angle);
+        const sp3 = scatter(baseX3, baseY3, node.id, 10);
+        const x = sp3.x;
+        const y = sp3.y;
+
         // 绘制动态流动连接线
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', parentX);
@@ -830,13 +919,16 @@ function toggleLevel1Node(node) {
         expandedNodes.delete(node.id);
     }
     
-    // 重绘图谱（带过渡动画）
+    // 重绘图谱（流畅渐隐渐现过渡）
     const svg = document.getElementById('knowledgeGraph');
-    svg.style.opacity = '0.8';
+    svg.style.transition = 'opacity 0.28s ease';
+    svg.style.opacity = '0';
     setTimeout(() => {
         initGraph();
-        svg.style.opacity = '1';
-    }, 150);
+        requestAnimationFrame(() => {
+            svg.style.opacity = '1';
+        });
+    }, 280);
     
     // 显示节点详情
     showNodeDetails(node);
@@ -855,7 +947,7 @@ function showNodeDetails(node) {
             // 为三级节点生成默认详情
             detailPanel.innerHTML = `
                 <div class="detail-content">
-                    <div class="detail-header" style="background: ${categoryColors[node.category] ? `linear-gradient(135deg, ${categoryColors[node.category].main}, ${categoryColors[node.category].dark})` : 'linear-gradient(135deg, #ff6b35, #c41e3a)'};">
+                    <div class="detail-header" style="background: ${categoryColors[node.category] ? `linear-gradient(135deg, ${categoryColors[node.category].main}, ${categoryColors[node.category].dark})` : 'linear-gradient(135deg, #D99A3E, #C24B3F)'};">
                         <h2 class="detail-title">${node.name}</h2>
                         <p class="detail-subtitle">${node.nameEn || ''}</p>
                     </div>
@@ -1063,7 +1155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bottom: 20px;
             right: 20px;
             padding: 10px 20px;
-            background: linear-gradient(135deg, #ff6b35, #c41e3a);
+            background: linear-gradient(135deg, #D99A3E, #C24B3F);
             color: white;
             border: none;
             border-radius: 8px;

@@ -35,13 +35,13 @@
             <div class="scroll-indicator-bottom">
                 <div class="scroll-arrows">
                     <div class="arrow">《</div>
-                    <div class="arrow">《</div>
                 </div>
             </div>
         </section>
 
         <!-- 第二部分 - 交互地图 -->
         <section class="section section-2" id="section2">
+            <div class="section-2-atmo"></div>
             <div class="section-header">
                 <h2 class="section-title">🧭 Heritage Map</h2>
                 <span class="five-band header-band"></span>
@@ -159,56 +159,139 @@
                         </div>
                     </div>
                     
-                    <!-- 右侧边缘图片墙 -->
-                    <div class="side-image-wall">
-                        <div class="side-image-item" style="--delay: 0s;">
-                            <img src="img/凤凰单丛茶.jpg" alt="凤凰单丛茶">
-                            <div class="side-image-caption">凤凰单丛茶</div>
-                        </div>
-                        <div class="side-image-item" style="--delay: 0.2s;">
-                            <img src="img/桑基鱼塘.jpg" alt="桑基鱼塘">
-                            <div class="side-image-caption">桑基鱼塘</div>
-                        </div>
-                        <div class="side-image-item" style="--delay: 0.4s;">
-                            <img src="img/荔枝丰收.jpg" alt="荔枝丰收">
-                            <div class="side-image-caption">沉醉甜蜜</div>
-                        </div>
-                    </div>
+                    <!-- 右侧竖向照片画廊（照片由 home-gallery.js 动态生成，按地图点位联动） -->
+                    <div class="side-image-wall"></div>
                 </div>
             </div>
         </section>
 
-        <!-- 第三部分 - 共创社区 -->
-        <section class="section section-3" id="section3">
-            <div class="global-wall">
-                <div class="global-header">
-                    <div class="header-with-button">
-                        <div class="title-section">
-                            <h2 class="global-title">🤝 Co-Creation Community</h2>
-                            <span class="five-band thin center"></span>
-                            <p class="global-subtitle">Voices from China and around the world sharing their impressions of Zengcheng Lychee Culture</p>
+        <!-- 第三部分 - 梅州万福楼灵芝 · 旗舰展示 -->
+        <section class="section section-lingzhi" id="section3">
+            <!-- 背景：灵芝大图叠底 -->
+            <div class="lz-bg">
+                <div class="lz-bg-img" style="background-image:url(img/灵芝8.jpg)"></div>
+                <div class="lz-bg-overlay"></div>
+            </div>
+
+            <div class="lz-hero">
+                <!-- 左：品牌信息 -->
+                <div class="lz-brand">
+                    <div class="lz-tagline">🍄 Meizhou · Wanfulou</div>
+                    <h1 class="lz-headline">
+                        <span class="lz-hl-cn">传承岭南灵芝栽培技艺</span>
+                        <span class="lz-hl-en">Inherit Lingnan Ganoderma Cultivation</span>
+                    </h1>
+                    <p class="lz-slogan">活化灵芝农业文化遗产，绿色培育高品质赤灵芝、血灵芝</p>
+
+                    <!-- 文化精粹：三行紧凑 -->
+                    <div class="lz-culture">
+                        <div class="lz-culine">
+                            <span class="lz-cul-icon">🌿</span>
+                            <span class="lz-cul-label">仙草典故</span>
+                            <span class="lz-cul-text">灵芝自古被誉为「仙草」，《神农本草经》列为上品</span>
                         </div>
-                        <a href="pages/detail.html" class="voice-btn">
-                            <span class="voice-icon">🎤</span>
-                            <span class="voice-text">我也来发声</span>
-                        </a>
+                        <div class="lz-culine">
+                            <span class="lz-cul-icon">🏔️</span>
+                            <span class="lz-cul-label">岭南传承</span>
+                            <span class="lz-cul-text">千年采集培植传统，珍贵农业文化遗产</span>
+                        </div>
+                        <div class="lz-culine">
+                            <span class="lz-cul-icon">🍵</span>
+                            <span class="lz-cul-label">药食同源</span>
+                            <span class="lz-cul-text">传统经验与现代设施结合，延续岭南灵芝文化脉络</span>
+                        </div>
+                    </div>
+
+                    <!-- 品种 + 规范 -->
+                    <div class="lz-tags">
+                        <span class="lz-vtag gold">赤灵芝 · 弹射孢子粉</span>
+                        <span class="lz-vtag rose">血灵芝 · 抗氧化突出</span>
+                        <span class="lz-std">零化肥农药</span>
+                        <span class="lz-std">密闭洁净</span>
+                        <span class="lz-std">室内立体栽培</span>
                     </div>
                 </div>
-                
-                <!-- 分类标签 -->
-                <div class="community-tabs">
-                    <button class="tab-btn active" data-tab="chinese">❤️ 中国视角</button>
-                    <button class="tab-btn" data-tab="international">🌍 国际视角</button>
+
+                <!-- 右：灵芝图像展示 -->
+                <div class="lz-visual">
+                    <div class="lz-main-img" style="background-image:url(img/灵芝1.jpg)"></div>
+                    <div class="lz-thumbs">
+                        <div class="lz-thumb active" style="background-image:url(img/灵芝1.jpg)" onclick="lzSwap('img/灵芝1.jpg',this)"></div>
+                        <div class="lz-thumb" style="background-image:url(img/灵芝2.jpg)" onclick="lzSwap('img/灵芝2.jpg',this)"></div>
+                        <div class="lz-thumb" style="background-image:url(img/灵芝3.jpg)" onclick="lzSwap('img/灵芝3.jpg',this)"></div>
+                        <div class="lz-thumb" style="background-image:url(img/灵芝4.jpg)" onclick="lzSwap('img/灵芝4.jpg',this)"></div>
+                        <div class="lz-thumb" style="background-image:url(img/灵芝5.jpg)" onclick="lzSwap('img/灵芝5.jpg',this)"></div>
+                        <div class="lz-thumb" style="background-image:url(img/灵芝6.jpg)" onclick="lzSwap('img/灵芝6.jpg',this)"></div>
+                        <div class="lz-thumb" style="background-image:url(img/灵芝7.jpg)" onclick="lzSwap('img/灵芝7.jpg',this)"></div>
+                        <div class="lz-thumb" style="background-image:url(img/灵芝8.jpg)" onclick="lzSwap('img/灵芝8.jpg',this)"></div>
+                    </div>
                 </div>
-                
-                <div class="story-wall" id="storyWall">
-                    <!-- 用户故事卡片将通过JavaScript动态生成 -->
+            </div>
+
+            <p class="lz-legal">* 种植实践总结，不作医疗论断</p>
+        </section>
+
+        <!-- 第四部分 - 灵芝工艺 · 品质溯源 -->
+        <section class="section section-process" id="section4">
+            <div class="proc-title-row">
+                <h2 class="proc-title">🔬 灵芝工艺 · 品质溯源</h2>
+                <span class="five-band thin" style="width:180px"></span>
+            </div>
+            <!-- 浮动信任徽章 -->
+            <div class="trust-badges">
+                <div class="tb-item"><span class="tb-num">30年</span><span class="tb-label">种植经验</span></div>
+                <div class="tb-item"><span class="tb-num">0</span><span class="tb-label">化肥农药</span></div>
+                <div class="tb-item"><span class="tb-num">100%</span><span class="tb-label">绿色标准</span></div>
+            </div>
+
+            <div class="bento-grid">
+                <!-- 大图 hero -->
+                <div class="bento-hero" style="background-image:url(img/灵芝4.jpg)">
+                    <div class="bento-hero-tag">赤灵芝 · 弹射孢子粉</div>
+                </div>
+
+                <!-- 工艺 pills -->
+                <div class="bento-steps">
+                    <h3 class="bento-label">标准化生产工艺</h3>
+                    <div class="bento-pills">
+                        <span class="bpill">① 菌种驯化</span>
+                        <span class="bpill">② 培养基制作</span>
+                        <span class="bpill">③ 高温灭菌</span>
+                        <span class="bpill">④ 恒温恒湿培育</span>
+                        <span class="bpill">⑤ 洁净防护</span>
+                        <span class="bpill">⑥ 孢子粉收集</span>
+                        <span class="bpill">⑦ 子实体采收</span>
+                    </div>
+                </div>
+
+                <!-- 社区引语卡 1 -->
+                <div class="bento-quote q1">
+                    <div class="bq-avatar">张</div>
+                    <p class="bq-text">"祖辈采灵芝靠天吃饭，现在基地科学种植，品质比野生还稳定。"</p>
+                    <div class="bq-who">张大爷 <span>当地药农 · 30年</span></div>
+                </div>
+
+                <!-- 社区引语卡 2 -->
+                <div class="bento-quote q2">
+                    <div class="bq-avatar">陈</div>
+                    <p class="bq-text">"菌种驯化是手艺活，一批菌种要反复筛选，细心观察才能出好灵芝。"</p>
+                    <div class="bq-who">陈师傅 <span>菌种培育员</span></div>
+                </div>
+
+                <!-- 副图 -->
+                <div class="bento-subimg" style="background-image:url(img/灵芝5.jpg)"></div>
+                <div class="bento-subimg" style="background-image:url(img/灵芝6.jpg)"></div>
+
+                <!-- 行动卡片 -->
+                <div class="bento-action">
+                    <p class="ba-text">灵芝承载千年农耕智慧<br>属于珍贵的农业文化遗产</p>
+                    <a href="pages/detail.html" class="ba-btn">我也来发声 →</a>
                 </div>
             </div>
         </section>
 
-        <!-- 第四部分 - 关于我们 -->
-        <section class="section section-4" id="section4">
+        <!-- 第五部分 - 关于我们 -->
+        <section class="section section-4" id="section5">
             <div class="about-bg">
                 <div class="about-grid"></div>
                 <div class="about-glow"></div>
@@ -240,7 +323,7 @@
                                     项目背景
                                 </h4>
                                 <p class="block-text">
-                                    广东作为岭南文化的发源地，拥有丰富的农业文化遗产资源。本项目聚焦增城荔枝、潮州单丛茶、化州橘红、新会陈皮、东莞莞香五大国家级农业遗产，构建数字化保护与传承平台。
+                                    广东作为岭南文化的发源地，拥有丰富的农业文化遗产资源。本项目聚焦增城荔枝、潮州单丛茶、化州橘红、新会陈皮、东莞莞香，梅州灵芝六大国家级农业遗产，构建数字化保护与传承平台。
                                 </p>
                             </div>
                             
@@ -280,7 +363,7 @@
                         <div class="panel-content">
                             <div class="team-intro">
                                 <p class="team-desc">
-                                    我们是一支跨学科的创新团队，汇聚了农业科学、数字媒体、国际传播、计算机技术等领域的青年学者。团队依托广东省农业文化遗产研究基地，致力于用科技赋能传统文化传承。
+                                    我们是一支跨学科的创新团队，汇聚了英语、涉外法治、大数据技术等领域的青年学者。团队依托广东省农业文化遗产研究基地，致力于用科技赋能传统文化传承。
                                 </p>
                             </div>
                             
@@ -289,7 +372,7 @@
                                     <div class="role-icon">🔬</div>
                                     <div class="role-info">
                                         <h5>农业遗产研究</h5>
-                                        <p>深度挖掘五大农遗的历史渊源与文化内涵</p>
+                                        <p>深度挖掘六大农遗的历史渊源与文化内涵</p>
                                     </div>
                                 </div>
                                 <div class="role-card">
@@ -348,8 +431,37 @@
         <div class="scroll-dot" data-section="2"></div>
         <div class="scroll-dot" data-section="3"></div>
         <div class="scroll-dot" data-section="4"></div>
+        <div class="scroll-dot" data-section="5"></div>
     </div>
 
+    <!-- 灵芝屏交互：缩略图切换 + 背景视差 -->
+    <script>
+    // 缩略图点击 → 切换主图
+    function lzSwap(src, el) {
+        var main = document.querySelector('.lz-main-img');
+        if (main) main.style.backgroundImage = 'url(' + src + ')';
+        document.querySelectorAll('.lz-thumb').forEach(function(t) { t.classList.remove('active'); });
+        el.classList.add('active');
+    }
+    // 背景视差：鼠标在灵芝屏移动时微移背景
+    (function(){
+        var sec = document.querySelector('.section-lingzhi');
+        if (!sec) return;
+        sec.addEventListener('mousemove', function(e){
+            var bg = sec.querySelector('.lz-bg-img');
+            if (!bg) return;
+            var x = (e.clientX / window.innerWidth - 0.5) * 14;
+            var y = (e.clientY / window.innerHeight - 0.5) * 10;
+            bg.style.transform = 'scale(1.06) translate(' + x + 'px, ' + y + 'px)';
+        });
+        sec.addEventListener('mouseleave', function(){
+            var bg = sec.querySelector('.lz-bg-img');
+            if (bg) bg.style.transform = ''; // 清空，恢复 CSS lzBgSlow 动画
+        });
+    })();
+    </script>
+    <script src="JS/home-progress.js"></script>
     <script src="JS/script.js"></script>
+    <script src="JS/home-gallery.js"></script>
 </body>
 </html>
