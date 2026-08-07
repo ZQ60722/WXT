@@ -11,7 +11,8 @@ import csv
 from openai import OpenAI
 
 # ==================== 你的API配置 ====================
-api_key = "sk-ncflzirrrbyxcteyirnktrsfjvtlijnfwjjvfaeddzuvhtsv"
+import os
+api_key = os.environ.get("SILICONFLOW_API_KEY", "")
 api_url = "https://api.siliconflow.cn/v1"
 model = "Qwen/Qwen3-8B"
 # =====================================================

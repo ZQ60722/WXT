@@ -1,0 +1,23 @@
+# 后端运行依赖（部署到 Koyeb 用，构建镜像时 pip install -r requirements.txt）
+# Web 框架与 ASGI 服务器
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+
+# 数据库 ORM（已用 SQLAlchemy 2.x 模型）
+sqlalchemy>=2.0.0
+
+# 异步 HTTP 客户端（调用硅基流动 API）
+httpx>=0.27.0
+
+# 数据校验（路由的请求/响应模型）
+pydantic>=2.5.0
+
+# 本地 .env 读取（生产环境由平台注入环境变量，此包不影响线上）
+python-dotenv>=1.0.0
+
+# Postgres 驱动（DATABASE_URL 指向 Supabase 时需要；本地 SQLite 不需要）
+psycopg2-binary>=2.9.0
+
+# 注意：以下仅本地脚本使用，未列入部署依赖
+#   db/2.py       -> openai
+#   init_database.py -> pandas

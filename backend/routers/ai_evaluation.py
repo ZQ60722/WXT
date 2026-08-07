@@ -115,7 +115,7 @@ async def call_deepseek_api(messages: List[Dict[str, str]]) -> str:
     调用硅基流动DeepSeek API进行对话
     """
     # 硅基流动API配置
-    api_key = "sk-ncflzirrrbyxcteyirnktrsfjvtlijnfwjjvfaeddzuvhtsv"
+    api_key = os.environ.get("SILICONFLOW_API_KEY", "")
     api_url = "https://api.siliconflow.cn/v1/chat/completions"
     model = "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B"
     
@@ -354,7 +354,7 @@ async def generate_ai_assessment(source_text: str, translated_text: str) -> Dict
 
     try:
         # 使用硬编码的API密钥（与翻译功能一致）
-        api_key = "sk-ncflzirrrbyxcteyirnktrsfjvtlijnfwjjvfaeddzuvhtsv"
+        api_key = os.environ.get("SILICONFLOW_API_KEY", "")
         print(f"[AI评估] 使用API密钥: {api_key[:20]}...")
         
         async with httpx.AsyncClient(timeout=30.0) as client:

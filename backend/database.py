@@ -16,9 +16,12 @@ DB_PATH = os.path.join(DB_DIR, 'lychee_culture.db')
 os.makedirs(DB_DIR, exist_ok=True)
 
 # 创建数据库引擎
+# 优先使用环境变量 DATABASE_URL（线上指向 Supabase Postgres），否则回退本地 SQLite
+DATABASE_URL = os.environ.get("DATABASE_URL") or f'sqlite:///{DB_PATH}'
+_connect_args = {'check_same_thread': False} if DATABASE_URL.startswith('sqlite') else {}
 engine = create_engine(
-    f'sqlite:///{DB_PATH}',
-    connect_args={'check_same_thread': False},
+    DATABASE_URL,
+    connect_args=_connect_args,
     echo=False
 )
 
