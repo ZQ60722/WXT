@@ -21,3 +21,7 @@ backend/db/*.sqlite3
 .idea/
 .vscode/
 Thumbs.db
+
+# ===== 日志 =====
+log/
+.log

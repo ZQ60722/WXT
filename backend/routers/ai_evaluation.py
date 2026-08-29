@@ -19,7 +19,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # 导入数据库模型
-from database import get_db, Terminology
+from database import get_db, Terminology, ZengchengLychee
 
 router = APIRouter(
     prefix="/api/ai",
@@ -104,6 +104,7 @@ SIMPLE_SYSTEM_PROMPT = """你是广东农业文化遗产数字化平台的AI助�
 3. 潮州凤凰单丛茶 - 乌龙茶精品，有蜜兰香、鸭屎香等香型
 4. 东莞莞香 - 沉香珍品，香道文化
 5. 新会陈皮 - 药食同源，越陈越香
+6. 梅州灵芝
 
 回答问题时请简洁明了，突出各农遗的特色和文化价值。"""
 
@@ -115,9 +116,9 @@ async def call_deepseek_api(messages: List[Dict[str, str]]) -> str:
     调用硅基流动DeepSeek API进行对话
     """
     # 硅基流动API配置
-    api_key = "sk-ncflzirrrbyxcteyirnktrsfjvtlijnfwjjvfaeddzuvhtsv"
+    api_key = os.environ.get("SILICONFLOW_API_KEY", "")
     api_url = "https://api.siliconflow.cn/v1/chat/completions"
-    model = "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B"
+    model = "Qwen/Qwen3-8B"
     
     try:
         async with httpx.AsyncClient(timeout=60.0) as client:
@@ -191,7 +192,7 @@ async def ai_chat_stream(request: ChatRequest):
 @router.post("/translate", response_model=TranslationResponse)
 async def ai_translate(request: TranslationRequest):
     """
-    AI翻译接口 - 使用DeepSeek进行荔枝文化相关翻译
+    AI翻译接口 - 使用api进行农遗文化相关翻译
     """
     # 构建翻译提示词
     system_prompt = """你是广东农业文化遗产数字化平台的AI翻译助手。请提供准确、专业的翻译服务。
@@ -354,7 +355,7 @@ async def generate_ai_assessment(source_text: str, translated_text: str) -> Dict
 
     try:
         # 使用硬编码的API密钥（与翻译功能一致）
-        api_key = "sk-ncflzirrrbyxcteyirnktrsfjvtlijnfwjjvfaeddzuvhtsv"
+        api_key = os.environ.get("SILICONFLOW_API_KEY", "")
         print(f"[AI评估] 使用API密钥: {api_key[:20]}...")
         
         async with httpx.AsyncClient(timeout=30.0) as client:
@@ -365,7 +366,7 @@ async def generate_ai_assessment(source_text: str, translated_text: str) -> Dict
                     "Content-Type": "application/json"
                 },
                 json={
-                    "model": "deepseek-ai/DeepSeek-V2.5",
+                    "model": "Qwen/Qwen3-8B",
                     "messages": [
                         {"role": "system", "content": "你是荔枝文化遗产翻译专家，擅长评估中文古典诗词和文化遗产的英译质量。"},
                         {"role": "user", "content": prompt}
@@ -509,88 +510,49 @@ class TermRecognitionResponse(BaseModel):
 def extract_text_from_docx(file_content: bytes) -> str:
     """
     从docx文件中提取文本
-    简化版本：直接读取文本内容
+    docx是zip格式，解析 word/document.xml 中的文本节点
     """
+    import zipfile
+    import io
+    from xml.etree import ElementTree as ET
+
+    W_NS = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+    text_parts = []
+
     try:
-        # 使用简单的文本提取方法
-        # docx文件是zip格式，document.xml包含文本
-        import zipfile
-        import io
-        from xml.etree import ElementTree as ET
-        
-        # 命名空间
-        namespaces = {
-            'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
-        }
-        
-        text_parts = []
-        
         with zipfile.ZipFile(io.BytesIO(file_content), 'r') as z:
-            if 'word/document.xml' in z.namelist():
-                with z.open('word/document.xml') as f:
-                    tree = ET.parse(f)
-                    root = tree.getroot()
-                    
-                    # 提取所有文本节点
-                    for elem in root.iter():
-                        if elem.text and elem.text.strip():
-                            text_parts.append(elem.text.strip())
-        
-        return ' '.join(text_parts)
+            for xml_name in z.namelist():
+                # 正文 + 页眉页脚里的文本都提取
+                is_doc = xml_name == 'word/document.xml'
+                is_hf = (xml_name.startswith('word/header') or xml_name.startswith('word/footer')) and xml_name.endswith('.xml')
+                if is_doc or is_hf:
+                    with z.open(xml_name) as f:
+                        root = ET.parse(f).getroot()
+                        # w:p 是段落，按段落拼接保留结构
+                        for para in root.iter(W_NS + 'p'):
+                            para_text = ''.join(
+                                node.text or '' for node in para.iter()
+                                if node.tag == W_NS + 't'
+                            )
+                            if para_text.strip():
+                                text_parts.append(para_text.strip())
     except Exception as e:
         print(f"提取docx文本失败: {e}")
-        # 如果失败，尝试直接解码
+        return ""
+
+    return chr(10).join(text_parts)
+
+
+def extract_text_from_txt(file_content: bytes) -> str:
+    """
+    从txt文件中提取文本，自动尝试常见中文编码
+    """
+    for enc in ('utf-8-sig', 'gbk', 'utf-16'):
         try:
-            return file_content.decode('utf-8', errors='ignore')
-        except:
-            return ""
-
-
-def simple_segment(text: str) -> List[str]:
-    """
-    简单的中文分词实现
-    使用正向最大匹配算法
-    """
-    # 荔枝文化相关的常用术语词典
-    term_dict = [
-        # 品种名
-        '挂绿', '化橘红', '妃子笑', '糯米糍', '新会大红柑', '莞香', '凤凰单丛茶', '蜜兰香',
-        # 地理相关
-        '增城', '化州', '新会', '潮州', '东莞',
-        # 文化相关
-        '贡品', '古诗', '栽培', '种植', '采摘', '保鲜',
-        # 特征描述
-        '果肉', '果核', '优良', '清甜', '爽脆', '晶莹剔透', '名贵',
-    ]
-    
-    words = []
-    i = 0
-    text_len = len(text)
-    
-    while i < text_len:
-        # 跳过标点符号和空格
-        if text[i] in ' ，。！？、；：""''（）【】《》 \t\n\r':
-            i += 1
+            return file_content.decode(enc)
+        except (UnicodeDecodeError, LookupError):
             continue
-        
-        # 尝试匹配最长的术语
-        matched = False
-        for length in range(min(10, text_len - i), 0, -1):
-            substr = text[i:i+length]
-            if substr in term_dict:
-                words.append(substr)
-                i += length
-                matched = True
-                break
-        
-        if not matched:
-            # 如果没有匹配到术语，按单字或常用词处理
-            # 检查是否是中文
-            if '\u4e00' <= text[i] <= '\u9fff':
-                words.append(text[i])
-            i += 1
-    
-    return words
+    return file_content.decode('utf-8', errors='ignore')
 
 
 @router.post("/recognize-terms", response_model=TermRecognitionResponse)
@@ -599,63 +561,72 @@ async def recognize_terms(
     db: Session = Depends(get_db)
 ):
     """
-    术语识别接口 - 上传docx文件，识别其中的荔枝文化术语
+    术语识别接口 - 上传 docx/txt 文件，识别其中的农遗术语
+
+    逻辑：把数据库全部术语（术语表 + 增城荔枝表）加载为匹配词典，
+    按"最长优先"对全文做多模式匹配并统计出现次数，
+    避免"增城挂绿"被重复计数为"挂绿"。
     """
-    # 检查文件类型
-    if not file.filename.endswith('.docx'):
-        raise HTTPException(status_code=400, detail="只支持 .docx 格式文件")
-    
-    try:
-        # 读取文件内容
+    filename = file.filename or ""
+    lower_name = filename.lower()
+
+    if lower_name.endswith('.docx'):
         content = await file.read()
-        
-        # 提取文本
         text = extract_text_from_docx(content)
-        
-        if not text:
-            return TermRecognitionResponse(
-                recognized_terms=[],
-                total_terms=0,
-                file_name=file.filename
-            )
-        
-        # 分词
-        words = simple_segment(text)
-        
-        # 统计词频
-        word_count = {}
-        for word in words:
-            if len(word) >= 2:  # 只统计2字及以上的词
-                word_count[word] = word_count.get(word, 0) + 1
-        
-        # 查询数据库匹配术语
-        recognized_terms = []
-        for word, count in word_count.items():
-            # 查询数据库
-            term = db.query(Terminology).filter(
-                Terminology.chinese_term.contains(word)
-            ).first()
-            
-            if term:
-                # 获取描述信息（优先使用文化内涵）
-                desc = term.cultural_connotation or ""
-                recognized_terms.append(TermRecognitionResult(
-                    term=term.chinese_term,
-                    english_term=term.english_term,
-                    category=term.category,
-                    description=desc[:100] + "..." if len(desc) > 100 else desc,
-                    count=count
-                ))
-        
-        # 按出现次数排序
-        recognized_terms.sort(key=lambda x: x.count, reverse=True)
-        
+    elif lower_name.endswith('.txt'):
+        content = await file.read()
+        text = extract_text_from_txt(content)
+    else:
+        raise HTTPException(status_code=400, detail="只支持 .docx 或 .txt 格式文件")
+
+    if not text.strip():
         return TermRecognitionResponse(
-            recognized_terms=recognized_terms,
-            total_terms=len(recognized_terms),
-            file_name=file.filename
+            recognized_terms=[],
+            total_terms=0,
+            file_name=filename
         )
-        
-    except Exception as e:
-        print(f"术语识别失败: {e}")
-        raise HTTPException(status_code=500, detail=f"术语识别失败: {str(e)}")
+
+    # 1. 加载数据库全部术语：术语表 + 增城荔枝表
+    term_info = {}  # 中文名 -> (英文名, 分类, 描述)
+    for t in db.query(Terminology).all():
+        if t.chinese_term and t.chinese_term not in term_info:
+            term_info[t.chinese_term] = (t.english_term, t.category, t.cultural_connotation)
+    for z in db.query(ZengchengLychee).all():
+        if z.chinese_name and z.chinese_name not in term_info:
+            term_info[z.chinese_name] = (z.english_name, z.category, z.description)
+
+    # 过滤单字词（单字误匹配率太高）
+    patterns = [name for name in term_info if len(name) >= 2]
+    if not patterns:
+        return TermRecognitionResponse(recognized_terms=[], total_terms=0, file_name=filename)
+
+    # 2. 构造"最长优先"的正则做多模式匹配
+    # 多分支正则按书写顺序尝试，长度降序排列即可实现最长匹配优先
+    patterns.sort(key=len, reverse=True)
+    pattern_re = re.compile('|'.join(re.escape(p) for p in patterns))
+
+    # 3. 统计每个术语在全文中的出现次数
+    word_count = {}
+    for m in pattern_re.finditer(text):
+        word_count[m.group()] = word_count.get(m.group(), 0) + 1
+
+    # 4. 组装结果，按出现次数排序
+    recognized_terms = []
+    for name, count in word_count.items():
+        english, category, desc = term_info[name]
+        desc = desc or ""
+        recognized_terms.append(TermRecognitionResult(
+            term=name,
+            english_term=english,
+            category=category,
+            description=desc[:100] + "..." if len(desc) > 100 else desc,
+            count=count
+        ))
+
+    recognized_terms.sort(key=lambda x: x.count, reverse=True)
+
+    return TermRecognitionResponse(
+        recognized_terms=recognized_terms,
+        total_terms=len(recognized_terms),
+        file_name=filename
+    )

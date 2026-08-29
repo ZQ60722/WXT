@@ -9,6 +9,8 @@ from fastapi.responses import JSONResponse
 import uvicorn
 import os
 import sys
+from dotenv import load_dotenv
+load_dotenv()  # 本地开发从 .env 读取环境变量；生产环境由部署平台注入，无需此文件
 
 # 添加当前目录到系统路径
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
