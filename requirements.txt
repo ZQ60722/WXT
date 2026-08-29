@@ -1,0 +1,33 @@
+# ===========================================
+# 岭南农遗服务生态平台 - Python 依赖清单
+# 安装命令: pip install -r requirements.txt
+# ===========================================
+
+# ----- 后端核心依赖 -----
+
+# Web 框架与 ASGI 服务器
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+
+# 数据库 ORM（SQLAlchemy 2.x）
+sqlalchemy>=2.0.0
+
+# 异步 HTTP 客户端（调用硅基流动 API）
+httpx>=0.27.0
+
+# 数据校验（FastAPI 请求/响应模型）
+pydantic>=2.5.0
+
+# 环境变量读取（本地 .env 文件）
+python-dotenv>=1.0.0
+
+# Postgres 驱动（生产环境使用 Supabase 时需要；本地 SQLite 可忽略）
+psycopg2-binary>=2.9.0
+
+# ----- 本地开发/脚本依赖 -----
+
+# OpenAI 兼容客户端（db/2.py 脚本使用）
+openai>=1.0.0
+
+# 数据处理（init_database.py 初始化脚本使用）
+pandas>=2.0.0

@@ -106,6 +106,7 @@ body {
     gap: 14px;
     letter-spacing: 1px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 240px;
 }
 
 .title-icon {

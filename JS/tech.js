@@ -994,11 +994,11 @@ function removeUploadedFile(event) {
 
 // ===== 术语识别功能 =====
 async function performTermRecognition() {
-    // 从AppState中获取已上传的文件
-    const targetFile = AppState.uploadedFiles.find(f => f.name.endsWith('.docx'));
+    // 从AppState中获取已上传的文件（后端支持 docx 和 txt）
+    const targetFile = AppState.uploadedFiles.find(f => f.name.endsWith('.docx') || f.name.endsWith('.txt'));
 
     if (!targetFile) {
-        alert('请先上传 .docx 格式的文件');
+        alert('请先上传 .docx 或 .txt 格式的文件');
         return;
     }
 

@@ -7,426 +7,109 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/theme.css">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        #musicBtn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 99999;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.65);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        #musicBtn:hover {
+            transform: scale(1.1);
+            background: rgba(0,0,0,0.8);
+            border-color: rgba(255,255,255,0.4);
+        }
+        #musicBtn.playing {
+            border-color: #4CAF50;
+            box-shadow: 0 0 30px rgba(76,175,80,0.2);
+        }
+        #musicBtn.muted {
+            border-color: #ff6b6b;
+        }
+        #clickHint {
+            position: fixed;
+            bottom: 90px;
+            right: 24px;
+            z-index: 99998;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: hintPulse 1.5s ease-in-out infinite;
+            display: none;
+            font-family: inherit;
+        }
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.6; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-4px); }
+        }
+        .page-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: rgba(255,255,255,0.6);
+            font-size: 18px;
+        }
+        .page-loading span { margin-right: 12px; }
+        .scroll-indicator.hidden { display: none !important; }
+        .back-home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            font-family: inherit;
+            display: none;
+        }
+        .back-home-btn:hover { background: rgba(255,255,255,0.15); transform: scale(1.05); }
+        .back-home-btn.show { display: block; }
+        #appContainer .container { width: 100%; max-width: 100%; }
+        .scroll-indicator:not(.hidden) { display: flex !important; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 第一部分 - 展示区域 -->
-        <section class="section section-1" id="section1">
-            <div class="glass-card">
-                <div class="hero-emblem">
-                    <div class="seal">嶺南<br>農遺</div>
-                    <div class="hero-title-group">
-                        <h1 class="main-title">🌿 Lingnan Intangible Cultural Heritage</h1>
-                        <span class="five-band thin"></span>
-                    </div>
-                </div>
-                <h2 class="subtitle">Digital Preservation and Cross-Cultural Communication of Traditional Knowledge Systems</h2>
-                <p class="description">
-                    Exploring the intricate tapestry of agricultural heritage, traditional craftsmanship, and folk wisdom across Guangdong Province.
-                </p>
-                <!-- 双按钮区域 -->
-                <div class="button-group">
-                    <a href="pages/tech.html" class="cta-button primary">Explore Corpus</a>
-                    <a href="pages/industry.html" class="cta-button secondary">Industry Service</a>
-                </div>
-            </div>
-            
-            <!-- 向下滚动指示器 -->
-            <div class="scroll-indicator-bottom">
-                <div class="scroll-arrows">
-                    <div class="arrow">《</div>
-                </div>
-            </div>
-        </section>
+    <audio id="bgMusic" loop>
+        <source src="music/七里香.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放
+    </audio>
+    
+    <button id="musicBtn" class="playing" onclick="toggleMusic()" title="切换背景音乐">
+        <span id="musicIcon">🔊</span>
+    </button>
+    
+    <div id="clickHint">🎵 点击任意位置播放音乐</div>
 
-        <!-- 第二部分 - 交互地图 -->
-        <section class="section section-2" id="section2">
-            <div class="section-2-atmo"></div>
-            <div class="section-header">
-                <h2 class="section-title">🧭 Heritage Map</h2>
-                <span class="five-band header-band"></span>
-            </div>
-            
-            <!-- 学术风格布局：标题区 + 主内容区 -->
-            <div class="academic-layout compact">
-                <!-- 顶部标题栏 -->
-                <div class="academic-header-bar">
-                    <div class="header-left">
-                        <span class="section-number">CN</span>
-                        <div class="header-divider"></div>
-                        <span class="section-subtitle">Guangdong Province——Cradle of Lingnan Intangible Cultural Heritage</span>
-                    </div>
-                    <div class="header-right">
-                        <span class="coordinate">23°16'N  113°50'E</span>
-                    </div>
-                </div>
-                
-                <!-- 主内容区 -->
-                <div class="academic-main-content compact">
-                    <!-- 左侧信息面板 -->
-                    <div class="academic-left-panel compact">
-                        <!-- 地点信息卡片 -->
-                        <div class="location-info-card" id="locationInfoCard">
-                            <div class="location-header">
-                                <span class="location-icon">📍</span>
-                                <h3 class="location-name" id="locationName">增城(Zengcheng)</h3>
-                                <!-- 语言切换按钮 -->
-                                <button class="lang-switch-btn" id="langSwitchBtn" onclick="toggleLanguage()" title="切换语言">
-                                    <span class="lang-current">中</span>
-                                    <span class="lang-divider">/</span>
-                                    <span class="lang-other">EN</span>
-                                </button>
-                            </div>
-                            
-                            <!-- 介绍 -->
-                            <div class="info-section">
-                                <h4 class="section-label" data-zh="介绍" data-en="Introduction">介绍</h4>
-                                <div class="intro-text" id="introText">
-                                    <p data-zh="岭南文化瑰宝" data-en="Treasure of Lingnan Culture">岭南文化瑰宝</p>
-                                </div>
-                            </div>
+    <button class="back-home-btn" id="backHomeBtn" onclick="navigateTo('home')">🏠 返回首页</button>
 
-                            <!-- 非遗与文化 -->
-                            <div class="info-section">
-                                <h4 class="section-label" data-zh="非遗与文化" data-en="Heritage & Culture">非遗与文化</h4>
-                                <div class="heritage-list" id="heritageList">
-                                    <div class="heritage-item">
-                                        <span class="heritage-dot"></span>
-                                        <span class="heritage-text" data-zh="荔枝传说文化（省级非遗）" data-en="Lychee Legend Culture (Provincial ICH)">荔枝传说文化（省级非遗）</span>
-                                    </div>
-                                    <div class="heritage-item">
-                                        <span class="heritage-dot"></span>
-                                        <span class="heritage-text" data-zh="传统荔枝种植技艺" data-en="Traditional Lychee Cultivation Techniques">传统荔枝种植技艺</span>
-                                    </div>
-                                    <div class="heritage-item">
-                                        <span class="heritage-dot"></span>
-                                        <span class="heritage-text" data-zh="北园绿荔枝（区级非遗）" data-en="Beiyuanlv Lychee (District ICH)">北园绿荔枝（区级非遗）</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- 核心点位 -->
-                            <div class="info-section">
-                                <h4 class="section-label" data-zh="核心点位" data-en="Key Sites">核心点位</h4>
-                                <div class="core-sites" id="coreSites">
-                                    <span class="site-tag" data-zh="西园桂绿母树园" data-en="Xiyuan Guilv Garden">西园桂绿母树园</span>
-                                    <span class="site-tag" data-zh="陈桥头村北园绿基地" data-en="Chenqiaotou Beiyuanlv Base">陈桥头村北园绿基地</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 数据统计卡片 -->
-                        <div class="academic-stats compact">
-                            <div class="stat-item">
-                                <span class="stat-number">7691</span>
-                                <span class="stat-label">非遗项目</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">226+</span>
-                                <span class="stat-label">保护单位</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">1000+</span>
-                                <span class="stat-label">年历史</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 右侧地图区域 -->
-                    <div class="academic-map-area compact">
-                        <div class="map-frame compact">
-                            <!-- 地图容器 -->
-                            <div class="map-wrapper compact">
-                                <div id="zengchengMap" style="width: 100%; height: 100%; border-radius: 12px; background: rgba(255, 255, 255, 0.1);"></div>
-                                
-                                <!-- 地图标记点 -->
-                                <div class="map-markers" id="mapMarkers"></div>
-                                
+    <div id="appContainer"></div>
 
-                            </div>
-                            
-                            <!-- 地图装饰边框 -->
-                            <div class="map-corner top-left"></div>
-                            <div class="map-corner top-right"></div>
-                            <div class="map-corner bottom-left"></div>
-                            <div class="map-corner bottom-right"></div>
-                            
-                            <!-- 探索知识图谱按钮 -->
-                            <a href="pages/knowledge-graph.html" class="knowledge-graph-btn" title="探索知识图谱">
-                                <span class="btn-icon">🔍</span>
-                                <span class="btn-text">探索知识图谱</span>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- 右侧竖向照片画廊（照片由 home-gallery.js 动态生成，按地图点位联动） -->
-                    <div class="side-image-wall"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 第三部分 - 梅州万福楼灵芝 · 旗舰展示 -->
-        <section class="section section-lingzhi" id="section3">
-            <!-- 背景：灵芝大图叠底 -->
-            <div class="lz-bg">
-                <div class="lz-bg-img" style="background-image:url(img/灵芝8.jpg)"></div>
-                <div class="lz-bg-overlay"></div>
-            </div>
-
-            <div class="lz-hero">
-                <!-- 左：品牌信息 -->
-                <div class="lz-brand">
-                    <div class="lz-tagline">🍄 Meizhou · Wanfulou</div>
-                    <h1 class="lz-headline">
-                        <span class="lz-hl-cn">传承岭南灵芝栽培技艺</span>
-                        <span class="lz-hl-en">Inherit Lingnan Ganoderma Cultivation</span>
-                    </h1>
-                    <p class="lz-slogan">活化灵芝农业文化遗产，绿色培育高品质赤灵芝、血灵芝</p>
-
-                    <!-- 文化精粹：三行紧凑 -->
-                    <div class="lz-culture">
-                        <div class="lz-culine">
-                            <span class="lz-cul-icon">🌿</span>
-                            <span class="lz-cul-label">仙草典故</span>
-                            <span class="lz-cul-text">灵芝自古被誉为「仙草」，《神农本草经》列为上品</span>
-                        </div>
-                        <div class="lz-culine">
-                            <span class="lz-cul-icon">🏔️</span>
-                            <span class="lz-cul-label">岭南传承</span>
-                            <span class="lz-cul-text">千年采集培植传统，珍贵农业文化遗产</span>
-                        </div>
-                        <div class="lz-culine">
-                            <span class="lz-cul-icon">🍵</span>
-                            <span class="lz-cul-label">药食同源</span>
-                            <span class="lz-cul-text">传统经验与现代设施结合，延续岭南灵芝文化脉络</span>
-                        </div>
-                    </div>
-
-                    <!-- 品种 + 规范 -->
-                    <div class="lz-tags">
-                        <span class="lz-vtag gold">赤灵芝 · 弹射孢子粉</span>
-                        <span class="lz-vtag rose">血灵芝 · 抗氧化突出</span>
-                        <span class="lz-std">零化肥农药</span>
-                        <span class="lz-std">密闭洁净</span>
-                        <span class="lz-std">室内立体栽培</span>
-                    </div>
-                </div>
-
-                <!-- 右：灵芝图像展示 -->
-                <div class="lz-visual">
-                    <div class="lz-main-img" style="background-image:url(img/灵芝1.jpg)"></div>
-                    <div class="lz-thumbs">
-                        <div class="lz-thumb active" style="background-image:url(img/灵芝1.jpg)" onclick="lzSwap('img/灵芝1.jpg',this)"></div>
-                        <div class="lz-thumb" style="background-image:url(img/灵芝2.jpg)" onclick="lzSwap('img/灵芝2.jpg',this)"></div>
-                        <div class="lz-thumb" style="background-image:url(img/灵芝3.jpg)" onclick="lzSwap('img/灵芝3.jpg',this)"></div>
-                        <div class="lz-thumb" style="background-image:url(img/灵芝4.jpg)" onclick="lzSwap('img/灵芝4.jpg',this)"></div>
-                        <div class="lz-thumb" style="background-image:url(img/灵芝5.jpg)" onclick="lzSwap('img/灵芝5.jpg',this)"></div>
-                        <div class="lz-thumb" style="background-image:url(img/灵芝6.jpg)" onclick="lzSwap('img/灵芝6.jpg',this)"></div>
-                        <div class="lz-thumb" style="background-image:url(img/灵芝7.jpg)" onclick="lzSwap('img/灵芝7.jpg',this)"></div>
-                        <div class="lz-thumb" style="background-image:url(img/灵芝8.jpg)" onclick="lzSwap('img/灵芝8.jpg',this)"></div>
-                    </div>
-                </div>
-            </div>
-
-            <p class="lz-legal">* 种植实践总结，不作医疗论断</p>
-        </section>
-
-        <!-- 第四部分 - 灵芝工艺 · 品质溯源 -->
-        <section class="section section-process" id="section4">
-            <div class="proc-title-row">
-                <h2 class="proc-title">🔬 灵芝工艺 · 品质溯源</h2>
-                <span class="five-band thin" style="width:180px"></span>
-            </div>
-            <!-- 浮动信任徽章 -->
-            <div class="trust-badges">
-                <div class="tb-item"><span class="tb-num">30年</span><span class="tb-label">种植经验</span></div>
-                <div class="tb-item"><span class="tb-num">0</span><span class="tb-label">化肥农药</span></div>
-                <div class="tb-item"><span class="tb-num">100%</span><span class="tb-label">绿色标准</span></div>
-            </div>
-
-            <div class="bento-grid">
-                <!-- 大图 hero -->
-                <div class="bento-hero" style="background-image:url(img/灵芝4.jpg)">
-                    <div class="bento-hero-tag">赤灵芝 · 弹射孢子粉</div>
-                </div>
-
-                <!-- 工艺 pills -->
-                <div class="bento-steps">
-                    <h3 class="bento-label">标准化生产工艺</h3>
-                    <div class="bento-pills">
-                        <span class="bpill">① 菌种驯化</span>
-                        <span class="bpill">② 培养基制作</span>
-                        <span class="bpill">③ 高温灭菌</span>
-                        <span class="bpill">④ 恒温恒湿培育</span>
-                        <span class="bpill">⑤ 洁净防护</span>
-                        <span class="bpill">⑥ 孢子粉收集</span>
-                        <span class="bpill">⑦ 子实体采收</span>
-                    </div>
-                </div>
-
-                <!-- 社区引语卡 1 -->
-                <div class="bento-quote q1">
-                    <div class="bq-avatar">张</div>
-                    <p class="bq-text">"祖辈采灵芝靠天吃饭，现在基地科学种植，品质比野生还稳定。"</p>
-                    <div class="bq-who">张大爷 <span>当地药农 · 30年</span></div>
-                </div>
-
-                <!-- 社区引语卡 2 -->
-                <div class="bento-quote q2">
-                    <div class="bq-avatar">陈</div>
-                    <p class="bq-text">"菌种驯化是手艺活，一批菌种要反复筛选，细心观察才能出好灵芝。"</p>
-                    <div class="bq-who">陈师傅 <span>菌种培育员</span></div>
-                </div>
-
-                <!-- 副图 -->
-                <div class="bento-subimg" style="background-image:url(img/灵芝5.jpg)"></div>
-                <div class="bento-subimg" style="background-image:url(img/灵芝6.jpg)"></div>
-
-                <!-- 行动卡片 -->
-                <div class="bento-action">
-                    <p class="ba-text">灵芝承载千年农耕智慧<br>属于珍贵的农业文化遗产</p>
-                    <a href="pages/detail.html" class="ba-btn">我也来发声 →</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 第五部分 - 关于我们 -->
-        <section class="section section-4" id="section5">
-            <div class="about-bg">
-                <div class="about-grid"></div>
-                <div class="about-glow"></div>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-header">
-                    <h2 class="about-title">
-                        <span class="title-cn">关于我们</span>
-                        <span class="title-en">About Us</span>
-                    </h2>
-                    <span class="five-band thin center"></span>
-                    <p class="about-subtitle">传承岭南农耕文明，连接世界文化桥梁</p>
-                </div>
-                
-                <div class="about-main">
-                    <!-- 左侧：项目介绍 -->
-                    <div class="about-panel project-panel">
-                        <div class="panel-header">
-                            <div class="panel-icon">🌾</div>
-                            <h3 class="panel-title">项目介绍</h3>
-                            <span class="panel-subtitle">Project Introduction</span>
-                        </div>
-                        
-                        <div class="panel-content">
-                            <div class="intro-block">
-                                <h4 class="block-title">
-                                    <span class="block-num">01</span>
-                                    项目背景
-                                </h4>
-                                <p class="block-text">
-                                    广东作为岭南文化的发源地，拥有丰富的农业文化遗产资源。本项目聚焦增城荔枝、潮州单丛茶、化州橘红、新会陈皮、东莞莞香，梅州灵芝六大国家级农业遗产，构建数字化保护与传承平台。
-                                </p>
-                            </div>
-                            
-                            <div class="intro-block">
-                                <h4 class="block-title">
-                                    <span class="block-num">02</span>
-                                    核心目标
-                                </h4>
-                                <p class="block-text">
-                                    通过"虚实融合"的创新模式，将传统农业遗产与现代数字技术相结合，打造全球首个农业遗产元宇宙交易平台，让千年农耕文明在数字时代焕发新生。
-                                </p>
-                            </div>
-                            
-                            <div class="intro-block">
-                                <h4 class="block-title">
-                                    <span class="block-num">03</span>
-                                    创新价值
-                                </h4>
-                                <div class="value-tags">
-                                    <span class="value-tag">区块链存证</span>
-                                    <span class="value-tag">AI知识图谱</span>
-                                    <span class="value-tag">虚实映射</span>
-                                    <span class="value-tag">跨境传播</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 右侧：团队介绍 -->
-                    <div class="about-panel team-panel">
-                        <div class="panel-header">
-                            <div class="panel-icon">👥</div>
-                            <h3 class="panel-title">研发团队</h3>
-                            <span class="panel-subtitle">Research Team</span>
-                        </div>
-                        
-                        <div class="panel-content">
-                            <div class="team-intro">
-                                <p class="team-desc">
-                                    我们是一支跨学科的创新团队，汇聚了英语、涉外法治、大数据技术等领域的青年学者。团队依托广东省农业文化遗产研究基地，致力于用科技赋能传统文化传承。
-                                </p>
-                            </div>
-                            
-                            <div class="team-roles">
-                                <div class="role-card">
-                                    <div class="role-icon">🔬</div>
-                                    <div class="role-info">
-                                        <h5>农业遗产研究</h5>
-                                        <p>深度挖掘六大农遗的历史渊源与文化内涵</p>
-                                    </div>
-                                </div>
-                                <div class="role-card">
-                                    <div class="role-icon">💻</div>
-                                    <div class="role-info">
-                                        <h5>数字技术开发</h5>
-                                        <p>构建知识图谱与智能交互系统</p>
-                                    </div>
-                                </div>
-                                <div class="role-card">
-                                    <div class="role-icon">🌐</div>
-                                    <div class="role-info">
-                                        <h5>国际传播设计</h5>
-                                        <p>面向全球用户的跨文化体验设计</p>
-                                    </div>
-                                </div>
-                                <div class="role-card">
-                                    <div class="role-icon">🎨</div>
-                                    <div class="role-info">
-                                        <h5>视觉创意呈现</h5>
-                                        <p>学术美学与游戏化设计的融合创新</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 底部信息 -->
-                <div class="about-footer">
-                    <div class="footer-info">
-                        <div class="info-item">
-                            <span class="info-label">指导单位</span>
-                            <span class="info-value">广东省农业农村厅 · 文化和旅游厅</span>
-                        </div>
-                        <div class="info-divider"></div>
-                        <div class="info-item">
-                            <span class="info-label">学术支持</span>
-                            <span class="info-value">华南农业大学 · 广东省农业科学院</span>
-                        </div>
-                        <div class="info-divider"></div>
-                        <div class="info-item">
-                            <span class="info-label">联系我们</span>
-                            <span class="info-value">contact@gd-agriheritage.cn</span>
-                        </div>
-                    </div>
-                    <p class="copyright">© 2025 广东农遗交易所 Guangdong Agri-Heritage Exchange. All Rights Reserved.</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- 滚动指示器 -->
-    <div class="scroll-indicator">
+    <div class="scroll-indicator" id="scrollIndicator">
         <div class="scroll-dot active" data-section="1"></div>
         <div class="scroll-dot" data-section="2"></div>
         <div class="scroll-dot" data-section="3"></div>
@@ -434,34 +117,632 @@
         <div class="scroll-dot" data-section="5"></div>
     </div>
 
-    <!-- 灵芝屏交互：缩略图切换 + 背景视差 -->
     <script>
-    // 缩略图点击 → 切换主图
-    function lzSwap(src, el) {
-        var main = document.querySelector('.lz-main-img');
-        if (main) main.style.backgroundImage = 'url(' + src + ')';
-        document.querySelectorAll('.lz-thumb').forEach(function(t) { t.classList.remove('active'); });
-        el.classList.add('active');
-    }
-    // 背景视差：鼠标在灵芝屏移动时微移背景
-    (function(){
-        var sec = document.querySelector('.section-lingzhi');
-        if (!sec) return;
-        sec.addEventListener('mousemove', function(e){
-            var bg = sec.querySelector('.lz-bg-img');
-            if (!bg) return;
-            var x = (e.clientX / window.innerWidth - 0.5) * 14;
-            var y = (e.clientY / window.innerHeight - 0.5) * 10;
-            bg.style.transform = 'scale(1.06) translate(' + x + 'px, ' + y + 'px)';
+        // ==========================================
+        // 1. 音乐控制
+        // ==========================================
+        var audio = document.getElementById('bgMusic');
+        var btn = document.getElementById('musicBtn');
+        var icon = document.getElementById('musicIcon');
+        var hint = document.getElementById('clickHint');
+        var isPlaying = true;
+        var musicStarted = false;
+
+        function updateMusicUI() {
+            icon.textContent = isPlaying ? '🔊' : '🔇';
+            btn.className = isPlaying ? 'playing' : 'muted';
+        }
+
+        function startMusic() {
+            if (musicStarted) return;
+            musicStarted = true;
+            audio.play().then(function() {
+                hint.style.display = 'none';
+                updateMusicUI();
+            }).catch(function() {
+                hint.style.display = 'block';
+                var clickHandler = function() {
+                    audio.play().then(function() {
+                        hint.style.display = 'none';
+                        updateMusicUI();
+                    }).catch(function() {});
+                    document.removeEventListener('click', clickHandler);
+                    document.removeEventListener('touchstart', clickHandler);
+                };
+                document.addEventListener('click', clickHandler);
+                document.addEventListener('touchstart', clickHandler);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(startMusic, 300);
         });
-        sec.addEventListener('mouseleave', function(){
-            var bg = sec.querySelector('.lz-bg-img');
-            if (bg) bg.style.transform = ''; // 清空，恢复 CSS lzBgSlow 动画
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+            } else {
+                isPlaying = true;
+                audio.play().catch(function() {});
+            }
+            updateMusicUI();
+        }
+        window.toggleMusic = toggleMusic;
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                if (isPlaying && !audio.paused) audio.pause();
+            } else {
+                if (isPlaying && audio.paused) audio.play().catch(function() {});
+            }
         });
-    })();
+        audio.addEventListener('ended', function() {
+            if (isPlaying) audio.play().catch(function() {});
+        });
+        updateMusicUI();
+
+        // ==========================================
+        // 2. SPA 路由配置
+        // ==========================================
+        var PAGE_CONFIG = {
+            'home': { title: '岭南农遗服务生态' },
+            'tech': { title: '语料库与翻译评估系统', file: 'pages/tech.html' },
+            'industry': { title: '产业服务', file: 'pages/industry.html' },
+            'knowledge-graph': { title: '广东非遗知识图谱', file: 'pages/knowledge-graph.html' },
+            'detail': { title: '详情', file: 'pages/detail.html' },
+            'lingzhi': { title: '灵芝文化', file: 'pages/lingzhi.html' }
+        };
+
+        var currentPage = 'home';
+
+        // ==========================================
+        // 3. 首页HTML
+        // ==========================================
+        function getHomePageHTML() {
+            return `
+            <div class="container">
+                <section class="section section-1" id="section1">
+                    <div class="glass-card">
+                        <div class="hero-emblem">
+                            <div class="seal">嶺南<br>農遺</div>
+                            <div class="hero-title-group">
+                                <h1 class="main-title">🌿 Lingnan Intangible Cultural Heritage</h1>
+                                <span class="five-band thin"></span>
+                            </div>
+                        </div>
+                        <h2 class="subtitle">Digital Preservation and Cross-Cultural Communication of Traditional Knowledge Systems</h2>
+                        <p class="description">Exploring the intricate tapestry of agricultural heritage, traditional craftsmanship, and folk wisdom across Guangdong Province.</p>
+                        <div class="button-group">
+                            <a href="#" class="cta-button primary" onclick="navigateTo('tech'); return false;">Explore Corpus</a>
+                            <a href="#" class="cta-button secondary" onclick="navigateTo('industry'); return false;">Industry Service</a>
+                        </div>
+                    </div>
+                    <div class="scroll-indicator-bottom">
+                        <div class="scroll-arrows"><div class="arrow">《</div></div>
+                    </div>
+                </section>
+
+                <section class="section section-2" id="section2">
+                    <div class="section-2-atmo"></div>
+                    <div class="section-header">
+                        <h2 class="section-title">🧭 Heritage Map</h2>
+                        <span class="five-band header-band"></span>
+                    </div>
+                    <div class="academic-layout compact">
+                        <div class="academic-header-bar">
+                            <div class="header-left">
+                                <span class="section-number">CN</span>
+                                <div class="header-divider"></div>
+                                <span class="section-subtitle">Guangdong Province——Cradle of Lingnan Intangible Cultural Heritage</span>
+                            </div>
+                            <div class="header-right">
+                                <span class="coordinate">23°16'N  113°50'E</span>
+                            </div>
+                        </div>
+                        <div class="academic-main-content compact">
+                            <div class="academic-left-panel compact">
+                                <div class="location-info-card" id="locationInfoCard">
+                                    <div class="location-header">
+                                        <span class="location-icon">📍</span>
+                                        <h3 class="location-name" id="locationName">增城(Zengcheng)</h3>
+                                        <button class="lang-switch-btn" id="langSwitchBtn" onclick="toggleLanguage()" title="切换语言">
+                                            <span class="lang-current">中</span>
+                                            <span class="lang-divider">/</span>
+                                            <span class="lang-other">EN</span>
+                                        </button>
+                                    </div>
+                                    <div class="info-section">
+                                        <h4 class="section-label" data-zh="介绍" data-en="Introduction">介绍</h4>
+                                        <div class="intro-text" id="introText">
+                                            <p data-zh="岭南文化瑰宝" data-en="Treasure of Lingnan Culture">岭南文化瑰宝</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-section">
+                                        <h4 class="section-label" data-zh="非遗与文化" data-en="Heritage & Culture">非遗与文化</h4>
+                                        <div class="heritage-list" id="heritageList">
+                                            <div class="heritage-item"><span class="heritage-dot"></span><span class="heritage-text" data-zh="荔枝传说文化（省级非遗）" data-en="Lychee Legend Culture (Provincial ICH)">荔枝传说文化（省级非遗）</span></div>
+                                            <div class="heritage-item"><span class="heritage-dot"></span><span class="heritage-text" data-zh="传统荔枝种植技艺" data-en="Traditional Lychee Cultivation Techniques">传统荔枝种植技艺</span></div>
+                                            <div class="heritage-item"><span class="heritage-dot"></span><span class="heritage-text" data-zh="北园绿荔枝（区级非遗）" data-en="Beiyuanlv Lychee (District ICH)">北园绿荔枝（区级非遗）</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="info-section">
+                                        <h4 class="section-label" data-zh="核心点位" data-en="Key Sites">核心点位</h4>
+                                        <div class="core-sites" id="coreSites">
+                                            <span class="site-tag" data-zh="西园桂绿母树园" data-en="Xiyuan Guilv Garden">西园桂绿母树园</span>
+                                            <span class="site-tag" data-zh="陈桥头村北园绿基地" data-en="Chenqiaotou Beiyuanlv Base">陈桥头村北园绿基地</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="academic-stats compact">
+                                    <div class="stat-item"><span class="stat-number">7691</span><span class="stat-label">非遗项目</span></div>
+                                    <div class="stat-item"><span class="stat-number">226+</span><span class="stat-label">保护单位</span></div>
+                                    <div class="stat-item"><span class="stat-number">1000+</span><span class="stat-label">年历史</span></div>
+                                </div>
+                            </div>
+                            <div class="academic-map-area compact">
+                                <div class="map-frame compact">
+                                    <div class="map-wrapper compact">
+                                        <div id="zengchengMap" style="width:100%;height:100%;border-radius:12px;background:rgba(255,255,255,0.1);"></div>
+                                        <div class="map-markers" id="mapMarkers"></div>
+                                    </div>
+                                    <div class="map-corner top-left"></div>
+                                    <div class="map-corner top-right"></div>
+                                    <div class="map-corner bottom-left"></div>
+                                    <div class="map-corner bottom-right"></div>
+                                    <a href="#" class="knowledge-graph-btn" onclick="navigateTo('knowledge-graph'); return false;" title="探索知识图谱">
+                                        <span class="btn-icon">🔍</span>
+                                        <span class="btn-text">探索知识图谱</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="side-image-wall"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section section-lingzhi" id="section3">
+                    <div class="lz-bg">
+                        <div class="lz-bg-img" style="background-image:url(img/灵芝8.jpg)"></div>
+                        <div class="lz-bg-overlay"></div>
+                    </div>
+                    <div class="lz-hero">
+                        <div class="lz-brand">
+                            <div class="lz-tagline">🍄 Meizhou · Wanfulou</div>
+                            <h1 class="lz-headline">
+                                <span class="lz-hl-cn">传承岭南灵芝栽培技艺</span>
+                                <span class="lz-hl-en">Inherit Lingnan Ganoderma Cultivation</span>
+                            </h1>
+                            <p class="lz-slogan">活化灵芝农业文化遗产，绿色培育高品质赤灵芝、血灵芝</p>
+                            <div class="lz-culture">
+                                <div class="lz-culine"><span class="lz-cul-icon">🌿</span><span class="lz-cul-label">仙草典故</span><span class="lz-cul-text">灵芝自古被誉为「仙草」，《神农本草经》列为上品</span></div>
+                                <div class="lz-culine"><span class="lz-cul-icon">🏔️</span><span class="lz-cul-label">岭南传承</span><span class="lz-cul-text">千年采集培植传统，珍贵农业文化遗产</span></div>
+                                <div class="lz-culine"><span class="lz-cul-icon">🍵</span><span class="lz-cul-label">药食同源</span><span class="lz-cul-text">传统经验与现代设施结合，延续岭南灵芝文化脉络</span></div>
+                            </div>
+                            <div class="lz-tags">
+                                <span class="lz-vtag gold">赤灵芝 · 弹射孢子粉</span>
+                                <span class="lz-vtag rose">血灵芝 · 抗氧化突出</span>
+                                <span class="lz-std">零化肥农药</span>
+                                <span class="lz-std">密闭洁净</span>
+                                <span class="lz-std">室内立体栽培</span>
+                            </div>
+                        </div>
+                        <div class="lz-visual">
+                            <div class="lz-main-img" style="background-image:url(img/灵芝1.jpg)"></div>
+                            <div class="lz-thumbs">
+                                <div class="lz-thumb active" style="background-image:url(img/灵芝1.jpg)" onclick="lzSwap('img/灵芝1.jpg',this)"></div>
+                                <div class="lz-thumb" style="background-image:url(img/灵芝2.jpg)" onclick="lzSwap('img/灵芝2.jpg',this)"></div>
+                                <div class="lz-thumb" style="background-image:url(img/灵芝3.jpg)" onclick="lzSwap('img/灵芝3.jpg',this)"></div>
+                                <div class="lz-thumb" style="background-image:url(img/灵芝4.jpg)" onclick="lzSwap('img/灵芝4.jpg',this)"></div>
+                                <div class="lz-thumb" style="background-image:url(img/灵芝5.jpg)" onclick="lzSwap('img/灵芝5.jpg',this)"></div>
+                                <div class="lz-thumb" style="background-image:url(img/灵芝6.jpg)" onclick="lzSwap('img/灵芝6.jpg',this)"></div>
+                                <div class="lz-thumb" style="background-image:url(img/灵芝7.jpg)" onclick="lzSwap('img/灵芝7.jpg',this)"></div>
+                                <div class="lz-thumb" style="background-image:url(img/灵芝8.jpg)" onclick="lzSwap('img/灵芝8.jpg',this)"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="lz-legal">* 种植实践总结，不作医疗论断</p>
+                </section>
+
+                <section class="section section-process" id="section4">
+                    <div class="proc-atmo"></div>
+                    <div class="proc-title-row">
+                        <div class="proc-title-group">
+                            <span class="proc-label">Craft & Quality</span>
+                            <h2 class="proc-title">灵芝工艺 · 品质溯源</h2>
+                        </div>
+                        <span class="five-band thin" style="width:180px"></span>
+                        <div class="trust-badges">
+                            <div class="tb-item"><span class="tb-num">30<span class="tb-unit">年</span></span><span class="tb-label">种植经验</span></div>
+                            <div class="tb-divider"></div>
+                            <div class="tb-item"><span class="tb-num">0</span><span class="tb-label">化肥农药</span></div>
+                            <div class="tb-divider"></div>
+                            <div class="tb-item"><span class="tb-num">100<span class="tb-unit">%</span></span><span class="tb-label">绿色标准</span></div>
+                        </div>
+                    </div>
+                    <div class="bento-grid">
+                        <div class="bento-hero" style="background-image:url(img/灵芝4.jpg)">
+                            <div class="bento-hero-tag">赤灵芝 · 弹射孢子粉</div>
+                            <div class="bento-hero-overlay"></div>
+                        </div>
+                        <div class="bento-steps">
+                            <div class="bento-steps-head">
+                                <span class="bs-icon">⚙️</span>
+                                <h3 class="bento-label">标准化生产工艺</h3>
+                            </div>
+                            <div class="bento-pills">
+                                <span class="bpill"><span class="bpill-num">01</span>菌种驯化</span>
+                                <span class="bpill"><span class="bpill-num">02</span>培养基制作</span>
+                                <span class="bpill"><span class="bpill-num">03</span>高温灭菌</span>
+                                <span class="bpill"><span class="bpill-num">04</span>恒温恒湿培育</span>
+                                <span class="bpill"><span class="bpill-num">05</span>洁净防护</span>
+                                <span class="bpill"><span class="bpill-num">06</span>孢子粉收集</span>
+                                <span class="bpill"><span class="bpill-num">07</span>子实体采收</span>
+                            </div>
+                        </div>
+                        <div class="bento-subimg s1" style="background-image:url(img/灵芝5.jpg)">
+                            <span class="bs-cap">培育期</span>
+                        </div>
+                        <div class="bento-subimg s2" style="background-image:url(img/灵芝6.jpg)">
+                            <span class="bs-cap">采收期</span>
+                        </div>
+                        <div class="bento-quote-row">
+                            <div class="bento-quote q1">
+                                <div class="bq-avatar">张</div>
+                                <div class="bq-body">
+                                    <p class="bq-text">"祖辈采灵芝靠天吃饭，现在基地科学种植，品质比野生还稳定。"</p>
+                                    <div class="bq-who">张大爷 <span>当地药农 · 30年</span></div>
+                                </div>
+                            </div>
+                            <div class="bento-quote q2">
+                                <div class="bq-avatar">陈</div>
+                                <div class="bq-body">
+                                    <p class="bq-text">"菌种驯化是手艺活，一批菌种要反复筛选，细心观察才能出好灵芝。"</p>
+                                    <div class="bq-who">陈师傅 <span>菌种培育员</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bento-action">
+                            <div class="ba-inner">
+                                <div class="ba-icon">🏛️</div>
+                                <p class="ba-text">灵芝承载千年农耕智慧，<br>属于珍贵的农业文化遗产</p>
+                                <a href="#" class="ba-btn" onclick="navigateTo('detail'); return false;">了解更多 →</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section section-4" id="section5">
+                    <div class="about-bg">
+                        <div class="about-grid"></div>
+                        <div class="about-glow"></div>
+                    </div>
+                    <div class="about-content">
+                        <div class="about-header">
+                            <h2 class="about-title">
+                                <span class="title-cn">关于我们</span>
+                                <span class="title-en">About Us</span>
+                            </h2>
+                            <span class="five-band thin center"></span>
+                            <p class="about-subtitle">传承岭南农耕文明，连接世界文化桥梁</p>
+                        </div>
+                        <div class="about-main">
+                            <div class="about-panel project-panel">
+                                <div class="panel-header">
+                                    <div class="panel-icon">🌾</div>
+                                    <h3 class="panel-title">项目介绍</h3>
+                                    <span class="panel-subtitle">Project Introduction</span>
+                                </div>
+                                <div class="panel-content">
+                                    <div class="intro-block">
+                                        <h4 class="block-title"><span class="block-num">01</span>项目背景</h4>
+                                        <p class="block-text">广东作为岭南文化的发源地，拥有丰富的农业文化遗产资源。本项目聚焦增城荔枝、潮州单丛茶、化州橘红、新会陈皮、东莞莞香，梅州灵芝六大国家级农业遗产，构建数字化保护与传承平台。</p>
+                                    </div>
+                                    <div class="intro-block">
+                                        <h4 class="block-title"><span class="block-num">02</span>核心目标</h4>
+                                        <p class="block-text">通过"虚实融合"的创新模式，将传统农业遗产与现代数字技术相结合，打造全球首个农业遗产元宇宙交易平台，让千年农耕文明在数字时代焕发新生。</p>
+                                    </div>
+                                    <div class="intro-block">
+                                        <h4 class="block-title"><span class="block-num">03</span>创新价值</h4>
+                                        <div class="value-tags">
+                                            <span class="value-tag">区块链存证</span>
+                                            <span class="value-tag">AI知识图谱</span>
+                                            <span class="value-tag">虚实映射</span>
+                                            <span class="value-tag">跨境传播</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="about-panel team-panel">
+                                <div class="panel-header">
+                                    <div class="panel-icon">👥</div>
+                                    <h3 class="panel-title">研发团队</h3>
+                                    <span class="panel-subtitle">Research Team</span>
+                                </div>
+                                <div class="panel-content">
+                                    <div class="team-intro">
+                                        <p class="team-desc">我们是一支跨学科的创新团队，汇聚了英语、涉外法治、大数据技术等领域的青年学者。团队依托广东省农业文化遗产研究基地，致力于用科技赋能传统文化传承。</p>
+                                    </div>
+                                    <div class="team-roles">
+                                        <div class="role-card"><div class="role-icon">🔬</div><div class="role-info"><h5>农业遗产研究</h5><p>深度挖掘六大农遗的历史渊源与文化内涵</p></div></div>
+                                        <div class="role-card"><div class="role-icon">💻</div><div class="role-info"><h5>数字技术开发</h5><p>构建知识图谱与智能交互系统</p></div></div>
+                                        <div class="role-card"><div class="role-icon">🌐</div><div class="role-info"><h5>国际传播设计</h5><p>面向全球用户的跨文化体验设计</p></div></div>
+                                        <div class="role-card"><div class="role-icon">🎨</div><div class="role-info"><h5>视觉创意呈现</h5><p>学术美学与游戏化设计的融合创新</p></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-footer">
+                            <div class="footer-info">
+                                <div class="info-item"><span class="info-label">指导单位</span><span class="info-value">广东省农业农村厅 · 文化和旅游厅</span></div>
+                                <div class="info-divider"></div>
+                                <div class="info-item"><span class="info-label">学术支持</span><span class="info-value">华南农业大学 · 广东省农业科学院</span></div>
+                                <div class="info-divider"></div>
+                                <div class="info-item"><span class="info-label">联系我们</span><span class="info-value">contact@gd-agriheritage.cn</span></div>
+                            </div>
+                            <p class="copyright">© 2025 广东农遗交易所 Guangdong Agri-Heritage Exchange. All Rights Reserved.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>`;
+        }
+
+        // ==========================================
+        // 4. 首页初始化
+        // ==========================================
+        function reinitHomeScripts() {
+            // 灵芝图片切换
+            if (typeof window.lzSwap !== 'function') {
+                window.lzSwap = function(src, el) {
+                    var main = document.querySelector('.lz-main-img');
+                    if (main) main.style.backgroundImage = 'url(' + src + ')';
+                    document.querySelectorAll('.lz-thumb').forEach(function(t) { t.classList.remove('active'); });
+                    if (el) el.classList.add('active');
+                };
+            }
+            document.querySelectorAll('.lz-thumb').forEach(function(el) {
+                el.onclick = function() {
+                    var src = this.style.backgroundImage.slice(4, -1).replace(/"/g, '');
+                    window.lzSwap(src, this);
+                };
+            });
+            
+            // 语言切换按钮
+            var langBtn = document.getElementById('langSwitchBtn');
+            if (langBtn && typeof window.toggleLanguage === 'function') {
+                langBtn.onclick = window.toggleLanguage;
+            }
+            
+            // ECharts 地图初始化 - 调用 script.js 中的完整地图初始化函数
+            if (typeof initZengchengMap === 'function') {
+                setTimeout(function() {
+                    initZengchengMap();
+                }, 100);
+            }
+            
+            // 🔥 关键修复：重新初始化滚动动画
+            // 重置所有 section 的 is-active 状态
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.classList.remove('is-active');
+            });
+            
+            // 重新设置 IntersectionObserver
+            if ('IntersectionObserver' in window) {
+                var container = document.querySelector('.container');
+                if (container) {
+                    var io = new IntersectionObserver(function (entries) {
+                        entries.forEach(function (entry) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-active');
+                                io.unobserve(entry.target);
+                            }
+                        });
+                    }, { root: container, threshold: 0.3 });
+                    
+                    sections.forEach(function (s) { 
+                        io.observe(s); 
+                    });
+                }
+            } else {
+                // 降级：直接显示所有内容
+                sections.forEach(function (s) { s.classList.add('is-active'); });
+            }
+            
+            updateScrollIndicator(1);
+        }
+
+        function updateScrollIndicator(activeIndex) {
+            var dots = document.querySelectorAll('.scroll-dot');
+            dots.forEach(function(dot, index) {
+                dot.classList.toggle('active', index === activeIndex - 1);
+            });
+        }
+
+        // ==========================================
+        // 5. 🔥 核心修复：重新触发 DOMContentLoaded
+        // ==========================================
+        function reinitializeSubPage(pageName) {
+            console.log('🔄 重新触发子页面初始化:', pageName);
+            
+            // 方法1：触发 DOMContentLoaded 事件
+            var event = new Event('DOMContentLoaded');
+            document.dispatchEvent(event);
+            
+            // 方法2：如果是 tech 页面，额外调用初始化函数
+            if (pageName === 'tech') {
+                setTimeout(function() {
+                    // 尝试调用 tech.js 的初始化函数
+                    if (typeof initializeCorpusSystem === 'function') {
+                        console.log('✅ 调用 initializeCorpusSystem()');
+                        initializeCorpusSystem();
+                    } else {
+                        console.log('⏳ initializeCorpusSystem 未定义，尝试再次触发事件');
+                        // 再次触发 DOMContentLoaded
+                        var event2 = new Event('DOMContentLoaded');
+                        document.dispatchEvent(event2);
+                        
+                        // 如果还是不行，模拟点击第一个标签
+                        setTimeout(function() {
+                            var gridItems = document.querySelectorAll('.grid-item');
+                            if (gridItems.length > 0 && gridItems[0]) {
+                                console.log('🔄 模拟点击第一个标签');
+                                gridItems[0].click();
+                            }
+                        }, 300);
+                    }
+                }, 400);
+            }
+            
+            // knowledge-graph 页面
+            if (pageName === 'knowledge-graph') {
+                setTimeout(function() {
+                    if (typeof initGraph === 'function') {
+                        initGraph();
+                    }
+                }, 400);
+            }
+        }
+
+        // ==========================================
+        // 6. 导航函数
+        // ==========================================
+        function navigateTo(pageName) {
+            var config = PAGE_CONFIG[pageName];
+            if (!config) { console.warn('未知页面:', pageName); return; }
+            if (currentPage === pageName) return;
+
+            currentPage = pageName;
+            var container = document.getElementById('appContainer');
+            var indicator = document.getElementById('scrollIndicator');
+            var backBtn = document.getElementById('backHomeBtn');
+
+            if (pageName === 'home') {
+                container.innerHTML = getHomePageHTML();
+                reinitHomeScripts();
+                document.title = '岭南农遗服务生态';
+                indicator.classList.remove('hidden');
+                backBtn.classList.remove('show');
+                return;
+            }
+
+            indicator.classList.add('hidden');
+            backBtn.classList.add('show');
+
+            container.innerHTML = '<div class="page-loading"><span>⏳</span> 加载中...</div>';
+
+            fetch(config.file)
+                .then(function(res) {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.text();
+                })
+                .then(function(html) {
+                    container.innerHTML = html;
+                    document.title = config.title + ' - 岭南农遗服务生态';
+                    window.scrollTo(0, 0);
+
+                    // 🔥 修复：加载外部脚本和内联脚本
+                    var externalScripts = [];
+                    var inlineScripts = [];
+                    
+                    // 提取外部脚本 src
+                    var externalRegex = /<script\s+src=["']([^"']+)["'][^>]*><\/script>/g;
+                    var extMatch;
+                    while ((extMatch = externalRegex.exec(html)) !== null) {
+                        externalScripts.push(extMatch[1]);
+                    }
+                    
+                    // 提取内联脚本
+                    var inlineRegex = /<script>([\s\S]*?)<\/script>/g;
+                    var inlineMatch;
+                    while ((inlineMatch = inlineRegex.exec(html)) !== null) {
+                        var code = inlineMatch[1].trim();
+                        if (code) inlineScripts.push(code);
+                    }
+                    
+                    // 加载外部脚本（按顺序）
+                    function loadScriptsSequentially(scripts, callback) {
+                        if (scripts.length === 0) {
+                            callback();
+                            return;
+                        }
+                        
+                        var script = document.createElement('script');
+                        script.src = scripts[0];
+                        script.onload = function() {
+                            loadScriptsSequentially(scripts.slice(1), callback);
+                        };
+                        script.onerror = function() {
+                            console.warn('外部脚本加载失败:', scripts[0]);
+                            loadScriptsSequentially(scripts.slice(1), callback);
+                        };
+                        document.head.appendChild(script);
+                    }
+                    
+                    // 先加载外部脚本，再执行内联脚本
+                    loadScriptsSequentially(externalScripts, function() {
+                        inlineScripts.forEach(function(code) {
+                            try {
+                                var func = new Function(code);
+                                func();
+                            } catch (e) {
+                                console.warn('内联脚本执行失败:', e.message);
+                            }
+                        });
+                        
+                        // 🔥 核心修复：重新触发子页面初始化
+                        reinitializeSubPage(pageName);
+                    });
+
+                    console.log('✅ 页面加载完成:', config.title);
+                })
+                .catch(function(err) {
+                    console.error('页面加载失败:', err);
+                    container.innerHTML =
+                        '<div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;color:rgba(255,255,255,0.7);text-align:center;padding:20px;">' +
+                        '<div style="font-size:48px;margin-bottom:20px;">😅</div>' +
+                        '<p style="font-size:20px;">页面加载失败</p>' +
+                        '<p style="font-size:14px;margin-top:8px;opacity:0.6;">' + err.message + '</p>' +
+                        '<button onclick="navigateTo(\'home\')" style="margin-top:24px;padding:12px 36px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:10px;color:#fff;cursor:pointer;font-size:16px;font-family:inherit;">🏠 返回首页</button>' +
+                        '</div>';
+                });
+        }
+
+        // ==========================================
+        // 7. 拦截所有链接
+        // ==========================================
+        document.addEventListener('click', function(e) {
+            var link = e.target.closest('a[href]');
+            if (!link) return;
+            var href = link.getAttribute('href');
+            
+            if (href && href.startsWith('pages/')) {
+                e.preventDefault();
+                var pageName = href.replace('pages/', '').replace('.html', '');
+                if (PAGE_CONFIG[pageName]) {
+                    navigateTo(pageName);
+                }
+            }
+            
+            if (href && href.startsWith('#')) { return; }
+            if (href && href.startsWith('javascript:')) { return; }
+        });
+
+        // ==========================================
+        // 8. 启动应用
+        // ==========================================
+        document.getElementById('appContainer').innerHTML = getHomePageHTML();
+        reinitHomeScripts();
+        document.title = '岭南农遗服务生态';
+
+        console.log('🎵 SPA 模式已启动，页面切换时音乐不会中断！');
+        console.log('📄 可用页面: home, tech, industry, knowledge-graph, detail');
+        console.log('💡 子页面加载后会重新触发 DOMContentLoaded，让您的 tech.js 自己初始化');
     </script>
+
     <script src="JS/home-progress.js"></script>
     <script src="JS/script.js"></script>
     <script src="JS/home-gallery.js"></script>
+
 </body>
 </html>
