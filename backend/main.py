@@ -5,7 +5,7 @@ FastAPI主入口文件
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 import uvicorn
 import os
 import sys
@@ -29,7 +29,7 @@ app = FastAPI(
 # 配置CORS中间件
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 允许所有来源（生产环境应限制具体域名）
+    allow_origins=os.environ.get("ALLOWED_ORIGINS", "*").split(","),  # 生产环境在 Koyeb 控制台设 ALLOWED_ORIGINS 为你的前端域名
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -39,10 +39,14 @@ app.add_middleware(
 # 如需重新初始化数据，请运行: python init_database.py
 
 
-# 根路由
-@app.get("/")
-async def root():
-    """API根路径"""
+# 前端静态目录（生产环境由 FastAPI 同时托管网页，用户只访问一个网址）
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "frontend"))
+
+# API 信息（网页由根路径 / 托管）
+@app.get("/api")
+async def api_info():
+    """API根路径信息"""
     return {
         "message": "增城荔枝文化遗产数字化平台 API",
         "version": "1.0.0",
@@ -83,6 +87,28 @@ async def general_exception_handler(request, exc):
         status_code=500,
         content={"detail": f"服务器内部错误: {str(exc)}"}
     )
+
+
+# ==================== 前端页面托管（生产环境）====================
+# FastAPI 同时提供 API 与网页静态文件，用户只访问一个网址即可。
+@app.get("/{full_path:path}")
+async def serve_frontend(full_path: str):
+    # API / 文档路径交给 FastAPI 自身处理，不要让前端托管拦截
+    if full_path.startswith("api") or full_path in ("health", "api/docs", "api/redoc"):
+        raise HTTPException(status_code=404, detail="Not Found")
+    if not os.path.isdir(FRONTEND_DIR):
+        raise HTTPException(status_code=404, detail="前端目录未找到")
+    # 防路径穿越：确保解析后的路径仍在前端目录内
+    candidate = os.path.abspath(os.path.join(FRONTEND_DIR, full_path))
+    if not candidate.startswith(FRONTEND_DIR):
+        raise HTTPException(status_code=400, detail="Bad Request")
+    if os.path.isfile(candidate):
+        return FileResponse(candidate)
+    index_html = os.path.join(candidate, "index.html")
+    if os.path.isfile(index_html):
+        return FileResponse(index_html)
+    # 未知路径回落到首页（适配前端路由）
+    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
 
 if __name__ == "__main__":

@@ -4,7 +4,11 @@
  */
 
 // API基础配置
-const API_BASE_URL = 'http://localhost:8000';
+// 后端地址：生产环境前端由同一 FastAPI 托管（同源，用相对路径 ''）；
+// 本地开发（localhost / 127.0.0.1）自动回退到 http://localhost:8000。
+const API_BASE_URL = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  ? "http://localhost:8000"
+  : "";
 
 // ==================== AI对话API ====================
 

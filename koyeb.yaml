@@ -1,0 +1,26 @@
+# Koyeb 应用定义（可选文件；也可全程在 Koyeb 控制台点击完成）
+#
+# 重要：密钥类环境变量（SILICONFLOW_API_KEY、DATABASE_URL）请务必在
+#       Koyeb 控制台 Service → Settings → Environment variables 里填写，
+#       不要写进这个明文文件，也不要提交到仓库（已被 .gitignore 忽略）。
+#
+# 部署步骤（任选其一）：
+#   1) 控制台：New App → 选 GitHub 仓库 → Builder 选 Docker → 端口填 8000
+#   2) CLI：   koyeb app init litchi-heritage --docker . --ports 8000:http --env ALLOWED_ORIGINS=*
+app: litchi-heritage
+services:
+  - name: web
+    type: web
+    docker:
+      build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - port: 8000
+        type: http
+    env:
+      - key: ALLOWED_ORIGINS
+        value: "*"
+    scaling:
+      min_instances: 0
+      max_instances: 1
